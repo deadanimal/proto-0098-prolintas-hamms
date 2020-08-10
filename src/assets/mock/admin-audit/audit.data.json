@@ -1,0 +1,402 @@
+[
+  {
+    "staff_id": "415796",
+    "username": "awinley0",
+    "email": "lscrease0@istockphoto.com",
+    "created_at": "2019-07-27T01:07:14Z",
+    "action": "POST",
+    "description": "Login"
+  },
+  {
+    "staff_id": "579611",
+    "username": "creihm1",
+    "email": "jthorowgood1@wp.com",
+    "created_at": "2019-10-31T07:27:46Z",
+    "action": "GET",
+    "description": "Logout"
+  },
+  {
+    "staff_id": "690184",
+    "username": "estoyles2",
+    "email": "mavory2@pagesperso-orange.fr",
+    "created_at": "2019-11-08T16:34:41Z",
+    "action": "POST",
+    "description": "Logout"
+  },
+  {
+    "staff_id": "072306",
+    "username": "cbarde3",
+    "email": "dblanshard3@bloglovin.com",
+    "created_at": "2020-03-31T13:11:14Z",
+    "action": "POST",
+    "description": "Print Report"
+  },
+  {
+    "staff_id": "170979",
+    "username": "cradwell4",
+    "email": "hranyard4@columbia.edu",
+    "created_at": "2019-06-13T19:15:32Z",
+    "action": "UPDATE",
+    "description": "Logout"
+  },
+  {
+    "staff_id": "258732",
+    "username": "obabon5",
+    "email": "rpirelli5@wordpress.org",
+    "created_at": "2020-01-07T17:26:19Z",
+    "action": "UPDATE",
+    "description": "Login"
+  },
+  {
+    "staff_id": "178896",
+    "username": "mswatradge6",
+    "email": "jjenny6@miibeian.gov.cn",
+    "created_at": "2019-12-25T10:33:20Z",
+    "action": "GET",
+    "description": "Print"
+  },
+  {
+    "staff_id": "557396",
+    "username": "tvicar7",
+    "email": "lcudworth7@umn.edu",
+    "created_at": "2020-02-20T23:32:39Z",
+    "action": "POST",
+    "description": "Logout"
+  },
+  {
+    "staff_id": "773782",
+    "username": "mpetrushanko8",
+    "email": "hcleatherow8@hostgator.com",
+    "created_at": "2019-12-11T20:36:25Z",
+    "action": "DELETE",
+    "description": "login"
+  },
+  {
+    "staff_id": "431692",
+    "username": "gvolks9",
+    "email": "cshaxby9@theglobeandmail.com",
+    "created_at": "2020-03-02T21:20:11Z",
+    "action": "UPDATE",
+    "description": "Logout"
+  },
+  {
+    "staff_id": "731873",
+    "username": "fbrotherwooda",
+    "email": "hmerrydewa@about.me",
+    "created_at": "2020-02-12T15:32:23Z",
+    "action": "DELETE",
+    "description": "Login"
+  },
+  {
+    "staff_id": "036637",
+    "username": "chenrionb",
+    "email": "jduffittb@patch.com",
+    "created_at": "2020-03-23T20:08:19Z",
+    "action": "GET",
+    "description": "Action triggered"
+  },
+  {
+    "staff_id": "750110",
+    "username": "msarchc",
+    "email": "gfancuttc@mail.ru",
+    "created_at": "2019-10-29T13:57:32Z",
+    "action": "DELETE",
+    "description": "Action triggered"
+  },
+  {
+    "staff_id": "544727",
+    "username": "dcurraghd",
+    "email": "bpudseyd@amazon.de",
+    "created_at": "2020-05-06T13:31:56Z",
+    "action": "UPDATE",
+    "description": "Action triggered"
+  },
+  {
+    "staff_id": "453538",
+    "username": "lkelde",
+    "email": "itookille@umich.edu",
+    "created_at": "2019-09-11T01:13:43Z",
+    "action": "DELETE",
+    "description": "Action triggered"
+  },
+  {
+    "staff_id": "621929",
+    "username": "gstrangf",
+    "email": "acurmef@slate.com",
+    "created_at": "2020-04-07T12:35:48Z",
+    "action": "GET",
+    "description": "Action triggered"
+  },
+  {
+    "staff_id": "533955",
+    "username": "ecominolig",
+    "email": "abirkenshawg@foxnews.com",
+    "created_at": "2019-11-14T17:17:24Z",
+    "action": "DELETE",
+    "description": "Action triggered"
+  },
+  {
+    "staff_id": "517196",
+    "username": "ldundredgeh",
+    "email": "ggotecliffeh@wiley.com",
+    "created_at": "2020-04-25T18:36:32Z",
+    "action": "GET",
+    "description": "Action triggered"
+  },
+  {
+    "staff_id": "411872",
+    "username": "rraui",
+    "email": "dcustyi@sina.com.cn",
+    "created_at": "2019-07-23T01:55:30Z",
+    "action": "POST",
+    "description": "Action triggered"
+  },
+  {
+    "staff_id": "401380",
+    "username": "gdegoixj",
+    "email": "ghunstonej@unicef.org",
+    "created_at": "2020-03-22T19:48:21Z",
+    "action": "POST",
+    "description": "Action triggered"
+  },
+  {
+    "staff_id": "678969",
+    "username": "kkraftk",
+    "email": "rjenckesk@loc.gov",
+    "created_at": "2019-11-04T12:47:16Z",
+    "action": "UPDATE",
+    "description": "Action triggered"
+  },
+  {
+    "staff_id": "840230",
+    "username": "jmacvanamyl",
+    "email": "ivanderkruil@miibeian.gov.cn",
+    "created_at": "2020-03-29T18:26:39Z",
+    "action": "DELETE",
+    "description": "Action triggered"
+  },
+  {
+    "staff_id": "246864",
+    "username": "screasym",
+    "email": "hcowterdm@harvard.edu",
+    "created_at": "2020-04-26T06:58:58Z",
+    "action": "POST",
+    "description": "Action triggered"
+  },
+  {
+    "staff_id": "081160",
+    "username": "hmccandien",
+    "email": "jaslien@bandcamp.com",
+    "created_at": "2019-12-05T09:30:16Z",
+    "action": "DELETE",
+    "description": "Action triggered"
+  },
+  {
+    "staff_id": "003019",
+    "username": "edumphyo",
+    "email": "gsteensono@free.fr",
+    "created_at": "2020-03-05T18:48:30Z",
+    "action": "POST",
+    "description": "Action triggered"
+  },
+  {
+    "staff_id": "442336",
+    "username": "gchaudrellep",
+    "email": "lobeep@ibm.com",
+    "created_at": "2019-12-24T14:30:43Z",
+    "action": "UPDATE",
+    "description": "Action triggered"
+  },
+  {
+    "staff_id": "334362",
+    "username": "mgalileeq",
+    "email": "epurchaseq@ocn.ne.jp",
+    "created_at": "2019-11-11T05:17:00Z",
+    "action": "POST",
+    "description": "Action triggered"
+  },
+  {
+    "staff_id": "739024",
+    "username": "nspreullr",
+    "email": "rsleetr@disqus.com",
+    "created_at": "2020-05-12T22:17:31Z",
+    "action": "UPDATE",
+    "description": "Action triggered"
+  },
+  {
+    "staff_id": "183036",
+    "username": "ffennys",
+    "email": "lransfields@naver.com",
+    "created_at": "2019-12-05T17:10:34Z",
+    "action": "GET",
+    "description": "Action triggered"
+  },
+  {
+    "staff_id": "102599",
+    "username": "pwinbornt",
+    "email": "sbissext@1688.com",
+    "created_at": "2019-06-21T17:30:37Z",
+    "action": "UPDATE",
+    "description": "Action triggered"
+  },
+  {
+    "staff_id": "050456",
+    "username": "dskewsu",
+    "email": "hmaseyku@kickstarter.com",
+    "created_at": "2019-06-14T07:44:27Z",
+    "action": "UPDATE",
+    "description": "Action triggered"
+  },
+  {
+    "staff_id": "602600",
+    "username": "spulverv",
+    "email": "sfaynev@statcounter.com",
+    "created_at": "2019-12-18T09:14:06Z",
+    "action": "DELETE",
+    "description": "Action triggered"
+  },
+  {
+    "staff_id": "206563",
+    "username": "lallsebrookw",
+    "email": "yiglesiasw@google.co.jp",
+    "created_at": "2019-07-04T07:56:03Z",
+    "action": "DELETE",
+    "description": "Action triggered"
+  },
+  {
+    "staff_id": "198096",
+    "username": "dbrstaff_idgewoodx",
+    "email": "mfarndalex@arizona.edu",
+    "created_at": "2019-10-24T01:39:34Z",
+    "action": "UPDATE",
+    "description": "Action triggered"
+  },
+  {
+    "staff_id": "256883",
+    "username": "lmunkleyy",
+    "email": "fspaveny@fda.gov",
+    "created_at": "2020-02-21T01:02:06Z",
+    "action": "UPDATE",
+    "description": "Action triggered"
+  },
+  {
+    "staff_id": "110957",
+    "username": "gwhortonz",
+    "email": "lfazakerleyz@uol.com.br",
+    "created_at": "2019-07-19T09:37:11Z",
+    "action": "POST",
+    "description": "Action triggered"
+  },
+  {
+    "staff_id": "220803",
+    "username": "lclevely10",
+    "email": "bhudson10@ifeng.com",
+    "created_at": "2020-03-05T19:56:51Z",
+    "action": "UPDATE",
+    "description": "Action triggered"
+  },
+  {
+    "staff_id": "554114",
+    "username": "bbosward11",
+    "email": "nscholz11@google.com.au",
+    "created_at": "2020-01-14T23:27:33Z",
+    "action": "UPDATE",
+    "description": "Action triggered"
+  },
+  {
+    "staff_id": "923371",
+    "username": "raudibert12",
+    "email": "scornelis12@dmoz.org",
+    "created_at": "2020-03-19T02:12:15Z",
+    "action": "UPDATE",
+    "description": "Action triggered"
+  },
+  {
+    "staff_id": "180620",
+    "username": "zseabrooke13",
+    "email": "mbarwick13@vimeo.com",
+    "created_at": "2019-08-04T01:24:05Z",
+    "action": "POST",
+    "description": "Action triggered"
+  },
+  {
+    "staff_id": "328879",
+    "username": "aprendergrast14",
+    "email": "kstoade14@odnoklassniki.ru",
+    "created_at": "2019-10-16T15:09:03Z",
+    "action": "UPDATE",
+    "description": "Action triggered"
+  },
+  {
+    "staff_id": "873952",
+    "username": "dcarle15",
+    "email": "ndranfield15@ask.com",
+    "created_at": "2019-05-19T20:46:48Z",
+    "action": "GET",
+    "description": "Action triggered"
+  },
+  {
+    "staff_id": "042006",
+    "username": "hrobben16",
+    "email": "fnother16@ifeng.com",
+    "created_at": "2019-07-17T05:36:59Z",
+    "action": "UPDATE",
+    "description": "Action triggered"
+  },
+  {
+    "staff_id": "109710",
+    "username": "fbarrowcliffe17",
+    "email": "lales17@storify.com",
+    "created_at": "2019-07-16T09:39:23Z",
+    "action": "GET",
+    "description": "Action triggered"
+  },
+  {
+    "staff_id": "918716",
+    "username": "mkoenen18",
+    "email": "calbers18@google.pl",
+    "created_at": "2019-10-09T16:40:00Z",
+    "action": "GET",
+    "description": "Action triggered"
+  },
+  {
+    "staff_id": "282377",
+    "username": "tpenritt19",
+    "email": "jpauler19@cocolog-nifty.com",
+    "created_at": "2019-08-03T09:15:07Z",
+    "action": "UPDATE",
+    "description": "Action triggered"
+  },
+  {
+    "staff_id": "081746",
+    "username": "tdawltrey1a",
+    "email": "eviel1a@springer.com",
+    "created_at": "2019-08-22T15:14:32Z",
+    "action": "GET",
+    "description": "Action triggered"
+  },
+  {
+    "staff_id": "232109",
+    "username": "kblacksland1b",
+    "email": "sguerrier1b@wp.com",
+    "created_at": "2019-06-12T22:12:20Z",
+    "action": "DELETE",
+    "description": "Action triggered"
+  },
+  {
+    "staff_id": "053704",
+    "username": "mmohammed1c",
+    "email": "mfairy1c@hugedomains.com",
+    "created_at": "2020-01-16T07:28:58Z",
+    "action": "UPDATE",
+    "description": "Action triggered"
+  },
+  {
+    "staff_id": "129899",
+    "username": "nbarge1d",
+    "email": "pfronek1d@rediff.com",
+    "created_at": "2020-04-02T12:56:44Z",
+    "action": "GET",
+    "description": "Action triggered"
+  }
+]

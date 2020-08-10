@@ -1,0 +1,947 @@
+<div class="header pb-6">
+  <div class="container-fluid">
+    <div class="header-body">
+      <div class="row align-items-center py-4">
+        <div class="col-lg-6 col-7">
+          <h6 class="h2 text-dark d-inline-block mb-0">
+            Pemohonan Baru
+          </h6>
+
+          <!-- <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                  <li class="breadcrumb-item">
+                    <a href="javascript:void(0)">
+                      <i class="fas fa-user-shield text-dark"></i>
+                    </a>
+                  </li>
+                  <li class="breadcrumb-item">
+                    <a href="javascript:void(0)" class="text-dark">
+                      Admin Maintenance
+                    </a>
+                  </li>
+                  <li aria-current="page" class="breadcrumb-item active">
+                    Group Profile
+                  </li>
+                </ol>
+              </nav> -->
+        </div>
+        <!-- <div class="col-lg-6 col-5 text-right">
+              <a
+                href="javascript:void(0)"
+                class="btn btn-sm btn-default"
+                (click)="openModal(addModal, undefined)"
+              >
+                Add Group Profile
+              </a>
+            </div> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid mt--6">
+  <div class="row">
+    <div class="col-md-12">
+      <mat-horizontal-stepper labelPosition="bottom" #stepper>
+        <mat-step>
+          <ng-template matStepLabel>Maklumat Peribadi</ng-template>
+
+          <!-- profile -->
+          <div class="row mt-1">
+            <div class="col-xl-4 order-xl-2">
+              <div class="card card-Maklumat">
+                <img
+                  alt="Image placeholder"
+                  class="card-img-top"
+                  src="assets/img/theme/img-1-1000x600.jpg"
+                />
+
+                <div class="row justify-content-center">
+                  <div class="col-lg-3 order-lg-2">
+                    <div class="card-profile-image">
+                      <a>
+                        <img
+                          class="rounded-circle"
+                          src="assets/img/default/avatar.png"
+                        />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4"
+                >
+                  <div class="d-flex justify-content-between">
+                    <a
+                      class="btn btn-sm btn-info mr-4"
+                      href="javascript:void(0)"
+                    >
+                      Telefon
+                    </a>
+
+                    <a
+                      class="btn btn-sm btn-default float-right"
+                      href="javascript:void(0)"
+                    >
+                      Mesej
+                    </a>
+                  </div>
+                </div>
+
+                <div class="card-body pt-0">
+                  <div class="row">
+                    <div class="col">
+                      <div
+                        class="card-Maklumat-stats d-flex justify-content-center"
+                      >
+                        <div>
+                          <span class="heading"> 22 </span>
+
+                          <span class="description"> Kawan </span>
+                        </div>
+
+                        <div>
+                          <span class="heading"> 10 </span>
+
+                          <span class="description"> Gambar </span>
+                        </div>
+
+                        <div>
+                          <span class="heading"> 89 </span>
+
+                          <span class="description"> Komen </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="text-center">
+                    <h5 class="h3">
+                      Ali Imran<span class="font-weight-light"> , 27 </span>
+                    </h5>
+
+                    <div class="h5 font-weight-300">
+                      <i class="fas fa-location-arrow mr-2"> </i> Ampang, Kuala
+                      Lumpur
+                    </div>
+
+                    <div class="h5 mt-4">
+                      <i class="fas fa-briefcase mr-2"> </i> Pengurus
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xl-8 order-xl-1">
+              <div class="card">
+                <div class="card-header">
+                  <div class="row align-items-center">
+                    <div class="col-8">
+                      <h3 *ngIf="!editEnabled" class="mb-0">Maklumat</h3>
+                      <h3 *ngIf="editEnabled" class="mb-0">Ubah Maklumat</h3>
+                    </div>
+
+                    <div class="col-4 text-right">
+                      <a
+                        *ngIf="!editEnabled"
+                        class="btn btn-sm btn-primary"
+                        href="javascript:void(0)"
+                      >
+                        Tetapan
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card-body">
+                  <form *ngIf="!editEnabled">
+                    <h6 class="heading-small text-muted mb-4">
+                      Maklumat Pemohon
+                    </h6>
+
+                    <div class="pl-lg-4">
+                      <div class="row">
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label
+                              class="form-control-label"
+                              for="input-username"
+                            >
+                              Nama
+                            </label>
+
+                            <input
+                              class="form-control"
+                              id="input-username"
+                              placeholder="Name"
+                              type="text"
+                              value="Ali Imran"
+                              disabled
+                            />
+                          </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label class="form-control-label" for="input-email">
+                              Email
+                            </label>
+
+                            <input
+                              class="form-control"
+                              id="input-email"
+                              placeholder="Email address"
+                              type="email"
+                              value="imran@prototype.com.my"
+                              disabled
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <hr class="my-4" />
+
+                    <h6 class="heading-small text-muted mb-4">Maklumat Lain</h6>
+
+                    <div class="pl-lg-4">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <label
+                              class="form-control-label"
+                              for="input-address"
+                            >
+                              Alamat
+                            </label>
+
+                            <input
+                              class="form-control"
+                              id="input-address"
+                              placeholder="Home Address"
+                              type="text"
+                              value="No. 199, Lorong Esplanade 91/8A"
+                              disabled
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-lg-4">
+                          <div class="form-group">
+                            <label class="form-control-label" for="input-city">
+                              Bandar
+                            </label>
+
+                            <input
+                              class="form-control"
+                              id="input-city"
+                              placeholder="City"
+                              type="text"
+                              value="Petaling Jaya"
+                              disabled
+                            />
+                          </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                          <div class="form-group">
+                            <label
+                              class="form-control-label"
+                              for="input-country"
+                            >
+                              Negara
+                            </label>
+
+                            <input
+                              class="form-control"
+                              id="input-country"
+                              placeholder="Country"
+                              type="text"
+                              value="Malaysia"
+                              disabled
+                            />
+                          </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                          <div class="form-group">
+                            <label
+                              class="form-control-label"
+                              for="input-country"
+                            >
+                              Poskod
+                            </label>
+
+                            <input
+                              class="form-control"
+                              id="input-postal-code"
+                              placeholder="Postal code"
+                              type="number"
+                              value="41240"
+                              disabled
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                  <form [formGroup]="editForm" *ngIf="editEnabled">
+                    <h6 class="heading-small text-muted mb-4">
+                      Maklumat Pemohon
+                    </h6>
+
+                    <div class="pl-lg-4">
+                      <div class="row">
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label
+                              class="form-control-label"
+                              for="input-username"
+                            >
+                              Nama
+                            </label>
+
+                            <input
+                              class="form-control"
+                              id="input-username"
+                              placeholder="Name"
+                              type="text"
+                              value="Ali Imran"
+                              formControlName="name"
+                            />
+                          </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label class="form-control-label" for="input-email">
+                              Email
+                            </label>
+
+                            <input
+                              class="form-control"
+                              id="input-email"
+                              placeholder="Email address"
+                              type="email"
+                              value="imran@prototype.com.my"
+                              formControlName="email"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <hr class="my-4" />
+
+                    <h6 class="heading-small text-muted mb-4">Maklumat Lain</h6>
+
+                    <div class="pl-lg-4">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <label
+                              class="form-control-label"
+                              for="input-address"
+                            >
+                              Alamat
+                            </label>
+
+                            <input
+                              class="form-control"
+                              id="input-address"
+                              placeholder="Home Address"
+                              type="text"
+                              value="No. 199, Lorong Esplanade 91/8A"
+                              formControlName="address"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-lg-4">
+                          <div class="form-group">
+                            <label class="form-control-label" for="input-city">
+                              Bandar
+                            </label>
+
+                            <input
+                              class="form-control"
+                              id="input-city"
+                              placeholder="City"
+                              type="text"
+                              value="Petaling Jaya"
+                              formControlName="city"
+                            />
+                          </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                          <div class="form-group">
+                            <label
+                              class="form-control-label"
+                              for="input-country"
+                            >
+                              Negara
+                            </label>
+
+                            <input
+                              class="form-control"
+                              id="input-country"
+                              placeholder="Country"
+                              type="text"
+                              value="Malaysia"
+                              formControlName="country"
+                            />
+                          </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                          <div class="form-group">
+                            <label
+                              class="form-control-label"
+                              for="input-country"
+                            >
+                              Poskod
+                            </label>
+
+                            <input
+                              class="form-control"
+                              id="input-postal-code"
+                              placeholder="Postal code"
+                              type="number"
+                              value="41240"
+                              formControlName="postcode"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- profile -->
+          <div class="text-right">
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Maklumat Penjaga</ng-template>
+
+          <!-- maklumat penjaga -->
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-control-label">Nama</label>
+                <input
+                  class="form-control"
+                  placeholder="Enter Nama"
+                  type="text"
+                />
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-control-label">Hubungan</label>
+                <input
+                  class="form-control"
+                  placeholder="Enter Hubungan"
+                  type="text"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-control-label">No Kad Pengenalan</label>
+                <input
+                  class="form-control"
+                  placeholder="Enter No Kad Pengenalan"
+                  type="text"
+                />
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-control-label">Tarikh Lahir</label>
+                <input
+                  class="form-control"
+                  placeholder="Enter Tarikh Lahir"
+                  type="datetime-local"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-control-label">Tempat Lahir</label>
+                <input
+                  class="form-control"
+                  placeholder="Enter Tempat Lahir"
+                  type="text"
+                />
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-control-label">Umur</label>
+                <input
+                  class="form-control"
+                  placeholder="Enter Umur"
+                  type="text"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-control-label">Alamat 1</label>
+                <input
+                  class="form-control"
+                  placeholder="Enter Alamat 1"
+                  type="text"
+                />
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-control-label">Alamat 2</label>
+                <input
+                  class="form-control"
+                  placeholder="Enter Alamat 2"
+                  type="text"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-control-label">Poskod</label>
+                <input
+                  class="form-control"
+                  placeholder="Enter Poskod"
+                  type="text"
+                />
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-control-label">Bandar</label>
+                <input
+                  class="form-control"
+                  placeholder="Enter Bandar"
+                  type="text"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-control-label">Negeri</label>
+                <input
+                  class="form-control"
+                  placeholder="Enter Negeri"
+                  type="text"
+                />
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-control-label">Negara</label>
+                <input
+                  class="form-control"
+                  placeholder="Enter Negara"
+                  type="text"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-control-label">No Telefon Bimbit</label>
+                <input
+                  class="form-control"
+                  placeholder="Enter No Telefon Bimbit"
+                  type="text"
+                />
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-control-label">Email</label>
+                <input
+                  class="form-control"
+                  placeholder="Enter Email"
+                  type="text"
+                />
+              </div>
+            </div>
+          </div>
+          <!-- maklumat penjaga -->
+
+          <div class="text-right">
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </mat-step>
+
+        <mat-step>
+          <ng-template matStepLabel>Maklumat Akademik</ng-template>
+
+          <!-- maklumat akademik -->
+          <div class="card-header bg-secondary">
+            <h3 class="m-0">PMR</h3>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="form-control-label">Tahun</label>
+                  <select
+                    class="form-control"
+                    placeholder="Enter Tahun"
+                    type="text"
+                    ><option>2018</option>
+                    <option>2019</option>
+                    <option>2020</option>
+                    <option>2021</option></select
+                  >
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="form-control-label">Gred/Pangkat</label>
+                  <input
+                    class="form-control"
+                    placeholder="Enter Gred/Pangkat"
+                    type="text"
+                  />
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="form-control-label">Sekolah</label>
+                  <input
+                    class="form-control"
+                    placeholder="Enter Sekolah"
+                    type="text"
+                  />
+                </div>
+              </div>
+            </div>
+            <br />
+            <h3 class="m-0">Keputusan</h3>
+            <br />
+            <div class="row">
+              <div class="col-md-7">
+                <div class="form-group">
+                  <label class="form-control-label">Matepejaran</label>
+                  <select class="form-control" placeholder="Enter" type="text">
+                    <option>Bahasa Melayu</option>
+                    <option>Bahasa English</option>
+                    <option>Matematik</option>
+                    <option>Kimia</option>
+                    <option>Fizik</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label class="form-control-label">Gred</label>
+                  <select class="form-control" placeholder="" type="text">
+                    <option checked>Sila Pilih</option>
+                    <option>A</option>
+                    <option>B</option>
+                    <option>C</option>
+                    <option>D</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md-2 pt-1 text-right">
+                <div class="form-group pt-1">
+                  <label class="form-control-label"></label>
+                  <br />
+                  <i class="fa fa-trash-alt"></i>
+                </div>
+              </div>
+            </div>
+            <span class="text-blue"> <i class="fa fa-plus"></i> Tambah </span>
+          </div>
+          <div class="card-header bg-secondary">
+            <h3 class="m-0">SPM</h3>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="form-control-label">Tahun</label>
+                  <select
+                    class="form-control"
+                    placeholder="Enter Tahun"
+                    type="text"
+                    ><option>2018</option>
+                    <option>2019</option>
+                    <option>2020</option>
+                    <option>2021</option></select
+                  >
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="form-control-label">Gred/Pangkat</label>
+                  <input
+                    class="form-control"
+                    placeholder="Enter Gred/Pangkat"
+                    type="text"
+                  />
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="form-control-label">Sekolah</label>
+                  <input
+                    class="form-control"
+                    placeholder="Enter Sekolah"
+                    type="text"
+                  />
+                </div>
+              </div>
+            </div>
+            <br />
+            <h3 class="m-0">Keputusan</h3>
+            <br />
+            <div class="row">
+              <div class="col-md-7">
+                <div class="form-group">
+                  <label class="form-control-label">Matepejaran</label>
+                  <select class="form-control" placeholder="Enter" type="text">
+                    <option>Bahasa Melayu</option>
+                    <option>Bahasa English</option>
+                    <option>Matematik</option>
+                    <option>Kimia</option>
+                    <option>Fizik</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label class="form-control-label">Gred</label>
+                  <select class="form-control" placeholder="" type="text">
+                    <option checked>Sila Pilih</option>
+                    <option>A</option>
+                    <option>B</option>
+                    <option>C</option>
+                    <option>D</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md-2 pt-1 text-right">
+                <div class="form-group pt-1">
+                  <label class="form-control-label"></label>
+                  <br />
+                  <i class="fa fa-trash-alt"></i>
+                </div>
+              </div>
+            </div>
+            <span class="text-blue"> <i class="fa fa-plus"></i> Tambah </span>
+          </div>
+          <!-- maklumat akademik -->
+
+          <div class="text-right">
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </mat-step>
+
+        <mat-step>
+          <ng-template matStepLabel>Maklumat Pengajian</ng-template>
+          <!-- pengajian -->
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-control-label">Institusi</label>
+                <input
+                  class="form-control"
+                  placeholder="Enter Institusi"
+                  type="text"
+                />
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-control-label">Bidang Pengajian</label>
+                <input
+                  class="form-control"
+                  placeholder="Enter Bidang Pengajian"
+                  type="text"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-control-label">Kursus</label>
+                <input
+                  class="form-control"
+                  placeholder="Enter Kursus"
+                  type="text"
+                />
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-control-label">Tempoh Pengajian</label>
+                <input
+                  class="form-control"
+                  placeholder="Enter Tempoh Pengajian"
+                  type="text"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-control-label">Tarikh Mula Kursus</label>
+                <input
+                  class="form-control"
+                  placeholder="Enter Tarikh Mula Kursus"
+                  type="text"
+                />
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-control-label">Tarikh Tamat Pengajian</label>
+                <input
+                  class="form-control"
+                  placeholder="Enter Tarikh Tamat Pengajian"
+                  type="text"
+                />
+              </div>
+            </div>
+          </div>
+          <!-- pengajian -->
+          <div class="text-right">
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </mat-step>
+
+        <mat-step>
+          <ng-template matStepLabel>Dokumen Sokongan</ng-template>
+          <!-- dokumen  -->
+
+          <div class="form-group">
+            <label class="form-control-label"
+              >Salinan Kad Pengenalan Pemohon</label
+            >
+            <input
+              class="form-control"
+              placeholder="Enter Salinan Kad Pengenalan Pemohon"
+              type="file"
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-control-label"
+              >Salinan Kad Pengenalan Penjaga</label
+            >
+            <input
+              class="form-control"
+              placeholder="Enter Salinan Kad Pengenalan Penjaga"
+              type="file"
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-control-label"
+              >Salinan Sijil Pelajaran Malaysia</label
+            >
+            <input
+              class="form-control"
+              placeholder="Enter Salinan Sijil Pelajaran Malaysia"
+              type="file"
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-control-label"
+              >Salinan Sijil Berhenti Sekolah</label
+            >
+            <input
+              class="form-control"
+              placeholder="Enter Salinan Sijil Berhenti Sekolah"
+              type="file"
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-control-label">Salinan Slip gaji Pemohon</label>
+            <input
+              class="form-control"
+              placeholder="Enter Salinan Slip gaji Pemohon"
+              type="file"
+            />
+          </div>
+          <!-- dokumen -->
+
+          <div class="text-right">
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Perakuan</ng-template>
+          <p>
+            <input type="checkbox" />&nbsp;&nbsp;Saya mengaku bahawa semua
+            maklumat yang diberikan didalam borang dan dokumen yang disenaraikan
+            adalah benar. Saya juga faham ekiranya terdapat maklumat yabg tidak
+            benar maka pemohonan ini akan terbatal dan ditarik balik
+          </p>
+          <div class="text-right">
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+            <button mat-button>Simpan</button>
+          </div>
+        </mat-step>
+      </mat-horizontal-stepper>
+    </div>
+  </div>
+</div>

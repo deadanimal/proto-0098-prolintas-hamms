@@ -1,0 +1,154 @@
+<div class="header pb-6">
+  <div class="container-fluid">
+    <div class="header-body">
+      <div class="row align-items-center py-4">
+        <div class="col-lg-6 col-7">
+          <h6 class="h2 text-dark d-inline-block mb-0">Media Monitoring</h6>
+
+          <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+              <li class="breadcrumb-item">
+                <a href="javascript:void(0)">
+                  <i class="fas fa-binoculars text-dark"> </i>
+                </a>
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid mt--6">
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-header bg-secondary">
+          <h6 class="text-muted text-uppercase ls-1 mb-1">Chart</h6>
+          <h5 class="h3 mb-0">Total News Alert By Month</h5>
+        </div>
+        <div class="card-body">
+          <div class="chart">
+            <div id="chartdiv" style="width: 100%; height: 100%;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-header bg-secondary">
+          <h6 class="text-muted text-uppercase ls-1 mb-1">Daily Update</h6>
+          <h5 class="h3 mb-0">Interactions</h5>
+          <div class="row mt-2">
+            <div class="col">
+              <div class="form-group">
+                <input
+                  class="form-control form-control-sm"
+                  id="example-text-input"
+                  type="text"
+                  placeholder="Description"
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  class="form-control form-control-sm"
+                  id="example-text-input"
+                  type="text"
+                  placeholder="Hashtag"
+                />
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <input
+                  class="form-control form-control-sm"
+                  placeholder="Date range"
+                  bsDaterangepicker
+                  [bsConfig]="{
+                    isAnimated: true,
+                    containerClass: 'theme-red'
+                  }"
+                  name="bsDaterangepicker"
+                />
+              </div>
+              <div class="input-slider-container">
+                <div
+                  class="input-slider"
+                  data-range-value-max="500"
+                  data-range-value-min="100"
+                  id="input-slider"
+                ></div>
+
+                <div class="row mt-3">
+                  <div class="col-6">
+                    <span
+                      class="range-slider-value"
+                      data-range-value-low="100"
+                      id="input-slider-value"
+                    >
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">Description</th>
+                <th scope="col">Date Published</th>
+                <th scope="col">Platform</th>
+                <th scope="col">Likes</th>
+                <th scope="col">Mentions</th>
+                <th scope="col">Impacts</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr *ngFor="let data of datas">
+                <th scope="row">{{ data.description }}</th>
+                <td>{{ data.date }}</td>
+                <td>
+                  <button
+                    *ngIf="data.platform == 'Facebook'"
+                    type="button"
+                    class="btn btn-facebook btn-icon-only"
+                  >
+                    <span class="btn-inner--icon"
+                      ><i class="fab fa-facebook"></i
+                    ></span>
+                  </button>
+                  <button
+                    *ngIf="data.platform == 'Twitter'"
+                    type="button"
+                    class="btn btn-twitter btn-icon-only"
+                  >
+                    <span class="btn-inner--icon"
+                      ><i class="fab fa-twitter"></i
+                    ></span>
+                  </button>
+                  <button
+                    *ngIf="data.platform == 'Instagram'"
+                    type="button"
+                    class="btn btn-instagram btn-icon-only"
+                  >
+                    <span class="btn-inner--icon"
+                      ><i class="fab fa-instagram"></i
+                    ></span>
+                  </button>
+                </td>
+                <td>{{ data.likes }}</td>
+                <td>{{ data.mentions }}</td>
+                <td>{{ data.impact }} %</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

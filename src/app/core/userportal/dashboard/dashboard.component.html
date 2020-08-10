@@ -1,0 +1,451 @@
+<nav
+  id="navbar-main"
+  class="navbar navbar-horizontal navbar-main navbar-expand-lg navbar-dark bg-secondary"
+>
+  <div class="container">
+    <a class="navbar-brand" (click)="navigatePage('landing_page')">
+      <img src="assets/img/logo/prolintas-logo.png" />
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbar-collapse"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+      (click)="isCollapsed = !isCollapsed"
+      [attr.aria-expanded]="!isCollapsed"
+      aria-controls="collapseBasic"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div
+      class="navbar-collapse navbar-custom-collapse collapse"
+      id="collapseBasic"
+    >
+      <div class="navbar-collapse-header">
+        <div class="row">
+          <div class="col-6 collapse-brand">
+            <a (click)="navigatePage('user-dashboard')">
+              <img src="assets/img/brand/blue.png" />
+            </a>
+          </div>
+          <div class="col-6 collapse-close">
+            <button
+              type="button"
+              class="navbar-toggler"
+              data-toggle="collapse"
+              data-target="#navbar-collapse"
+              aria-controls="navbar-collapse"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+              (click)="isCollapsed = !isCollapsed"
+            >
+              <span></span> <span></span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item" style="cursor: pointer;">
+          <a
+            class="nav-link text-dark"
+            routerLinkActive="active"
+            style="cursor: pointer;"
+            (click)="navigatePage('user-dashboard')"
+          >
+            <span class="nav-link-inner--text">Dashboard</span>
+          </a>
+        </li>
+        <!-- <li class="nav-item" style="cursor: pointer;">
+          <a
+            class="nav-link text-dark"
+            routerLinkActive="active"
+            style="cursor: pointer;"
+            (click)="navigatePage('manual')"
+          >
+            <span class="nav-link-inner--text">Manual</span>
+          </a>
+        </li> -->
+        <li class="nav-item" style="cursor: pointer;">
+          <a
+            class="nav-link text-dark"
+            routerLinkActive="active"
+            style="cursor: pointer;"
+            (click)="navigatePage('faq')"
+          >
+            <span class="nav-link-inner--text">FAQ</span>
+          </a>
+        </li>
+        <!-- <li class="nav-item" style="cursor: pointer;">
+          <a
+            class="nav-link text-dark"
+            routerLinkActive="active"
+            style="cursor: pointer;"
+            (click)="navigatePage('brochure')"
+          >
+            <span class="nav-link-inner--text">Brochure</span>
+          </a>
+        </li> -->
+        <!-- <li class="nav-item" style="cursor: pointer;">
+          <a
+            class="nav-link text-dark"
+            routerLinkActive="active"
+            style="cursor: pointer;"
+            (click)="navigatePage('refund')"
+          >
+            <span class="nav-link-inner--text">Refund</span>
+          </a>
+        </li> -->
+        <li class="nav-item" style="cursor: pointer;">
+          <a
+            class="nav-link text-dark"
+            routerLinkActive="active"
+            style="cursor: pointer;"
+            (click)="navigatePage('complaint')"
+          >
+            <span class="nav-link-inner--text">Complaint</span>
+          </a>
+        </li>
+      </ul>
+      <hr class="d-lg-none" />
+      <ul class="navbar-nav align-items-lg-center ml-lg-auto">
+        <li class="nav-item">
+          <a
+            class="nav-link nav-link-icon"
+            href="https://www.facebook.com/creativetim"
+            target="_blank"
+            tooltip="Like us on Facebook"
+          >
+            <i class="fab fa-facebook-square text-cyan"></i>
+            <span class="nav-link-inner--text d-lg-none text-dark"
+              >Facebook</span
+            >
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link nav-link-icon"
+            href="https://www.instagram.com/creativetimofficial"
+            target="_blank"
+            tooltip="Follow us on Instagram"
+          >
+            <i class="fab fa-instagram text-pink"></i>
+            <span class="nav-link-inner--text d-lg-none text-dark"
+              >Instagram</span
+            >
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link nav-link-icon"
+            href="https://twitter.com/creativetim"
+            target="_blank"
+            tooltip="Follow us on Twitter"
+          >
+            <i class="fab fa-twitter-square text-blue"></i>
+            <span class="nav-link-inner--text d-lg-none text-dark"
+              >Twitter</span
+            >
+          </a>
+        </li>
+        <li class="nav-item d-none text-white d-lg-block ml-lg-4">
+          <a (click)="navigatePage('user-portal/dashboard')">
+            <span class="btn-inner--icon">
+              <i class="fas fa-user text-dark"></i>
+            </span>
+            <span class="nav-link-inner--text text-dark">&nbsp;&nbsp;User</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="main-content">
+  <!-- Header -->
+  <div
+    class="header bg-secondary pt-7 pb-7"
+    style="
+      background-image: url('../../../../assets/img/default/bg-img22.png');
+      background-repeat: no-repeat;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+    "
+  >
+    <div class="container mt-5 mb-5">
+      <div class="header-body">
+        <div class="row">
+          <div class="col-md-3"></div>
+          <div class="col-md-6">
+            <span class="text-center px-4">
+              <img
+                width="100%"
+                height="300px"
+                src="assets/img/icons/cards/search2.svg"
+              />
+            </span>
+            <br /><br />
+            <div class="ng-autocomplete pb-5">
+              <ng-autocomplete
+                [data]="data"
+                [searchKeyword]="keyword"
+                (selected)="selectEvent($event)"
+                (inputChanged)="onChangeSearch($event)"
+                (inputFocused)="onFocused($event)"
+                [itemTemplate]="itemTemplate"
+                [notFoundTemplate]="notFoundTemplate"
+              >
+              </ng-autocomplete>
+
+              <ng-template #itemTemplate let-item>
+                <a [innerHTML]="item.name"></a>
+              </ng-template>
+
+              <ng-template #notFoundTemplate let-notFound>
+                <div [innerHTML]="notFound"></div>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="separator separator-bottom separator-skew zindex-100">
+      <svg
+        x="0"
+        y="0"
+        viewBox="0 0 2560 100"
+        preserveAspectRatio="none"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
+      </svg>
+    </div> -->
+  </div>
+  <section class="py-5 pt-5 pb-9 bg-default">
+    <div class="text-center text-white pt-1 pb-5">
+      <h1 class="text-white">About Us</h1>
+    </div>
+    <div class="container-fluid">
+      <div class="row justify-content-center text-center">
+        <iframe
+          width="80%"
+          height="450"
+          src="https://www.youtube.com/embed/1dbh4-ikePU"
+          frameborder="0"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+  </section>
+  <section class="section section-lg pt-lg-0 mt--7 pb-4">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-12">
+          <div class="row">
+            <div class="col-lg-4">
+              <div
+                class="card card-lift--hover shadow border-0"
+                style="cursor: pointer;"
+              >
+                <div class="card-body py-5">
+                  <div
+                    class="icon icon-shape bg-gradient-primary text-white rounded-circle mb-4"
+                  >
+                    <i class="ni ni-check-bold"></i>
+                  </div>
+                  <h4 class="h3 text-primary text-uppercase">
+                    SSM BizTrust User Manual
+                  </h4>
+                  <p class="description mt-3">
+                    A user guide, also commonly called a technical communication
+                    document or manual.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div
+                class="card card-lift--hover shadow border-0"
+                style="cursor: pointer;"
+              >
+                <div class="card-body py-5">
+                  <div
+                    class="icon icon-shape bg-gradient-success text-white rounded-circle mb-4"
+                  >
+                    <i class="ni ni-istanbul"></i>
+                  </div>
+                  <h4 class="h3 text-success text-uppercase">
+                    SSM BizTrust FAQ
+                  </h4>
+                  <p class="description mt-3">
+                    An FAQ is a list of frequently asked questions (FAQs) and
+                    answers on a particular topic.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div
+                class="card card-lift--hover shadow border-0"
+                style="cursor: pointer;"
+              >
+                <div class="card-body py-5">
+                  <div
+                    class="icon icon-shape bg-gradient-warning text-white rounded-circle mb-4"
+                  >
+                    <i class="ni ni-planet"></i>
+                  </div>
+                  <h4 class="h3 text-warning text-uppercase">
+                    SSM BizTrust Brochure
+                  </h4>
+                  <p class="description mt-3">
+                    A brochure is an informative paper document that can be
+                    folded into a template.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-lg-4">
+              <div
+                class="card card-lift--hover shadow border-0"
+                style="cursor: pointer;"
+              >
+                <div class="card-body py-5">
+                  <div
+                    class="icon icon-shape bg-gradient-danger text-white rounded-circle mb-4"
+                  >
+                    <i class="ni ni-planet"></i>
+                  </div>
+                  <h4 class="h3 text-danger text-uppercase">
+                    Refund Form
+                  </h4>
+                  <p class="description mt-3">
+                    A tax refund is a payment to the taxpayer when the taxpayer
+                    pays more tax than they owe.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div
+                class="card card-lift--hover shadow border-0"
+                style="cursor: pointer;"
+              >
+                <div class="card-body py-5">
+                  <div
+                    class="icon icon-shape bg-gradient-info text-white rounded-circle mb-4"
+                  >
+                    <i class="ni ni-planet"></i>
+                  </div>
+                  <h4 class="h3 text-info text-uppercase">
+                    SSM Biztrust Complaint Form
+                  </h4>
+                  <p class="description mt-3">
+                    A complaint is any formal legal document that sets out the
+                    facts and legal reasons
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- Footer -->
+<footer class="py-5 bg-secondary" id="footer-main">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 text-dark">
+        <span style="font-size: large; font-weight: bold;"
+          >SSM BizTrust General Line</span
+        >
+        <br /><br />
+        <span
+          ><i class="fas fa-envelope text-yellow"></i
+          >&nbsp;&nbsp;enquiry@ssm.com.my</span
+        ><br />
+        <span
+          ><i class="fas fa-phone text-brown"></i>&nbsp;&nbsp;Tel:
+          603-77214000</span
+        >
+      </div>
+      <div class="col-md-4 text-dark">
+        <span style="font-size: large; font-weight: bold;"
+          >Operation Hour
+        </span>
+        <br /><br />
+        <span>Day: Monday - Friday</span><br />
+        <span>Service Counter: 8.15 AM - 4.15 PM</span>
+      </div>
+      <div class="col-md-4 text-dark">
+        <span style="font-size: large; font-weight: bold;"
+          >SSM BizTrust Address</span
+        >
+        <br /><br />
+        <span>
+          <i class="fas fa-map-marker-alt text-danger"></i>&nbsp;&nbsp;Menara
+          SSM@Sentral, No. 7 Jalan Stesen Sentral 5, Kuala Lumpur Sentral 50623
+          Kuala Lumpur.
+        </span>
+      </div>
+    </div>
+    <br />
+    <hr />
+    <br />
+    <div class="row align-items-center justify-content-xl-between">
+      <div class="col-xl-6">
+        <div class="copyright text-center text-xl-left text-muted">
+          &copy; {{ test | date: "yyyy" }}
+          <a
+            href="https://www.creative-tim.com?ref=adpa-presentation-page"
+            class="font-weight-bold ml-1"
+            target="_blank"
+            >PROLINTAS - HAMMS</a
+          >
+        </div>
+      </div>
+      <div class="col-xl-6">
+        <ul
+          class="nav nav-footer justify-content-center justify-content-xl-end"
+        >
+          <li class="nav-item">
+            <a href="#" class="nav-link" target="_blank">Privacy Policy</a>
+          </li>
+          <li class="nav-item">
+            <a
+              href="https://www.creative-tim.com/presentation?ref=adpa-presentation-page"
+              class="nav-link"
+              target="_blank"
+              >About Us</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              href="http://blog.creative-tim.com?ref=adpa-presentation-page"
+              class="nav-link"
+              target="_blank"
+              >Disclaimer</a
+            >
+          </li>
+          <!-- <li class="nav-item">
+            <a
+              href="https://www.creative-tim.com/license?ref=adpa-presentation-page"
+              class="nav-link"
+              target="_blank"
+              >License</a
+            >
+          </li> -->
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>

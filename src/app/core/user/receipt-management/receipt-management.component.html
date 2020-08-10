@@ -1,0 +1,435 @@
+<div class="header pb-6">
+  <div class="container-fluid">
+    <div class="header-body">
+      <div class="row align-items-center py-4">
+        <div class="col-lg-6 col-7">
+          <h6 class="h2 text-dark d-inline-block mb-0">
+            Receipt
+          </h6>
+
+          <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+              <li class="breadcrumb-item">
+                <a href="javascript:void(0)">
+                  <i class="fas fa-user-shield text-dark"></i>
+                </a>
+              </li>
+              <li class="breadcrumb-item">
+                <a href="javascript:void(0)" class="text-dark"> Finance </a>
+              </li>
+              <li aria-current="page" class="breadcrumb-item active">
+                Receipt
+              </li>
+            </ol>
+          </nav>
+        </div>
+        <div class="col-lg-6 col-5 text-right">
+          <!-- <a
+            href="javascript:void(0)"
+            class="btn btn-sm btn-default"
+            (click)="openModal(addNewReceipt, undefined)"
+          >
+            Add New Receipt
+          </a> -->
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-4 col-md-6">
+          <div class="card card-stats">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">
+                    Total Receipt
+                  </h5>
+                  <span class="h2 font-weight-bold mb-0"> 350,897 </span>
+                </div>
+                <div class="col-auto">
+                  <div
+                    class="icon icon-shape bg-gradient-red text-white rounded-circle shadow"
+                  >
+                    <i class="ni ni-active-40"> </i>
+                  </div>
+                </div>
+              </div>
+              <!-- <p class="mt-3 mb-0 text-sm">
+                            <span class="text-success mr-2">
+                              <i class="fa fa-arrow-up"> </i> 3.48%
+                            </span>
+                            <span class="text-nowrap"> Since last month </span>
+                          </p> -->
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-4 col-md-6">
+          <div class="card card-stats">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">
+                    Total Debit
+                  </h5>
+                  <span class="h2 font-weight-bold mb-0"> 2,356 </span>
+                </div>
+                <div class="col-auto">
+                  <div
+                    class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow"
+                  >
+                    <i class="ni ni-chart-pie-35"> </i>
+                  </div>
+                </div>
+              </div>
+              <!-- <p class="mt-3 mb-0 text-sm">
+                            <span class="text-success mr-2">
+                              <i class="fa fa-arrow-up"> </i> 3.48%
+                            </span>
+                            <span class="text-nowrap"> Since last month </span>
+                          </p> -->
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-4 col-md-6">
+          <div class="card card-stats">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">
+                    Total Credit
+                  </h5>
+                  <span class="h2 font-weight-bold mb-0"> 924 </span>
+                </div>
+                <div class="col-auto">
+                  <div
+                    class="icon icon-shape bg-gradient-green text-white rounded-circle shadow"
+                  >
+                    <i class="ni ni-money-coins"> </i>
+                  </div>
+                </div>
+              </div>
+              <!-- <p class="mt-3 mb-0 text-sm">
+                            <span class="text-success mr-2">
+                              <i class="fa fa-arrow-up"> </i> 3.48%
+                            </span>
+                            <span class="text-nowrap"> Since last month </span>
+                          </p> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid mt--6">
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="m-0">Receipt Trend</h3>
+        </div>
+        <div class="card-body">
+          <div style="width: 100%; height: 450px;" id="chartReceipt"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-header bg-secondary">
+          <h3 class="m-0">Search Receipt</h3>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label class="form-control-label">Name</label>
+                <input
+                  class="form-control"
+                  placeholder="Enter Name"
+                  formControlName="name"
+                  type="text"
+                />
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label class="form-control-label">Department</label>
+                <input
+                  class="form-control"
+                  placeholder="Enter Department"
+                  formControlName="name"
+                  type="text"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer text-center">
+          <button
+            class="btn btn-primary"
+            (click)="successAlert('search Receipt')"
+          >
+            Search
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="m-0">List Of Receipts</h3>
+        </div>
+        <div class="dataTables_wrapper py-4">
+          <div class="row">
+            <div class="col-sm-12 col-md-6">
+              <div class="dataTables_length" id="datatable_length">
+                <label>
+                  Show
+                  <select
+                    name="datatable_length"
+                    aria-controls="datatable"
+                    class="form-control form-control-sm"
+                    (change)="entriesChange($event)"
+                  >
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="-1">All</option>
+                  </select>
+                  records
+                </label>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+              <!-- <div id="datatable_filter" class="dataTables_filter">
+                <label>
+                  <input
+                    type="search"
+                    class="form-control form-control-sm"
+                    placeholder="Search records"
+                    aria-controls="datatable"
+                    (keyup)="filterTable($event)"
+                  />
+                </label>
+              </div> -->
+            </div>
+          </div>
+
+          <ngx-datatable
+            class="bootstrap selection-cell"
+            [columnMode]="'force'"
+            [headerHeight]="50"
+            [footerHeight]="50"
+            [rowHeight]="'auto'"
+            [limit]="tableEntries != -1 ? tableEntries : undefined"
+            [rows]="listReceipt"
+            (activate)="onActivate($event)"
+          >
+            <ngx-datatable-column name="No">
+              <ng-template
+                let-rowIndex="rowIndex"
+                let-row="row"
+                ngx-datatable-cell-template
+              >
+                <strong>{{ rowIndex + 1 }}</strong>
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span>Name</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.cust }}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span>Receipt</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.name }}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span>Amount</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.amount }}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span>Description</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.description }}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span>Created</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.created_at | date: "dd/MM/yyyy" }}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span></span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <a
+                  (click)="openModal(editReceipt, row)"
+                  style="cursor: pointer;"
+                  ><i class="fas fa-edit"></i
+                ></a>
+              </ng-template>
+            </ngx-datatable-column>
+          </ngx-datatable>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #addNewReceipt>
+  <div class="modal-header bg-default">
+    <h6 class="modal-title text-white my-auto" id="modal-title-default">
+      Add New Receipt
+    </h6>
+
+    <button
+      aria-label="Close"
+      class="close"
+      data-dismiss="modal"
+      type="button"
+      (click)="closeModal()"
+    >
+      <span aria-hidden="true" class="text-white my-auto"> × </span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <div class="form-group">
+      <label class="form-control-label">Name</label>
+      <input
+        class="form-control"
+        placeholder="Enter Name"
+        formControlName="name"
+        type="text"
+      />
+    </div>
+    <div class="form-group">
+      <label class="form-control-label">Rate</label>
+      <input
+        class="form-control"
+        placeholder="Enter Rate (%)"
+        formControlName="name"
+        type="text"
+      />
+    </div>
+    <div class="form-group">
+      <label class="form-control-label">Description</label>
+      <input
+        class="form-control"
+        placeholder="Enter Description"
+        type="text"
+        value="Fee Description"
+      />
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <div class="text-center">
+      <button class="btn btn-default" (click)="successAlert('add new Receipt')">
+        Save
+      </button>
+      <button
+        class="btn btn-outline-danger ml-auto"
+        data-dismiss="modal"
+        type="button"
+        (click)="closeModal()"
+      >
+        Close
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #editReceipt>
+  <div class="modal-header bg-default">
+    <h6 class="modal-title text-white my-auto" id="modal-title-default">
+      Edit Receipt
+    </h6>
+
+    <button
+      aria-label="Close"
+      class="close"
+      data-dismiss="modal"
+      type="button"
+      (click)="closeModal()"
+    >
+      <span aria-hidden="true" class="text-white my-auto"> × </span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <div class="form-group">
+      <label class="form-control-label">Name</label>
+      <input
+        class="form-control"
+        placeholder="Enter Name"
+        type="text"
+        value="Receipt 1"
+      />
+    </div>
+    <div class="form-group">
+      <label class="form-control-label">Rate</label>
+      <input
+        class="form-control"
+        placeholder="Enter Rate (%)"
+        type="text"
+        value="1o%"
+      />
+    </div>
+    <div class="form-group">
+      <label class="form-control-label">Description</label>
+      <input
+        class="form-control"
+        placeholder="Enter Description"
+        type="text"
+        value="Fee Description"
+      />
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <div class="text-center">
+      <button class="btn btn-default" (click)="successAlert('edit Receipt')">
+        Save
+      </button>
+      <button
+        class="btn btn-outline-danger ml-auto"
+        data-dismiss="modal"
+        type="button"
+        (click)="closeModal()"
+      >
+        Close
+      </button>
+    </div>
+  </div>
+</ng-template>

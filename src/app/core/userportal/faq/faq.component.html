@@ -1,0 +1,337 @@
+<nav
+  id="navbar-main"
+  class="navbar navbar-horizontal navbar-main navbar-expand-lg navbar-dark bg-secondary"
+>
+  <div class="container">
+    <a class="navbar-brand" (click)="navigatePage('landing_page')">
+      <img src="assets/img/logo/prolintas-logo.png" />
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbar-collapse"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+      (click)="isCollapsed = !isCollapsed"
+      [attr.aria-expanded]="!isCollapsed"
+      aria-controls="collapseBasic"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div
+      class="navbar-collapse navbar-custom-collapse collapse"
+      id="collapseBasic"
+    >
+      <div class="navbar-collapse-header">
+        <div class="row">
+          <div class="col-6 collapse-brand">
+            <a (click)="navigatePage('user-dashboard')">
+              <img src="assets/img/brand/blue.png" />
+            </a>
+          </div>
+          <div class="col-6 collapse-close">
+            <button
+              type="button"
+              class="navbar-toggler"
+              data-toggle="collapse"
+              data-target="#navbar-collapse"
+              aria-controls="navbar-collapse"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+              (click)="isCollapsed = !isCollapsed"
+            >
+              <span></span> <span></span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item" style="cursor: pointer;">
+          <a
+            class="nav-link text-dark"
+            routerLinkActive="active"
+            style="cursor: pointer;"
+            (click)="navigatePage('user-dashboard')"
+          >
+            <span class="nav-link-inner--text">Dashboard</span>
+          </a>
+        </li>
+        <!-- <li class="nav-item" style="cursor: pointer;">
+          <a
+            class="nav-link text-dark"
+            routerLinkActive="active"
+            style="cursor: pointer;"
+            (click)="navigatePage('manual')"
+          >
+            <span class="nav-link-inner--text">Manual</span>
+          </a>
+        </li> -->
+        <li class="nav-item" style="cursor: pointer;">
+          <a
+            class="nav-link text-dark"
+            routerLinkActive="active"
+            style="cursor: pointer;"
+            (click)="navigatePage('faq')"
+          >
+            <span class="nav-link-inner--text">FAQ</span>
+          </a>
+        </li>
+        <!-- <li class="nav-item" style="cursor: pointer;">
+          <a
+            class="nav-link text-dark"
+            routerLinkActive="active"
+            style="cursor: pointer;"
+            (click)="navigatePage('brochure')"
+          >
+            <span class="nav-link-inner--text">Brochure</span>
+          </a>
+        </li> -->
+        <!-- <li class="nav-item" style="cursor: pointer;">
+          <a
+            class="nav-link text-dark"
+            routerLinkActive="active"
+            style="cursor: pointer;"
+            (click)="navigatePage('refund')"
+          >
+            <span class="nav-link-inner--text">Refund</span>
+          </a>
+        </li> -->
+        <li class="nav-item" style="cursor: pointer;">
+          <a
+            class="nav-link text-dark"
+            routerLinkActive="active"
+            style="cursor: pointer;"
+            (click)="navigatePage('complaint')"
+          >
+            <span class="nav-link-inner--text">Complaint</span>
+          </a>
+        </li>
+      </ul>
+      <hr class="d-lg-none" />
+      <ul class="navbar-nav align-items-lg-center ml-lg-auto">
+        <li class="nav-item">
+          <a
+            class="nav-link nav-link-icon"
+            href="https://www.facebook.com/creativetim"
+            target="_blank"
+            tooltip="Like us on Facebook"
+          >
+            <i class="fab fa-facebook-square text-cyan"></i>
+            <span class="nav-link-inner--text d-lg-none text-dark"
+              >Facebook</span
+            >
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link nav-link-icon"
+            href="https://www.instagram.com/creativetimofficial"
+            target="_blank"
+            tooltip="Follow us on Instagram"
+          >
+            <i class="fab fa-instagram text-pink"></i>
+            <span class="nav-link-inner--text d-lg-none text-dark"
+              >Instagram</span
+            >
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link nav-link-icon"
+            href="https://twitter.com/creativetim"
+            target="_blank"
+            tooltip="Follow us on Twitter"
+          >
+            <i class="fab fa-twitter-square text-blue"></i>
+            <span class="nav-link-inner--text d-lg-none text-dark"
+              >Twitter</span
+            >
+          </a>
+        </li>
+        <li class="nav-item d-none text-white d-lg-block ml-lg-4">
+          <a (click)="navigatePage('user-portal/dashboard')">
+            <span class="btn-inner--icon">
+              <i class="fas fa-user text-dark"></i>
+            </span>
+            <span class="nav-link-inner--text text-dark">&nbsp;&nbsp;User</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="main-content">
+  <!-- Header -->
+
+  <section class="section section-lg pt-lg-0 mt-3 pb-4">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="text-center text-white pt-4 pb-5">
+          <h1 class="text-white">Frequently Asked Question (FAQ)</h1>
+        </div>
+        <div class="col-lg-12 col-md-12">
+          <div class="card">
+            <div class="card-body">
+              <accordion [isAnimated]="true">
+                <accordion-group class="pb--1">
+                  <h5 class="mb-0" accordion-heading>What is SSM BizTrust?</h5>
+                  BizTrust is a standard that can be obtained by online business
+                  entities via SSM, which certifies that the entity has complied
+                  with the characteristics of the Trust Principles and Criteria
+                  that have been established including registration with SSM,
+                  online security and privacy of information.
+                </accordion-group>
+                <accordion-group>
+                  <h5 class="mb-0" accordion-heading>
+                    Who can apply to SSM BizTrust?
+                  </h5>
+                  <p>
+                    Any online entity that is registered and in good standing
+                    with SSM and follows established business practices.
+                  </p>
+                </accordion-group>
+                <accordion-group>
+                  <h5 class="mb-0" accordion-heading>
+                    What online medium should the online business entity have?
+                  </h5>
+                  <p>
+                    Any online entity that offers products or services or even
+                    to simply share information on their website, including
+                    online transactions and social media.
+                  </p>
+                </accordion-group>
+                <accordion-group>
+                  <h5 class="mb-0" accordion-heading>
+                    How do I access the SSM BizTrust system?
+                  </h5>
+                  <p>
+                    SSM BizTrust can be accessed via www.ssm.com.my and click
+                    the icon for “SSM BizTrust” under e-Services list or
+                    directly to https://biztrust.ssm.com.my
+                  </p>
+                </accordion-group>
+                <accordion-group>
+                  <h5 class="mb-0" accordion-heading>
+                    What are the software and hardware is required for using SSM
+                    BizTrust Services?
+                  </h5>
+                  <p>(a)The Hardware Requirements are as below:</p>
+                  <ul>
+                    <li>Intel iCore 3 & above processor</li>
+                    <li>2 GB of memory and above</li>
+                    <li>1Mbps minimum internet connection</li>
+                    <li>Printer (Black or Color)</li>
+                    <li>Scanner</li>
+                  </ul>
+                  <p>(b)The Software Requirements are as below:</p>
+                  <ul>
+                    <li>
+                      Microsoft Windows 7 or above
+                    </li>
+                    <li>Web Browser</li>
+                    <li>Chrome version 32 or higher</li>
+                    <li>Firefox version 27 or higher</li>
+                    <li>
+                      Internet Explorer version 8, 9 or 11
+                    </li>
+                    <li>Adobe Reader 9.0 and above</li>
+                  </ul>
+                </accordion-group>
+              </accordion>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- Footer -->
+<footer class="py-5 bg-secondary" id="footer-main">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 text-dark">
+        <span style="font-size: large; font-weight: bold;"
+          >SSM BizTrust General Line</span
+        >
+        <br /><br />
+        <span
+          ><i class="fas fa-envelope text-yellow"></i
+          >&nbsp;&nbsp;enquiry@ssm.com.my</span
+        ><br />
+        <span
+          ><i class="fas fa-phone text-brown"></i>&nbsp;&nbsp;Tel:
+          603-77214000</span
+        >
+      </div>
+      <div class="col-md-4 text-dark">
+        <span style="font-size: large; font-weight: bold;"
+          >Operation Hour
+        </span>
+        <br /><br />
+        <span>Day: Monday - Friday</span><br />
+        <span>Service Counter: 8.15 AM - 4.15 PM</span>
+      </div>
+      <div class="col-md-4 text-dark">
+        <span style="font-size: large; font-weight: bold;"
+          >SSM BizTrust Address</span
+        >
+        <br /><br />
+        <span>
+          <i class="fas fa-map-marker-alt text-danger"></i>&nbsp;&nbsp;Menara
+          SSM@Sentral, No. 7 Jalan Stesen Sentral 5, Kuala Lumpur Sentral 50623
+          Kuala Lumpur.
+        </span>
+      </div>
+    </div>
+    <br />
+    <hr />
+    <br />
+    <div class="row align-items-center justify-content-xl-between">
+      <div class="col-xl-6">
+        <div class="copyright text-center text-xl-left text-muted">
+          &copy; {{ test | date: "yyyy" }}
+          <a
+            href="https://www.creative-tim.com?ref=adpa-presentation-page"
+            class="font-weight-bold ml-1"
+            target="_blank"
+            >TM - IBILL</a
+          >
+        </div>
+      </div>
+      <div class="col-xl-6">
+        <ul
+          class="nav nav-footer justify-content-center justify-content-xl-end"
+        >
+          <li class="nav-item">
+            <a href="#" class="nav-link" target="_blank">Privacy Policy</a>
+          </li>
+          <li class="nav-item">
+            <a
+              href="https://www.creative-tim.com/presentation?ref=adpa-presentation-page"
+              class="nav-link"
+              target="_blank"
+              >About Us</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              href="http://blog.creative-tim.com?ref=adpa-presentation-page"
+              class="nav-link"
+              target="_blank"
+              >Disclaimer</a
+            >
+          </li>
+          <!-- <li class="nav-item">
+            <a
+              href="https://www.creative-tim.com/license?ref=adpa-presentation-page"
+              class="nav-link"
+              target="_blank"
+              >License</a
+            >
+          </li> -->
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>

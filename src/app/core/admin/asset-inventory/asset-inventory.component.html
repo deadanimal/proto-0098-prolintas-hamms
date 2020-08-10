@@ -1,0 +1,352 @@
+<div class="header pb-6">
+  <div class="container-fluid">
+    <div class="header-body">
+      <div class="row align-items-center py-4">
+        <div class="col-lg-6 col-7">
+          <h6 class="h2 text-dark d-inline-block mb-0">
+            Asset Inventory
+          </h6>
+
+          <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+              <li class="breadcrumb-item">
+                <a href="javascript:void(0)">
+                  <i class="fas fa-binoculars text-dark"> </i>
+                </a>
+              </li>
+            </ol>
+          </nav>
+        </div>
+        <div class="col-lg-6 col-5 text-right">
+          <a
+            href="javascript:void(0)"
+            class="btn btn-sm btn-default"
+            (click)="openModal(addModal, undefined)"
+          >
+            Add Asset Inventory
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid mt--6">
+  <div class="row">
+    <div class="col-md-5">
+      <div class="card">
+        <div class="card-header bg-secondary">
+          <h5 class="h3 mb-0">Asset Inventory</h5>
+        </div>
+        <div class="card-body">
+          <div class="chart">
+            <div id="chartdivIA" style="width: 100%; height: 100%;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-7">
+      <div class="card">
+        <div class="card-header bg-secondary">
+          <h5 class="h3 mb-0">Asset Inventory</h5>
+        </div>
+
+        <div class="dataTables_wrapper py-4">
+          <div class="dataTables_length" id="datatable_length">
+            <label>
+              Show
+              <select
+                name="datatable_length"
+                aria-controls="datatable"
+                class="form-control form-control-sm"
+                (change)="entriesChange($event)"
+              >
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="-1">All</option>
+              </select>
+              records
+            </label>
+          </div>
+
+          <ngx-datatable
+            class="bootstrap selection-cell"
+            [columnMode]="'force'"
+            [headerHeight]="50"
+            [footerHeight]="50"
+            [rowHeight]="'auto'"
+            [limit]="tableEntries != -1 ? tableEntries : undefined"
+            [rows]="listRoles"
+            (activate)="onActivate($event)"
+          >
+            <!-- <ngx-datatable-column name="No">
+              <ng-template
+                let-rowIndex="rowIndex"
+                let-row="row"
+                ngx-datatable-cell-template
+              >
+                <strong>{{ rowIndex + 1 }}</strong>
+              </ng-template>
+            </ngx-datatable-column> -->
+
+            <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span>Name</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.name }}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span>Owner</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.owner }}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span>Health</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <span *ngIf="row.health == 'AC'" class="badge badge-success"
+                  >Active</span
+                >
+                <span *ngIf="row.health == 'PE'" class="badge badge-warning"
+                  >Pending</span
+                >
+                <span *ngIf="row.health == 'CA'" class="badge badge-danger"
+                  >Cancelled</span
+                >
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span>Budget</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.budget }}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <!-- <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span>Expenses</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.expenses }}
+              </ng-template>
+            </ngx-datatable-column> -->
+
+            <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span></span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <a (click)="openModal(editModal, row)" style="cursor: pointer;">
+                  <button class="btn btn-default btn-sm">
+                    <i class="fas fa-edit"></i></button
+                ></a>
+              </ng-template>
+            </ngx-datatable-column>
+          </ngx-datatable>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-body text-center">
+          <img
+            width="80%"
+            src="assets/img/google/budget.png"
+          /><br /><br /><br />
+          <b>Allocated<br />Asset<br /><br />1.5 M</b>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-body text-center">
+          <img
+            width="80%"
+            src="assets/img/google/document.png"
+          /><br /><br /><br />
+          <b>Used Asset Across Portfolio<br /><br />900 K</b>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-body text-center">
+          <img width="80%" src="assets/img/google/cost.png" /><br /><br /><br />
+          <b>Used Asset Percentage<br /><br />70%</b>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-body text-center">
+          <img
+            width="80%"
+            src="assets/img/google/financial.png"
+          /><br /><br /><br />
+          <b
+            >Estimated Cost Across Portfolio<br /><br />
+            850 K</b
+          >
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-body text-center">
+          <img
+            width="80%"
+            src="assets/img/google/money-bag.png"
+          /><br /><br /><br />
+          <b>Actual Cost Across Portfolio<br /><br />2.5 M</b>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-header bg-secondary">
+          Asset Digital Mapping
+        </div>
+        <div
+          style="height: 500px;"
+          leaflet
+          [leafletOptions]="options"
+          [leafletLayers]="layers"
+        ></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #addModal>
+  <div class="modal-header bg-default">
+    <h6 class="modal-title text-white my-auto" id="modal-title-default">
+      Add Asset Inventory
+    </h6>
+
+    <button
+      aria-label="Close"
+      class="close"
+      data-dismiss="modal"
+      type="button"
+      (click)="closeModal()"
+    >
+      <span aria-hidden="true" class="text-white my-auto"> × </span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <div class="form-group">
+      <label class="form-control-label">Name</label>
+      <input class="form-control" placeholder="Enter Name" type="text" />
+    </div>
+    <div class="form-group">
+      <label class="form-control-label">Owner </label>
+      <input class="form-control" placeholder="Enter Amount" type="text" />
+    </div>
+
+    <div class="form-group">
+      <label class="form-control-label">Document</label>
+      <input class="form-control" type="file" />
+    </div>
+
+    <div class="form-group">
+      <label class="form-control-label">Value</label>
+      <input
+        class="form-control"
+        placeholder="Enter Detail"
+        type="datetime-local"
+      />
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <div class="text-center">
+      <button class="btn btn-default" (click)="successAlert('add new data')">
+        Save
+      </button>
+      <button
+        class="btn btn-outline-danger ml-auto"
+        data-dismiss="modal"
+        type="button"
+        (click)="closeModal()"
+      >
+        Close
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #editModal>
+  <div class="modal-header bg-default">
+    <h6 class="modal-title text-white my-auto" id="modal-title-default">
+      Edit Asset Inventory
+    </h6>
+
+    <button
+      aria-label="Close"
+      class="close"
+      data-dismiss="modal"
+      type="button"
+      (click)="closeModal()"
+    >
+      <span aria-hidden="true" class="text-white my-auto"> × </span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <div class="form-group">
+      <label class="form-control-label">Name</label>
+      <input class="form-control" placeholder="Enter Name" type="text" />
+    </div>
+    <div class="form-group">
+      <label class="form-control-label">Owner </label>
+      <input class="form-control" placeholder="Enter Amount" type="text" />
+    </div>
+
+    <div class="form-group">
+      <label class="form-control-label">Document</label>
+      <input class="form-control" type="file" />
+    </div>
+
+    <div class="form-group">
+      <label class="form-control-label">Value</label>
+      <input
+        class="form-control"
+        placeholder="Enter Detail"
+        type="datetime-local"
+      />
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <div class="text-center">
+      <button class="btn btn-default" (click)="successAlert('edit new data')">
+        Save
+      </button>
+      <button
+        class="btn btn-outline-danger ml-auto"
+        data-dismiss="modal"
+        type="button"
+        (click)="closeModal()"
+      >
+        Close
+      </button>
+    </div>
+  </div>
+</ng-template>

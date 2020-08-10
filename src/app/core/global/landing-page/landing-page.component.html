@@ -1,0 +1,540 @@
+<nav
+  id="navbar-main"
+  class="navbar navbar-horizontal navbar-main navbar-expand-lg navbar-dark bg-secondary"
+>
+  <div class="container">
+    <a
+      class="navbar-brand"
+      style="cursor: pointer;"
+      (click)="navigatePage('landing_page')"
+    >
+      <img src="assets/img/logo/prolintas-logo.png" />
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbar-collapse"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+      (click)="isCollapsed = !isCollapsed"
+      [attr.aria-expanded]="!isCollapsed"
+      aria-controls="collapseBasic"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div
+      class="navbar-collapse navbar-custom-collapse collapse"
+      id="collapseBasic"
+    >
+      <div class="navbar-collapse-header">
+        <div class="row">
+          <div class="col-6 collapse-brand">
+            <a (click)="navigatePage('home')">
+              <img src="assets/img/brand/blue.png" />
+            </a>
+          </div>
+          <div class="col-6 collapse-close">
+            <button
+              type="button"
+              class="navbar-toggler"
+              data-toggle="collapse"
+              data-target="#navbar-collapse"
+              aria-controls="navbar-collapse"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+              (click)="isCollapsed = !isCollapsed"
+            >
+              <span></span> <span></span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <ul class="navbar-nav mr-auto">
+        <!-- <li class="nav-item" style="cursor: pointer;">
+          <a
+            class="nav-link text-dark"
+            routerLinkActive="active"
+            style="cursor: pointer;"
+            (click)="navigatePage('user-dashboard')"
+          >
+            <span class="nav-link-inner--text">Dashboard</span>
+          </a>
+        </li> -->
+        <li class="nav-item" style="cursor: pointer;">
+          <a
+            class="nav-link text-dark"
+            routerLinkActive="active"
+            style="cursor: pointer;"
+            (click)="navigatePage('home')"
+          >
+            <span class="nav-link-inner--text">Menu Utama</span>
+          </a>
+        </li>
+        <li class="nav-item" style="cursor: pointer;">
+          <a
+            class="nav-link text-dark"
+            routerLinkActive="active"
+            style="cursor: pointer;"
+            (click)="navigatePage('faq')"
+          >
+            <span class="nav-link-inner--text">Soalan Lazim</span>
+          </a>
+        </li>
+        <li class="nav-item" style="cursor: pointer;">
+          <a
+            class="nav-link text-dark"
+            routerLinkActive="active"
+            style="cursor: pointer;"
+            (click)="navigatePage('about-us')"
+          >
+            <span class="nav-link-inner--text">Mengenai Kami</span>
+          </a>
+        </li>
+        <!-- <li class="nav-item" style="cursor: pointer;">
+          <a
+            class="nav-link text-dark"
+            routerLinkActive="active"
+            style="cursor: pointer;"
+            (click)="navigatePage('brochure')"
+          >
+            <span class="nav-link-inner--text">Brochure</span>
+          </a>
+        </li> -->
+        <!-- <li class="nav-item" style="cursor: pointer;">
+          <a
+            class="nav-link text-dark"
+            routerLinkActive="active"
+            style="cursor: pointer;"
+            (click)="navigatePage('refund')"
+          >
+            <span class="nav-link-inner--text">Refund</span>
+          </a>
+        </li> -->
+        <!-- <li class="nav-item" style="cursor: pointer;">
+          <a
+            class="nav-link text-dark"
+            routerLinkActive="active"
+            style="cursor: pointer;"
+            (click)="navigatePage('complaint')"
+          >
+            <span class="nav-link-inner--text">Complaint</span>
+          </a>
+        </li> -->
+      </ul>
+      <hr class="d-lg-none" />
+      <ul class="navbar-nav align-items-lg-center ml-lg-auto">
+        <li class="nav-item">
+          <a
+            class="nav-link nav-link-icon"
+            href="#"
+            target="_blank"
+            tooltip="Like us on Facebook"
+          >
+            <i class="fab fa-facebook-square text-cyan"></i>
+            <span class="nav-link-inner--text d-lg-none text-dark"
+              >Facebook</span
+            >
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link nav-link-icon"
+            href="#"
+            target="_blank"
+            tooltip="Follow us on Instagram"
+          >
+            <i class="fab fa-instagram text-pink"></i>
+            <span class="nav-link-inner--text d-lg-none text-dark"
+              >Instagram</span
+            >
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link nav-link-icon"
+            href="#"
+            target="_blank"
+            tooltip="Follow us on Twitter"
+          >
+            <i class="fab fa-twitter-square text-blue"></i>
+            <span class="nav-link-inner--text d-lg-none text-dark"
+              >Twitter</span
+            >
+          </a>
+        </li>
+        <li class="nav-item">
+          <div class="dropdown" dropdown>
+            <a
+              href="javascript:void(0)"
+              id="navbarDropdownMenuLink2"
+              dropdownToggle
+            >
+              <img
+                width="17px"
+                height="15px"
+                src="assets/img/icons/flags/MY.png"
+              />
+            </a>
+            <ul
+              aria-labelledby="navbarDropdownMenuLink2"
+              *dropdownMenu
+              class="dropdown-menu"
+            >
+              <li>
+                <a class="dropdown-item" href="javascript:void(0)">
+                  <img
+                    width="17px"
+                    height="15px"
+                    src="assets/img/icons/flags/GB.png"
+                  />
+                  EN
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item active" href="javascript:void(0)">
+                  <img
+                    width="17px"
+                    height="15px"
+                    src="assets/img/icons/flags/MY.png"
+                  />
+                  BM
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li class="nav-item d-none text-white d-lg-block ml-lg-4">
+          <a (click)="navigatePage('login')" style="cursor: pointer;">
+            <span class="btn-inner--icon">
+              <i class="fas fa-user text-dark"></i>
+            </span>
+            <span class="nav-link-inner--text text-dark"
+              >&nbsp;&nbsp;Log Masuk</span
+            >
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="main-content">
+  <!-- Header -->
+  <carousel>
+    <slide>
+      <img
+        src="assets/img/default/banner.png"
+        alt="first slide"
+        style="display: block; width: 100%; height: 500px;"
+      />
+    </slide>
+    <slide>
+      <img
+        src="assets/img/default/banner2.png"
+        alt="second slide"
+        style="display: block; width: 100%; height: 500px;"
+      />
+    </slide>
+    <slide>
+      <img
+        src="assets/img/default/banner3.png"
+        alt="third slide"
+        style="display: block; width: 100%; height: 500px;"
+      />
+    </slide>
+  </carousel>
+  <!-- <div
+    class="header bg-secondary pt-7 pb-7"
+    style="
+      background-image: url('../../../../assets/img/default/bg-img22.png');
+      background-repeat: no-repeat;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+    "
+  >
+    <div class="container mt-5 mb-5">
+      <div class="header-body">
+        <div class="row">
+          <div class="col-md-3"></div>
+          <div class="col-md-6">
+            <span class="text-center px-4">
+              <img
+                width="100%"
+                height="300px"
+                src="assets/img/icons/cards/search2.svg"
+              />
+            </span>
+            <br /><br />
+            <div class="ng-autocomplete pb-5">
+              <ng-autocomplete
+                [data]="data"
+                [searchKeyword]="keyword"
+                (selected)="selectEvent($event)"
+                (inputChanged)="onChangeSearch($event)"
+                (inputFocused)="onFocused($event)"
+                [itemTemplate]="itemTemplate"
+                [notFoundTemplate]="notFoundTemplate"
+              >
+              </ng-autocomplete>
+
+              <ng-template #itemTemplate let-item>
+                <a [innerHTML]="item.name"></a>
+              </ng-template>
+
+              <ng-template #notFoundTemplate let-notFound>
+                <div [innerHTML]="notFound"></div>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  <section class="py-5 pt-5 pb-0 bg-default">
+    <div class="text-center text-white pt-1 pb-5">
+      <h1 class="text-white">Lagu Negeri Selangor</h1>
+    </div>
+    <div class="container-fluid">
+      <div class="row justify-content-center text-center">
+        <iframe
+          width="80%"
+          height="450"
+          src="https://www.youtube.com/embed/1WHjQ0uK2Xo"
+          frameborder="0"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+  </section>
+  <section class="section section-lg pt-lg-0 pt-5 mt-7 pb-6 bg-white">
+    <div class="container">
+      <div class="text-center text-dark pt-4 pb-7">
+        <h1 class="text-dark">Pautan Agensi</h1>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-lg-12">
+          <div class="row">
+            <div class="col-md-2 pd-2"></div>
+            <div class="col">
+              <img
+                src="assets/img/default/agensi1.gif"
+                style="
+                  display: block;
+                  width: 100px;
+                  height: 100px;
+                  cursor: pointer;
+                "
+              />
+            </div>
+            <div class="col">
+              <img
+                src="assets/img/default/agensi2.png"
+                style="
+                  display: block;
+                  width: 100px;
+                  height: 100px;
+                  cursor: pointer;
+                "
+              />
+            </div>
+            <div class="col">
+              <img
+                src="assets/img/default/agensi3.png"
+                style="
+                  display: block;
+                  width: 100px;
+                  height: 100px;
+                  cursor: pointer;
+                "
+              />
+            </div>
+            <div class="col">
+              <img
+                src="assets/img/default/agensi4.gif"
+                style="
+                  display: block;
+                  width: 100px;
+                  height: 100px;
+                  cursor: pointer;
+                "
+              />
+            </div>
+            <div class="col">
+              <img
+                src="assets/img/default/agensi5.gif"
+                style="
+                  display: block;
+                  width: 100px;
+                  height: 100px;
+                  cursor: pointer;
+                "
+              />
+            </div>
+            <div class="col-md-2"></div>
+          </div>
+          <br /><br />
+          <div class="row mt-1 pt-1">
+            <div class="col-md-2 mt-1 pt-1"></div>
+            <div class="col">
+              <img
+                src="assets/img/default/agensi6.jpg"
+                style="
+                  display: block;
+                  width: 100px;
+                  height: 100px;
+                  cursor: pointer;
+                "
+              />
+            </div>
+            <div class="col">
+              <img
+                src="assets/img/default/agensi7.gif"
+                style="
+                  display: block;
+                  width: 100px;
+                  height: 100px;
+                  cursor: pointer;
+                "
+              />
+            </div>
+            <div class="col">
+              <img
+                src="assets/img/default/agensi8.png"
+                style="
+                  display: block;
+                  width: 100px;
+                  height: 100px;
+                  cursor: pointer;
+                "
+              />
+            </div>
+            <div class="col">
+              <img
+                src="assets/img/default/agensi9.png"
+                style="
+                  display: block;
+                  width: 100px;
+                  height: 100px;
+                  cursor: pointer;
+                "
+              />
+            </div>
+            <!-- <div class="col">
+              <img
+                src="assets/img/default/agensi1.gif"
+                style="
+                  display: block;
+                  width: 100px;
+                  height: 100px;
+                  cursor: pointer;
+                "
+              />
+            </div> -->
+            <div class="col-md-2"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- Footer -->
+<footer class="py-5 bg-secondary" id="footer-main">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 text-dark">
+        <span style="font-size: large; font-weight: bold;">Hubungi Kami</span>
+        <br /><br />
+        <span
+          ><i class="fas fa-envelope text-yellow"></i
+          >&nbsp;&nbsp;webadmin@selangor.gov.my</span
+        ><br />
+        <span
+          ><i class="fas fa-phone text-brown"></i>&nbsp;&nbsp;Tel 1:
+          (6)03-55447000</span
+        ><br />
+        <span
+          ><i class="fas fa-phone text-brown"></i>&nbsp;&nbsp;Tel 2:
+          (6)03-55212347</span
+        >
+      </div>
+      <div class="col-md-4 text-dark">
+        <span style="font-size: large; font-weight: bold;">Waktu Operasi </span>
+        <br /><br />
+        <span>Hari: Isnin - Jumaat</span><br />
+        <span>Servis Kaunter: 8.15 AM - 4.15 PM</span>
+      </div>
+      <div class="col-md-4 text-dark">
+        <span style="font-size: large; font-weight: bold;">Alamat</span>
+        <br /><br />
+        <span>
+          <i class="fas fa-map-marker-alt text-danger"></i>&nbsp;&nbsp;Pejabat
+          Setiausaha Kerajaan Negeri Selangor,<br />
+          Bangunan Sultan Salahuddin Abdul Aziz Shah,<br />
+          40503 Shah Alam,<br />
+          Selangor Darul Ehsan.
+        </span>
+      </div>
+    </div>
+    <br />
+    <hr />
+    <br />
+    <div class="row align-items-center justify-content-xl-between">
+      <div class="col-xl-6">
+        <div class="copyright text-center text-xl-left text-muted">
+          &copy; {{ test | date: "yyyy" }}
+          <a href="#" class="font-weight-bold ml-1" target="_blank"
+            >TM - IBILL</a
+          >
+        </div>
+      </div>
+      <div class="col-xl-6">
+        <ul
+          class="nav nav-footer justify-content-center justify-content-xl-end"
+        >
+          <li class="nav-item" style="cursor: pointer;">
+            <a
+              class="nav-link text-dark"
+              routerLinkActive="active"
+              style="cursor: pointer;"
+              (click)="navigatePage('faq')"
+            >
+              <span class="nav-link-inner--text">Soalan Lazim</span>
+            </a>
+          </li>
+
+          <li class="nav-item" style="cursor: pointer;">
+            <a href="#" class="nav-link" target="_blank">Mengenai Kami</a>
+          </li>
+          <!-- <li class="nav-item" style="cursor: pointer;">
+            <a
+              href="http://blog.creative-tim.com?ref=adpa-presentation-page"
+              class="nav-link"
+              target="_blank"
+              >Disclaimer</a
+            >
+          </li> -->
+          <!-- <li class="nav-item">
+            <a
+              href="https://www.creative-tim.com/license?ref=adpa-presentation-page"
+              class="nav-link"
+              target="_blank"
+              >License</a
+            >
+          </li> -->
+        </ul>
+      </div>
+    </div>
+    <livechat-widget
+      #liveChatWidget
+      licenseId="11082047"
+      (onChatLoaded)="onChatLoaded($event)"
+      (onChatWindowOpened)="onChatWindowOpened()"
+      (onChatWindowMinimized)="onChatWindowMinimized()"
+      [visitor]="visitor"
+      [params]="params"
+    ></livechat-widget>
+  </div>
+</footer>

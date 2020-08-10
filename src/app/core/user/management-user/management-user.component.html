@@ -1,0 +1,247 @@
+<div class="header pb-6">
+  <div class="container-fluid">
+    <div class="header-body">
+      <div class="row align-items-center py-4">
+        <div class="col-lg-6 col-7">
+          <h6 class="h2 text-dark d-inline-block mb-0">User</h6>
+
+          <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+              <li class="breadcrumb-item">
+                <a href="javascript:void(0)">
+                  <i class="fas fa-user-shield text-dark"> </i>
+                </a>
+              </li>
+              <li class="breadcrumb-item">
+                <a href="javascript:void(0)" class="text-dark"> Admin </a>
+              </li>
+              <li aria-current="page" class="breadcrumb-item active">
+                User
+              </li>
+            </ol>
+          </nav>
+        </div>
+
+        <div class="col-lg-6 col-5 text-right">
+          <a
+            class="btn btn-sm btn-default text-white"
+            (click)="openModal(createUser)"
+          >
+            Create
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid mt--6">
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="m-0">Registered User by Month</h3>
+        </div>
+        <div class="card-body">
+          <div class="chart">
+            <div class="amchart" id="chartdiv"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="m-0">User List</h3>
+        </div>
+        <div class="dataTables_wrapper py-4">
+          <div class="row">
+            <div class="col-sm-12 col-md-6">
+              <div class="dataTables_length" id="datatable_length">
+                <label>
+                  Show
+                  <select
+                    name="datatable_length"
+                    aria-controls="datatable"
+                    class="form-control form-control-sm"
+                    (change)="entriesChange($event)"
+                  >
+                    <option value="10" [selected]="tableEntries == 5">5</option>
+                    <option value="25" [selected]="tableEntries == 10"
+                      >10</option
+                    >
+                    <option value="50" [selected]="tableEntries == 15"
+                      >15</option
+                    >
+                    <option value="-1" [selected]="tableEntries == -1"
+                      >All</option
+                    >
+                  </select>
+                  records
+                </label>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+              <!-- <div id="datatable_filter" class="dataTables_filter">
+                                <label>
+                                    <input 
+                                        type="search"
+                                        class="form-control form-control-sm"
+                                        placeholder="Search records"
+                                        aria-controls="datatable"
+                                        (keyup)="filterTable($event)" 
+                                    />
+                                </label>
+                            </div> -->
+            </div>
+          </div>
+
+          <ngx-datatable
+            class="bootstrap selection-cell"
+            [columnMode]="'force'"
+            [headerHeight]="50"
+            [footerHeight]="50"
+            [rowHeight]="'auto'"
+            [limit]="tableEntries != -1 ? tableEntries : undefined"
+            [rows]="tableTemp"
+            (activate)="onActivate($event)"
+          >
+            <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span>User ID</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.user_id }}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Name"></ngx-datatable-column>
+            <ngx-datatable-column name="Email"></ngx-datatable-column>
+            <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span>Joined At</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.joined_at }}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span>User Type</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.user_type }}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span>Status</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <span
+                  *ngIf="row.is_active == 'Active'"
+                  class="badge badge-pill badge-success"
+                  >Active</span
+                >
+                <span
+                  *ngIf="row.is_active == 'Inactive'"
+                  class="badge badge-pill badge-warning"
+                  >Inactive</span
+                >
+              </ng-template>
+            </ngx-datatable-column>
+          </ngx-datatable>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #createUser>
+  <div class="modal-header bg-default">
+    <h6 class="modal-title text-white my-auto" id="modal-title-default">
+      Create New User
+    </h6>
+
+    <button
+      aria-label="Close"
+      class="close"
+      data-dismiss="modal"
+      type="button"
+      (click)="closeModal()"
+    >
+      <span aria-hidden="true" class="text-white my-auto"> × </span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <form [formGroup]="registerForm">
+      <div class="form-group">
+        <label class="form-control-label">Name</label>
+        <input
+          class="form-control"
+          placeholder="Enter name"
+          formControlName="name"
+          type="text"
+        />
+        <ng-container *ngFor="let message of registerFormMessages.name">
+          <div
+            *ngIf="
+              registerForm.get('name').hasError(message.type) &&
+              (registerForm.get('name').dirty ||
+                registerForm.get('name').touched)
+            "
+          >
+            <p class="error-message">
+              <span>{{ message.message }}</span>
+            </p>
+          </div>
+        </ng-container>
+      </div>
+      <div class="form-group">
+        <label class="form-control-label">Email</label>
+        <input
+          class="form-control"
+          placeholder="Enter email"
+          formControlName="email"
+          type="text"
+        />
+        <ng-container *ngFor="let message of registerFormMessages.email">
+          <div
+            *ngIf="
+              registerForm.get('email').hasError(message.type) &&
+              (registerForm.get('email').dirty ||
+                registerForm.get('email').touched)
+            "
+          >
+            <p class="error-message">
+              <span>{{ message.message }}</span>
+            </p>
+          </div>
+        </ng-container>
+      </div>
+    </form>
+  </div>
+
+  <div class="modal-footer">
+    <button
+      class="btn btn-success"
+      type="button"
+      (click)="confirm()"
+      [disabled]="!registerForm.valid"
+    >
+      Create
+    </button>
+
+    <button
+      class="btn btn-outline-danger ml-auto"
+      data-dismiss="modal"
+      type="button"
+      (click)="closeModal()"
+    >
+      Close
+    </button>
+  </div>
+</ng-template>

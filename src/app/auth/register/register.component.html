@@ -1,0 +1,192 @@
+<ngx-loading-bar></ngx-loading-bar>
+<div class="main-content auth-content">
+  <!-- <div class="header">
+    <div class="container"></div>
+  </div> -->
+
+  <div class="container mt-4 pb-9">
+    <div class="row justify-content-center">
+      <div class="col-lg-5 col-md-7">
+        <div class="card bg-secondary border-0 mb-0">
+          <div class="card-header bg-transparent">
+            <div class="logo-box mb--1 text-center">
+              <img class="logo pt-2 pb-2" [src]="imgLogo" />
+              <h6 class="h2 text-default mt-3 mb-0">Register account</h6>
+            </div>
+          </div>
+          <div class="card-body px-lg-5 py-lg-5">
+            <form [formGroup]="registerForm">
+              <div
+                class="form-group"
+                [ngClass]="{ focused: focusUsername === true }"
+              >
+                <div class="input-group input-group-alternative mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text bg-primary">
+                      <i class="fas fa-envelope text-white"></i>
+                    </span>
+                  </div>
+                  <input
+                    class="form-control"
+                    placeholder="Email"
+                    type="email"
+                    formControlName="username"
+                    (focus)="focusUsername = true"
+                    (blur)="focusUsername = false"
+                  />
+                </div>
+                <ng-container
+                  *ngFor="let message of registerFormMessages.username"
+                >
+                  <div
+                    *ngIf="
+                      registerForm.get('username').hasError(message.type) &&
+                      (registerForm.get('username').dirty ||
+                        registerForm.get('username').touched)
+                    "
+                  >
+                    <p class="error-message">
+                      <span>{{ message.message }}</span>
+                    </p>
+                  </div>
+                </ng-container>
+              </div>
+
+              <div
+                class="form-group"
+                [ngClass]="{ focused: focusPassword === true }"
+              >
+                <div class="input-group input-group-alternative mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text bg-primary">
+                      <i class="fas fa-lock text-white"></i>
+                    </span>
+                  </div>
+                  <input
+                    class="form-control"
+                    placeholder="Password"
+                    type="password"
+                    formControlName="password1"
+                    (focus)="focusPassword = true"
+                    (blur)="focusPassword = false"
+                  />
+                </div>
+                <ng-container
+                  *ngFor="let message of registerFormMessages.password1"
+                >
+                  <div
+                    *ngIf="
+                      registerForm.get('password1').hasError(message.type) &&
+                      (registerForm.get('password1').dirty ||
+                        registerForm.get('password1').touched)
+                    "
+                  >
+                    <p class="error-message">
+                      <span>{{ message.message }}</span>
+                    </p>
+                  </div>
+                </ng-container>
+              </div>
+
+              <div
+                class="form-group"
+                [ngClass]="{ focused: focusConfirmPassword === true }"
+              >
+                <div class="input-group input-group-alternative">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text bg-primary">
+                      <i class="fas fa-lock text-white"></i>
+                    </span>
+                  </div>
+                  <input
+                    class="form-control"
+                    placeholder="Confirm password"
+                    type="password"
+                    formControlName="password2"
+                    (focus)="focusConfirmPassword = true"
+                    (blur)="focusConfirmPassword = false"
+                  />
+                </div>
+                <ng-container
+                  *ngFor="let message of registerFormMessages.password2"
+                >
+                  <div
+                    *ngIf="
+                      registerForm.get('password2').hasError(message.type) &&
+                      (registerForm.get('password2').dirty ||
+                        registerForm.get('password2').touched)
+                    "
+                  >
+                    <p class="error-message">
+                      <span>{{ message.message }}</span>
+                    </p>
+                  </div>
+                </ng-container>
+              </div>
+              <!--
+                            <div class="strength">
+                                <ul class="strength-bar">
+                                    <li class="point" [style.background-color]="bar0"></li>
+                                    <li class="point" [style.background-color]="bar1"></li>
+                                    <li class="point" [style.background-color]="bar2"></li>
+                                    <li class="point" [style.background-color]="bar3"></li>
+                                </ul>
+                            </div>
+                            -->
+              <div class="text-muted font-italic">
+                <small
+                  >password strength:
+                  <span class="text-success font-weight-700">strong</span>
+                </small>
+              </div>
+
+              <div class="row my-4">
+                <div class="col-12">
+                  <div
+                    class="custom-control custom-control-alternative custom-checkbox"
+                  >
+                    <input
+                      class="custom-control-input"
+                      id="customCheckRegister"
+                      type="checkbox"
+                    />
+                    <label
+                      class="custom-control-label"
+                      for="customCheckRegister"
+                    >
+                      <span
+                        >I agree with the
+                        <a href="javascript:void(0)">Privacy Policy</a>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </form>
+
+            <div class="text-center">
+              <button
+                type="button"
+                class="btn btn-primary mt-4 btn-block"
+                (click)="createAccount()"
+              >
+                Create account
+              </button>
+              <button
+                type="button"
+                class="btn btn-icon btn-outline-primary btn-block my-2"
+                (click)="navigatePage('login')"
+              >
+                <span class="btn-inner--icon"
+                  ><i class="fas fa-angle-left"></i
+                ></span>
+                <span class="btn-inner--text">Login</span>
+              </button>
+            </div>
+          </div>
+          <!-- </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

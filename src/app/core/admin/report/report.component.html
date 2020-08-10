@@ -1,0 +1,392 @@
+<div class="header pb-6">
+  <div class="container-fluid">
+    <div class="header-body">
+      <div class="row align-items-center py-4">
+        <div class="col-lg-6 col-7">
+          <h6 class="h2 text-dark d-inline-block mb-0">Reporting</h6>
+
+          <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+              <li class="breadcrumb-item">
+                <a href="javascript:void(0)">
+                  <i class="fas fa-chart-bar text-dark"> </i>
+                </a>
+              </li>
+              <li aria-current="page" class="breadcrumb-item active">
+                Reporting
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid mt--6">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header bg-secondary">
+          <h3 class="m-0">Reporting Tool</h3>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12 col-lg-6">
+              <div class="form-group">
+                <label class="form-control-label">IC Number</label>
+                <input
+                  class="form-control"
+                  placeholder="IC Number"
+                  type="text"
+                />
+              </div>
+            </div>
+            <div class="col-md-12 col-lg-6">
+              <div class="form-group">
+                <label class="form-control-label">Account Number</label>
+                <input
+                  class="form-control"
+                  placeholder="Account Number"
+                  type="text"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 col-lg-6">
+              <div class="form-group">
+                <label class="form-control-label">Portfolio Level</label>
+                <select
+                  class="form-control"
+                  placeholder="Portfolio Level"
+                  type="text"
+                >
+                  <option>Level 1</option>
+                  <option>Level 2</option>
+                  <option>Level 3</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-12 col-lg-6">
+              <div class="form-group">
+                <label class="form-control-label">Fund Level</label>
+                <select
+                  class="form-control"
+                  placeholder="Fund Level"
+                  type="text"
+                >
+                  <option>Level 1</option>
+                  <option>Level 2</option>
+                  <option>Level 3</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col text-center">
+              <button
+                class="btn btn-default"
+                type="button"
+                (click)="successAlert('search result')"
+              >
+                Search
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 col-lg-6">
+      <div class="card">
+        <div class="card-header bg-secondary">
+          <div class="row">
+            <div class="col">
+              <h3 class="m-0">Return of Investment</h3>
+            </div>
+            <div class="col text-right">
+              <button
+                class="btn btn-sm btn-default"
+                (click)="successAlert('print report')"
+              >
+                Print
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="chart">
+            <div class="amchart" id="chartdiv"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 col-lg-6">
+      <div class="card">
+        <div class="card-header bg-secondary">
+          <div class="row">
+            <div class="col">
+              <h3 class="m-0">Investment Status Summary</h3>
+            </div>
+            <div class="col text-right">
+              <button
+                class="btn btn-sm btn-default"
+                (click)="successAlert('print report')"
+              >
+                Print
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="chart">
+            <div class="amchart" id="chartdiv1"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 col-lg-6">
+      <div class="card">
+        <div class="card-header bg-secondary">
+          <div class="row">
+            <div class="col">
+              <h3 class="m-0">Investment Achievement against target Listing</h3>
+            </div>
+            <div class="col text-right">
+              <button
+                class="btn btn-sm btn-default"
+                (click)="successAlert('print report')"
+              >
+                Print
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="chart">
+            <div class="amchart" id="chartdiv2"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 col-lg-6">
+      <div class="card">
+        <div class="card-header bg-secondary">
+          <div class="row">
+            <div class="col">
+              <h3 class="m-0">Investment Cut- Loss Listing</h3>
+            </div>
+            <div class="col text-right">
+              <button
+                class="btn btn-sm btn-default"
+                (click)="successAlert('print report')"
+              >
+                Print
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="chart">
+            <div class="amchart" id="chartdiv3"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-header bg-secondary">
+          <h3 class="m-0">Scheduler List</h3>
+        </div>
+        <div class="dataTables_wrapper py-4">
+          <div class="row">
+            <div class="col-sm-12 col-md-6">
+              <div class="dataTables_length" id="datatable_length">
+                <label>
+                  Show
+                  <select
+                    name="datatable_length"
+                    aria-controls="datatable"
+                    class="form-control form-control-sm"
+                    (change)="entriesChange($event)"
+                  >
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="-1">All</option>
+                  </select>
+                  records
+                </label>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+              <!-- <div id="datatable_filter" class="dataTables_filter">
+                        <label>
+                          <input
+                            type="search"
+                            class="form-control form-control-sm"
+                            placeholder="Search records"
+                            aria-controls="datatable"
+                            (keyup)="filterTable($event)"
+                          />
+                        </label>
+                      </div> -->
+            </div>
+          </div>
+
+          <ngx-datatable
+            class="bootstrap selection-cell"
+            [columnMode]="'force'"
+            [headerHeight]="50"
+            [footerHeight]="50"
+            [rowHeight]="'auto'"
+            [limit]="tableEntries != -1 ? tableEntries : undefined"
+            [rows]="listreport"
+            (activate)="onActivate($event)"
+          >
+            <!-- <ngx-datatable-column name="No">
+                  <ng-template
+                    let-rowIndex="rowIndex"
+                    let-row="row"
+                    ngx-datatable-cell-template
+                  >
+                    <strong>{{ rowIndex + 1 }}</strong>
+                  </ng-template>
+                </ngx-datatable-column> -->
+
+            <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span>Current Holdings Units</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.chu }}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span>Transaction details</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.td }}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span>Total Value (RM) & Units</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.tvu }}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span>Average Cost (RM)</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.ac }}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span>NAV</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.nav }}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span>Original Amount</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.oa }}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span>Capital Appreciation</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.cap_app }}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span>ROI</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.roi }}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span>Investment Duration</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.inv_du }}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span>Annualized Growth (%)</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.ann_growth }}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span>Total Return</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.tot_ret }}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span>Created</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.created_at | date: "dd/MM/yyyy" }}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <!-- <ngx-datatable-column>
+                  <ng-template ngx-datatable-header-template>
+                    <span></span>
+                  </ng-template>
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    <a
+                      (click)="openModal(editReceipt, row)"
+                      style="cursor: pointer;"
+                    >
+                      <button class="btn btn-info btn-sm">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                    </a>
+                  </ng-template>
+                </ngx-datatable-column> -->
+          </ngx-datatable>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+{
+  "HOME": {
+    "SELECT": "language",
+    "TITLE": "Bill Presentment",
+    "TITLE1": "Bill Presentment",
+    "TITLE2": "Bill Presentment",
+    "TITLE3": "Bill Presentment",
+    "TITLE4": "Bill Presentment",
+    "TITLE5": "Bill Presentment",
+    "TITLE6": "Bill Presentment",
+    "SHOW": "Show",
+    "REKOD": "Record",
+    "NO": "No.",
+    "NAMECOL": "Name",
+    "BINV": "Bill Invoice",
+    "BDD": "Bill Due Date",
+    "BPAID": "Bill Paid",
+    "CREATED": "Created",
+    "EXP": "Export",
+    "ACT": "Action",
+    "BAR": "Bar",
+    "LINE": "Line",
+    "PIE": "Pie",
+    "BILLNO": "Bill No",
+    "TOT": "Total Amount"
+  }
+}

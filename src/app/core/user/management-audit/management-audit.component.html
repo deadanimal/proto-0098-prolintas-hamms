@@ -1,0 +1,154 @@
+<div class="header pb-6">
+  <div class="container-fluid">
+    <div class="header-body">
+      <div class="row align-items-center py-4">
+        <div class="col-lg-6 col-7">
+          <h6 class="h2 text-dark d-inline-block mb-0">Audit Logs</h6>
+
+          <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+              <li class="breadcrumb-item">
+                <a href="javascript:void(0)">
+                  <i class="fas fa-user-shield text-dark"></i>
+                </a>
+              </li>
+              <li class="breadcrumb-item">
+                <a href="javascript:void(0)" class="text-dark"> Admin </a>
+              </li>
+              <li aria-current="page" class="breadcrumb-item active">
+                Audit Logs
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid mt--6">
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="m-0">Action Types</h3>
+        </div>
+        <div class="card-body">
+          <div class="chart">
+            <div class="amchart" id="chartdiv"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="m-0">Audit Trails</h3>
+        </div>
+        <div class="dataTables_wrapper py-4">
+          <div class="row">
+            <div class="col-sm-12 col-md-6">
+              <div class="dataTables_length" id="datatable_length">
+                <label>
+                  Show
+                  <select
+                    name="datatable_length"
+                    aria-controls="datatable"
+                    class="form-control form-control-sm"
+                    (change)="entriesChange($event)"
+                  >
+                    <option value="5" [selected]="tableEntries == 5">5</option>
+                    <option value="10" [selected]="tableEntries == 10"
+                      >10</option
+                    >
+                    <option value="15" [selected]="tableEntries == 15"
+                      >15</option
+                    >
+                    <option value="-1" [selected]="tableEntries == -1"
+                      >All</option
+                    >
+                  </select>
+                  records
+                </label>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+              <!-- <div id="datatable_filter" class="dataTables_filter">
+                          <label>
+                            <input
+                              type="search"
+                              class="form-control form-control-sm"
+                              placeholder="Search records"
+                              aria-controls="datatable"
+                              (keyup)="filterTable($event)"
+                            />
+                          </label>
+                        </div> -->
+            </div>
+          </div>
+
+          <ngx-datatable
+            class="bootstrap selection-cell"
+            [columnMode]="'force'"
+            [headerHeight]="50"
+            [footerHeight]="50"
+            [rowHeight]="'auto'"
+            [limit]="tableEntries != -1 ? tableEntries : undefined"
+            [rows]="tableTemp"
+            (activate)="onActivate($event)"
+          >
+            <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span>ID</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.staff_id }}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Username"></ngx-datatable-column>
+            <ngx-datatable-column name="Email"></ngx-datatable-column>
+            <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span>Created At</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.created_at }}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span>Action</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <span
+                  *ngIf="row.action == 'POST'"
+                  class="badge badge-pill badge-default"
+                  >POST</span
+                >
+                <span
+                  *ngIf="row.action == 'GET'"
+                  class="badge badge-pill badge-success"
+                  >GET</span
+                >
+                <span
+                  *ngIf="row.action == 'UPDATE'"
+                  class="badge badge-pill badge-info"
+                  >UPDATE</span
+                >
+                <span
+                  *ngIf="row.action == 'DELETE'"
+                  class="badge badge-pill badge-warning"
+                  >DELETE</span
+                >
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Description"></ngx-datatable-column>
+          </ngx-datatable>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

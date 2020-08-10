@@ -1,0 +1,76 @@
+<ngx-loading-bar></ngx-loading-bar>
+<div class="main-content auth-content">
+  <!-- <div class="header">
+    <div class="container"></div>
+  </div> -->
+
+  <div class="container mt-8 pb-9">
+    <div class="row justify-content-center">
+      <div class="col-lg-5 col-md-7">
+        <div class="card bg-secondary border-0 mb-0">
+          <div class="card-header bg-transparent">
+            <div class="logo-box">
+              <img class="logo pt-2 pb-2" [src]="imgLogo" />
+            </div>
+          </div>
+          <div class="card-body px-lg-5 py-lg-5">
+            <form [formGroup]="resetForm">
+              <div
+                class="form-group mb-3"
+                [ngClass]="{ focused: focusEmail === true }"
+              >
+                <div class="input-group input-group-alternative">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text bg-primary">
+                      <i class="fas fa-envelope text-white"></i>
+                    </span>
+                  </div>
+                  <input
+                    class="form-control text-dark"
+                    placeholder="Email"
+                    type="email"
+                    formControlName="email"
+                    (focus)="focusEmail = true"
+                    (blur)="focusEmail = false"
+                  />
+                </div>
+                <ng-container *ngFor="let message of resetFormMessages.email">
+                  <div
+                    *ngIf="
+                      resetForm.get('email').hasError(message.type) &&
+                      (resetForm.get('email').dirty ||
+                        resetForm.get('email').touched)
+                    "
+                  >
+                    <p class="error-message">
+                      <span>{{ message.message }}</span>
+                    </p>
+                  </div>
+                </ng-container>
+              </div>
+              <div class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-primary btn-block my-4"
+                  (click)="reset()"
+                >
+                  Reset Password
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-icon btn-outline-primary btn-block my-2"
+                  (click)="navigatePage('login')"
+                >
+                  <span class="btn-inner--icon"
+                    ><i class="fas fa-angle-left"></i
+                  ></span>
+                  <span class="btn-inner--text">Login</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+.logo-box {
+  text-align: center;
+  margin-bottom: 2rem;
+  .logo {
+    max-height: 9rem;
+  }
+}
+
+.auth-content {
+  background-color: #172b4d;
+  background-image: url("../../../assets/img/default/bg-img-it.jpeg");
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.forget-label {
+  font-size: 0.875rem;
+  cursor: pointer;
+  span {
+    position: relative;
+    top: 2px;
+  }
+}
+
+.custom-control-label {
+  vertical-align: none !important;
+}
+
+.error-message {
+  color: #f5365c;
+  text-align: right;
+  font-size: 0.8em;
+  padding-top: 5px;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}

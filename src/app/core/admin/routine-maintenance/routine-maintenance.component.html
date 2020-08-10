@@ -1,0 +1,646 @@
+<div class="header pb-6">
+  <div class="container-fluid">
+    <div class="header-body">
+      <div class="row align-items-center py-4">
+        <div class="col-lg-6 col-7">
+          <h6 class="h2 text-dark d-inline-block mb-0">
+            Routine Maintenance
+          </h6>
+
+          <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+              <li class="breadcrumb-item">
+                <a href="javascript:void(0)">
+                  <i class="fas fa-binoculars text-dark"> </i>
+                </a>
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid mt--6">
+  <!-- <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header bg-secondary">
+          <h6 class="text-muted text-uppercase ls-1 mb-1">Chart</h6>
+          <h5 class="h3 mb-0">
+            Routine Maintenance
+          </h5>
+        </div>
+        <div class="card-body">
+          <div class="chart">
+            <div id="chartdivTsa" style="width: 100%; height: 400px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  <div class="row">
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header bg-secondary">
+              <h6 class="text-muted text-uppercase ls-1 mb-1">Chart</h6>
+              <h5 class="h3 mb-0">
+                Monthly Routine Maintenance
+              </h5>
+            </div>
+            <div id="chartdivTsa2" style="width: 100%; height: 400px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card card-calendar">
+        <div class="card-header bg-secondary">
+          <h6 class="text-muted text-uppercase ls-1 mb-1">Calendar</h6>
+          <h5 class="h3 mb-0">
+            Calendar
+          </h5>
+        </div>
+
+        <div class="card-body p-0">
+          <div class="calendar" data-toggle="calendar" id="calendar"></div>
+        </div>
+      </div>
+
+      <div
+        aria-hidden="true"
+        aria-labelledby="new-event-label"
+        class="modal fade"
+        id="new-event"
+        role="dialog"
+        tabindex="-1"
+      >
+        <div
+          class="modal-dialog modal-dialog-centered modal-secondary"
+          role="document"
+        ></div>
+      </div>
+
+      <div
+        aria-hidden="true"
+        aria-labelledby="edit-event-label"
+        class="modal fade"
+        id="edit-event"
+        role="dialog"
+        tabindex="-1"
+      >
+        <div
+          class="modal-dialog modal-dialog-centered modal-secondary"
+          role="document"
+        ></div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <!-- <div class="col">
+      <div class="card">
+        <div class="card-header bg-secondary">
+          <h6 class="text-muted text-uppercase ls-1 mb-1">Chart</h6>
+          <h5 class="h3 mb-0">
+            Routine Maintenance 3
+          </h5>
+        </div>
+        <div class="card-body">
+          <div class="chart">
+            <div id="chartdivTsa3" style="width: 100%; height: 100%;"></div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    <!-- <div class="col">
+      <div class="card">
+        <div class="card-header bg-secondary">
+          <h6 class="text-muted text-uppercase ls-1 mb-1">News</h6>
+          <h5 class="h3 mb-0">News</h5>
+        </div>
+        <div class="card-body p-0">
+          <div class="list-group list-group-flush">
+            <a
+              class="list-group-item list-group-item-action flex-column align-items-start py-4 px-4"
+              href="javascript:void(0)"
+            >
+              <div class="d-flex w-100 justify-content-between">
+                <div>
+                  <div class="d-flex w-100 align-items-center">
+                    <h5 class="mb-1">News 1</h5>
+                  </div>
+                </div>
+
+                <small> 2 hrs ago </small>
+              </div>
+              <p class="text-sm mb-0">
+                After COVID-19, what is the future of health care for older
+                Americans?
+              </p>
+            </a>
+
+            <a
+              class="list-group-item list-group-item-action flex-column align-items-start py-4 px-4"
+              href="javascript:void(0)"
+            >
+              <div class="d-flex w-100 justify-content-between">
+                <div>
+                  <div class="d-flex w-100 align-items-center">
+                    <h5 class="mb-1">News 2</h5>
+                  </div>
+                </div>
+
+                <small> 1 day ago </small>
+              </div>
+
+              <p class="text-sm mb-0">
+                After COVID-19, what is the future of health care for older
+                Americans?
+              </p>
+            </a>
+
+            <a
+              class="list-group-item list-group-item-action flex-column align-items-start py-4 px-4"
+              href="javascript:void(0)"
+            >
+              <div class="d-flex w-100 justify-content-between">
+                <div>
+                  <div class="d-flex w-100 align-items-center">
+                    <h5 class="mb-1">News 3</h5>
+                  </div>
+                </div>
+
+                <small> 2 hrs ago </small>
+              </div>
+              <p class="text-sm mb-0">
+                After COVID-19, what is the future of health care for older
+                Americans?
+              </p>
+            </a>
+
+            <a
+              class="list-group-item list-group-item-action flex-column align-items-start py-4 px-4"
+              href="javascript:void(0)"
+            >
+              <div class="d-flex w-100 justify-content-between">
+                <div>
+                  <div class="d-flex w-100 align-items-center">
+                    <h5 class="mb-1">News 4</h5>
+                  </div>
+                </div>
+
+                <small> 1 day ago </small>
+              </div>
+
+              <p class="text-sm mb-0">
+                After COVID-19, what is the future of health care for older
+                Americans?
+              </p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div> -->
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-header bg-secondary">
+          <h6 class="text-muted text-uppercase ls-1 mb-1">Data</h6>
+          <h5 class="h3 mb-0">Routine Maintenance</h5>
+        </div>
+        <div class="table-responsive">
+          <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Status</th>
+                <th scope="col">Created</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr *ngFor="let data of datas">
+                <td>{{ data.name }}</td>
+                <td>{{ data.desc }}</td>
+                <td>{{ data.amount }}</td>
+                <td>{{ data.status }}</td>
+                <td>{{ data.created_at | date: "dd/MM/yyyy" }}</td>
+                <td>
+                  <button
+                    class="btn btn-default btn-sm"
+                    (click)="openModal(editModal, row)"
+                    style="cursor: pointer;"
+                  >
+                    <i class="fas fa-edit"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #addModal>
+  <div class="modal-header bg-default">
+    <h6 class="modal-title text-white my-auto" id="modal-title-default">
+      Add Routine Maintenance
+    </h6>
+
+    <button
+      aria-label="Close"
+      class="close"
+      data-dismiss="modal"
+      type="button"
+      (click)="closeModal()"
+    >
+      <span aria-hidden="true" class="text-white my-auto"> × </span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <div class="form-group">
+      <label class="form-control-label">Name</label>
+      <input class="form-control" placeholder="Enter Name" type="text" />
+    </div>
+    <div class="form-group">
+      <label class="form-control-label">Description </label>
+      <input
+        class="form-control"
+        placeholder="Enter Description"
+        type="datetime-local"
+      />
+    </div>
+    <div class="form-group">
+      <label class="form-control-label">Status</label>
+      <input
+        class="form-control"
+        placeholder="Enter Status"
+        type="datetime-local"
+      />
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <div class="text-center">
+      <button class="btn btn-default" (click)="successAlert('add new data')">
+        Save
+      </button>
+      <button
+        class="btn btn-outline-danger ml-auto"
+        data-dismiss="modal"
+        type="button"
+        (click)="closeModal()"
+      >
+        Close
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #editModal>
+  <div class="modal-header bg-default">
+    <h6 class="modal-title text-white my-auto" id="modal-title-default">
+      Edit Asset Inventory
+    </h6>
+
+    <button
+      aria-label="Close"
+      class="close"
+      data-dismiss="modal"
+      type="button"
+      (click)="closeModal()"
+    >
+      <span aria-hidden="true" class="text-white my-auto"> × </span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <div class="form-group">
+      <label class="form-control-label">Name</label>
+      <input class="form-control" placeholder="Enter Name" type="text" />
+    </div>
+    <div class="form-group">
+      <label class="form-control-label">Description </label>
+      <input
+        class="form-control"
+        placeholder="Enter Description"
+        type="datetime-local"
+      />
+    </div>
+    <div class="form-group">
+      <label class="form-control-label">Status</label>
+      <input
+        class="form-control"
+        placeholder="Enter Status"
+        type="datetime-local"
+      />
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <div class="text-center">
+      <button class="btn btn-default" (click)="successAlert('edit new data')">
+        Save
+      </button>
+      <button
+        class="btn btn-outline-danger ml-auto"
+        data-dismiss="modal"
+        type="button"
+        (click)="closeModal()"
+      >
+        Close
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #modalEdit>
+  <div class="modal-body">
+    <form class="edit-event--form">
+      <div class="form-group">
+        <label class="form-control-label"> Event title </label>
+
+        <input
+          class="form-control form-control-alternative edit-event--title"
+          placeholder="Event Title"
+          type="text"
+          value="{{ eventTitle }}"
+          (change)="getNewEventTitle($event)"
+        />
+      </div>
+
+      <div class="form-group">
+        <label class="form-control-label d-block mb-3">
+          Status color
+        </label>
+
+        <div
+          class="btn-group btn-group-toggle btn-group-colors event-tag mb-0"
+          data-toggle="buttons"
+        >
+          <label
+            class="btn bg-info"
+            [ngClass]="{ active: radios === 'bg-info' }"
+          >
+            <input
+              autocomplete="off"
+              checked="checked"
+              name="event-tag"
+              type="radio"
+              value="bg-info"
+              (click)="radios = 'bg-info'"
+            />
+          </label>
+
+          <label
+            class="btn bg-warning"
+            [ngClass]="{ active: radios === 'bg-warning' }"
+          >
+            <input
+              autocomplete="off"
+              name="event-tag"
+              type="radio"
+              value="bg-warning"
+              (click)="radios = 'bg-warning'"
+            />
+          </label>
+
+          <label
+            class="btn bg-danger"
+            [ngClass]="{ active: radios === 'bg-danger' }"
+          >
+            <input
+              autocomplete="off"
+              name="event-tag"
+              type="radio"
+              value="bg-danger"
+              (click)="radios = 'bg-danger'"
+            />
+          </label>
+
+          <label
+            class="btn bg-success"
+            [ngClass]="{ active: radios === 'bg-success' }"
+          >
+            <input
+              autocomplete="off"
+              name="event-tag"
+              type="radio"
+              value="bg-success"
+              (click)="radios = 'bg-success'"
+            />
+          </label>
+
+          <label
+            class="btn bg-default"
+            [ngClass]="{ active: radios === 'bg-default' }"
+          >
+            <input
+              autocomplete="off"
+              name="event-tag"
+              type="radio"
+              value="bg-default"
+              (click)="radios = 'bg-default'"
+            />
+          </label>
+
+          <label
+            class="btn bg-primary"
+            [ngClass]="{ active: radios === 'bg-primary' }"
+          >
+            <input
+              autocomplete="off"
+              name="event-tag"
+              type="radio"
+              value="bg-primary"
+              (click)="radios = 'bg-primary'"
+            />
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-control-label"> Description </label>
+
+        <textarea
+          class="form-control form-control-alternative edit-event--description textarea-autosize"
+          placeholder="Event Desctiption"
+          value="{{ eventDescription }}"
+          (change)="getNewEventDescription($event)"
+        ></textarea>
+
+        <i class="form-group--bar"> </i>
+      </div>
+
+      <input class="edit-event--id" type="hidden" />
+    </form>
+  </div>
+
+  <div class="modal-footer">
+    <button
+      class="btn btn-primary"
+      data-calendar="update"
+      (click)="updateEvent()"
+    >
+      Update
+    </button>
+
+    <button
+      class="btn btn-danger"
+      data-calendar="delete"
+      (click)="deleteEventSweetAlert()"
+    >
+      Delete
+    </button>
+
+    <button
+      class="btn btn-link ml-auto"
+      data-dismiss="modal"
+      (click)="editModal.hide()"
+    >
+      Close
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #modalAdd>
+  <div class="modal-body">
+    <form class="new-event--form">
+      <div class="form-group">
+        <label class="form-control-label"> Event title </label>
+
+        <input
+          class="form-control form-control-alternative new-event--title"
+          id="new-event--title"
+          placeholder="Event Title"
+          type="text"
+          (change)="getNewEventTitle($event)"
+        />
+      </div>
+
+      <div class="form-group mb-0">
+        <label class="form-control-label d-block mb-3">
+          Status color
+        </label>
+
+        <div
+          class="btn-group btn-group-toggle btn-group-colors event-tag"
+          data-toggle="buttons"
+        >
+          <label
+            class="btn bg-info"
+            [ngClass]="{ active: radios === 'bg-info' }"
+          >
+            <input
+              autocomplete="off"
+              checked="checked"
+              name="event-tag"
+              type="radio"
+              value="bg-info"
+              (click)="radios = 'bg-info'"
+            />
+          </label>
+
+          <label
+            class="btn bg-warning"
+            [ngClass]="{ active: radios === 'bg-warning' }"
+          >
+            <input
+              autocomplete="off"
+              name="event-tag"
+              type="radio"
+              value="bg-warning"
+              (click)="radios = 'bg-warning'"
+            />
+          </label>
+
+          <label
+            class="btn bg-danger"
+            [ngClass]="{ active: radios === 'bg-danger' }"
+          >
+            <input
+              autocomplete="off"
+              name="event-tag"
+              type="radio"
+              value="bg-danger"
+              (click)="radios = 'bg-danger'"
+            />
+          </label>
+
+          <label
+            class="btn bg-success"
+            [ngClass]="{ active: radios === 'bg-success' }"
+          >
+            <input
+              autocomplete="off"
+              name="event-tag"
+              type="radio"
+              value="bg-success"
+              (click)="radios = 'bg-success'"
+            />
+          </label>
+
+          <label
+            class="btn bg-default"
+            [ngClass]="{ active: radios === 'bg-default' }"
+          >
+            <input
+              autocomplete="off"
+              name="event-tag"
+              type="radio"
+              value="bg-default"
+              (click)="radios = 'bg-default'"
+            />
+          </label>
+
+          <label
+            class="btn bg-primary"
+            [ngClass]="{ active: radios === 'bg-primary' }"
+          >
+            <input
+              autocomplete="off"
+              name="event-tag"
+              type="radio"
+              value="bg-primary"
+              (click)="radios = 'bg-primary'"
+            />
+          </label>
+        </div>
+      </div>
+
+      <input class="new-event--start" type="hidden" />
+
+      <input class="new-event--end" type="hidden" />
+    </form>
+  </div>
+
+  <div class="modal-footer">
+    <button
+      class="btn btn-primary new-event--add"
+      type="submit"
+      (click)="addNewEvent()"
+    >
+      Add event
+    </button>
+
+    <button
+      (click)="addModal.hide()"
+      class="btn btn-link ml-auto"
+      data-dismiss="modal"
+      type="button"
+    >
+      Close
+    </button>
+  </div>
+</ng-template>
