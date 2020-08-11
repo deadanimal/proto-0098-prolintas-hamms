@@ -100,6 +100,13 @@ export const ROUTES: RouteInfo[] = [
   },
 
   {
+    path: "/admin/kpi-module",
+    title: "KPI Module",
+    type: "link",
+    icontype: "fas fa-chart-line text-default",
+  },
+
+  {
     path: "/admin/payment",
     title: "Payment",
     type: "link",

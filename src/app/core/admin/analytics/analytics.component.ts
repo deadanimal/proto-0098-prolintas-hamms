@@ -5,46 +5,15 @@ import {
   NgZone,
   TemplateRef,
 } from "@angular/core";
-import { Audit } from "src/assets/mock/admin-audit/audit.model";
+import { User } from "src/assets/mock/admin-user/users.model";
 import { MocksService } from "src/app/shared/services/mocks/mocks.service";
-// import { AuditData } from 'src/assets/mock/admin-audit/audit.data.json'
+
 import * as moment from "moment";
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
-am4core.useTheme(am4themes_animated);
-
-//
-import { HttpClient } from "@angular/common/http";
-import { environment } from "src/environments/environment";
 import { BsModalRef, BsModalService } from "ngx-bootstrap";
-import {
-  FormGroup,
-  FormBuilder,
-  Validators,
-  FormControl,
-} from "@angular/forms";
-import swal from "sweetalert2";
-import { LoadingBarService } from "@ngx-loading-bar/core";
-import { AuthService } from "src/app/shared/services/auth/auth.service";
-import { NotifyService } from "src/app/shared/handler/notify/notify.service";
-import { Router, ActivatedRoute } from "@angular/router";
-import { tileLayer, latLng, marker, icon } from "leaflet";
-import { BsDropdownConfig } from "ngx-bootstrap/dropdown";
-import { TranslateService } from "@ngx-translate/core";
-
-// import { Bill } from "src/app/shared/services/bill/bill.model";
-// import { BillService } from "src/app/shared/services/bill/bill.service";
-
-export enum SelectionType {
-  single = "single",
-  multi = "multi",
-  multiClick = "multiClick",
-  cell = "cell",
-  checkbox = "checkbox",
-}
-
-declare var tableau: any;
+am4core.useTheme(am4themes_animated);
 
 @Component({
   selector: "app-analytics",
@@ -54,6 +23,12 @@ declare var tableau: any;
 export class AnalyticsComponent implements OnInit, OnDestroy {
   // Chart
   chart: any;
+  chart1: any;
+  chart2: any;
+  chart3: any;
+  dataChart: any[] = [];
+  dataChart2: any[] = [];
+  dataChart3: any[] = [];
 
   // Datepicker
   bsDPConfig = {
@@ -61,1370 +36,755 @@ export class AnalyticsComponent implements OnInit, OnDestroy {
     containerClass: "theme-default",
   };
 
-  // Modal
-  modal: BsModalRef;
-  modalConfig = {
-    keyboard: true,
-    class: "modal-dialog-centered",
-  };
-
-  // Data
-  public datas: any = [];
-  listBill: any;
-
-  // Table
-  tableEntries: number = 5;
-  tableSelected: any[] = [];
-  tableTemp = [];
-  tableActiveRow: any;
-  // tableRows: Bill[] = [];
-  SelectionType = SelectionType;
-  listBillPresent: any = [
-    {
-      lang: "English",
-      curr: "Ringgit Malaysia (RM)",
-      acc: "1231231",
-      total: "RM120.50",
-      created_at: "2019-07-27T01:07:14Z",
-    },
-    {
-      lang: "Bahasa Malaysia",
-      curr: "Ringgit Malaysia (RM)",
-      acc: "1231231",
-      total: "RM120.47",
-      created_at: "2019-07-27T01:07:14Z",
-    },
-    {
-      lang: "English",
-      curr: "Singapore Dollar (SGD)",
-      acc: "1231231",
-      total: "SGD120.82",
-      created_at: "2019-07-27T01:07:14Z",
-    },
-  ];
-
-  listAnalytic: any = [
-    {
-      anomalies: "High Usage In short time",
-      action: "Change WIFI password",
-    },
-    {
-      anomalies: "High Number of calls",
-      action: "Use free internet calls",
-    },
-  ];
-  vizOne: any;
-  vizTwo: any;
-
-  constructor(
-    private mockService: MocksService,
-    private notifyService: NotifyService,
-    private zone: NgZone,
-    private modalService: BsModalService,
-    private formBuilder: FormBuilder,
-    private http: HttpClient,
-    private loadingBar: LoadingBarService,
-    private router: Router,
-    private _route: ActivatedRoute,
-    public translate: TranslateService // private BillData: BillService
-  ) {}
-
-  ngOnInit() {
-    // this.getCharts();
-    // this.getChart3(); // barchart
-    this.getChartTrendYear();
-    this.getChart10();
-    this.getChart11();
+  constructor(private mockService: MocksService, private zone: NgZone) {
+    this.getData();
   }
 
-  ngAfterViewInit() {
-    this.initTableauOne();
-    this.initTableauTwo();
-  }
-
-  initTableauOne() {
-    var placeholderDiv = document.getElementById("vizContainerOne");
-    // Replace this url with the url of your Tableau dashboard
-    var url =
-      "https://public.tableau.com/views/testing_15890862200980/DashboardMovement?:display_count=y&:origin=viz_share_link";
-    var options = {
-      hideTabs: true,
-      width: "80%",
-      height: "600px",
-      onFirstInteractive: function () {
-        // The viz is now ready and can be safely used.
-        console.log("Run this code when the viz has finished loading.");
-      },
-    };
-    // Creating a viz object and embed it in the container div.
-    this.vizOne = new tableau.Viz(placeholderDiv, url, options);
-  }
-
-  initTableauTwo() {
-    var placeholderDiv = document.getElementById("vizContainerTwo");
-    // Replace this url with the url of your Tableau dashboard
-    var url =
-      "https://public.tableau.com/views/testing_15890862200980/DashboardStockValue?:display_count=y&:origin=viz_share_link";
-    var options = {
-      hideTabs: true,
-      width: "80%",
-      height: "600px",
-      onFirstInteractive: function () {
-        // The viz is now ready and can be safely used.
-        console.log("Run this code when the viz has finished loading.");
-      },
-    };
-    // Creating a viz object and embed it in the container div.
-    this.vizTwo = new tableau.Viz(placeholderDiv, url, options);
-  }
+  ngOnInit() {}
 
   ngOnDestroy() {
     this.zone.runOutsideAngular(() => {
       if (this.chart) {
         this.chart.dispose();
       }
+      if (this.chart1) {
+        this.chart1.dispose();
+      }
+      if (this.chart2) {
+        this.chart2.dispose();
+      }
+      if (this.chart3) {
+        this.chart3.dispose();
+      }
     });
   }
 
-  // genReport() {
-  //   this.BillData.generateReport().subscribe(
-  //     (res) => {
-  //       console.log("qwe", res.report[0].url);
-  //       console.log("asdas", res.report);
-  //       window.open(res.report[0].url, "_blank");
-  //       // Success
-  //       // this.isLoading = false
-  //       // this.successMessage();
-  //     },
-  //     () => {
-  //       // Failed
-  //       // this.isLoading = false
-  //       // this.successMessage();
-  //     },
-  //     () => {
-  //       // After
-  //       // this.notifyService.openToastr("Success", "Welcome back");
-  //       // this.navigateHomePage();
-  //     }
-  //   );
-  // }
-
-  changeChart(value) {
-    console.log(value);
-    if (value == "2") {
-      this.getChartTrendYear(); // Yearly
-    } else if (value == "3") {
-      this.getChartTrendMonth(); // Monthly
-    } else if (value == "4") {
-      this.getChartTrendWeek(); // Weekly
-    } else if (value == "5") {
-      this.getChartTrendDay(); // daily
-    } else {
-      this.getChartTrendYear(); // yearly
-    }
-  }
-
-  // getData() {
-  //   this.mockService.getAll(this.listReceipt).subscribe(
-  //     (res) => {
-  //       // Success
-  //       this.tableRows = [...res];
-  //       this.tableTemp = this.tableRows.map((prop, key) => {
-  //         return {
-  //           ...prop,
-  //           id: key,
-  //         };
-  //       });
-  //       console.log("Svc: ", this.tableTemp);
-  //     },
-  //     () => {
-  //       // Unsuccess
-  //     },
-  //     () => {
-  //       // After
-  //       this.getChart();
-  //     }
-  //   );
-  // }
-
-  openModal(modalRef: TemplateRef<any>, row) {
-    // if (row) {
-    //   console.log(row);
-    //   this.editActionForm.patchValue(row);
-    // }
-    this.modal = this.modalService.show(
-      modalRef,
-      Object.assign({}, { class: "gray modal-xl" })
+  getData() {
+    this.mockService.getAll("admin-report/report-data-1.json").subscribe(
+      (res) => {
+        // Success
+        this.dataChart = res;
+      },
+      () => {
+        // Unsuccess
+      },
+      () => {
+        // After
+        this.mockService.getAll("admin-report/report-data-2.json").subscribe(
+          (res) => {
+            // Success
+            this.dataChart2 = res;
+          },
+          () => {
+            // Unsuccess
+          },
+          () => {
+            // After
+            this.mockService
+              .getAll("admin-report/report-data-3.json")
+              .subscribe(
+                (res) => {
+                  // Success
+                  this.dataChart3 = res;
+                },
+                () => {
+                  // Unsuccess
+                },
+                () => {
+                  // After
+                  this.getCharts();
+                }
+              );
+          }
+        );
+      }
     );
-    this.getChart3();
-    this.getChart8();
-    this.getChart9();
-    // this.modal = this.modalService.show(modalRef, this.modalConfig);
   }
 
-  closeModal() {
-    this.modal.hide();
-    // this.editActionForm.reset();
+  getCharts() {
+    this.zone.runOutsideAngular(() => {
+      // this.getChart();
+      this.getChart1();
+      this.getChart2();
+      this.getChart3();
+      this.getChart4();
+      this.getChart5();
+      // this.getChart6();
+      this.getChart7();
+    });
   }
 
-  navigatePage(path: String) {
-    // let qq = "db17a36a-1da6-4919-9746-dfed8802ec9d";
-    console.log(path);
-    if (path == "/admin//utility/Actions") {
-      return this.router.navigate([path]);
+  getChart() {
+    let chart = am4core.create("chartdivanalytic", am4charts.XYChart);
+    chart.paddingRight = 20;
+
+    let data = this.dataChart;
+
+    chart.data = data;
+    chart.dateFormatter.inputDateFormat = "yyyy";
+
+    let dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+    dateAxis.renderer.minGridDistance = 50;
+    dateAxis.baseInterval = { timeUnit: "year", count: 2 };
+    let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+    valueAxis.tooltip.disabled = true;
+
+    let series = chart.series.push(new am4charts.StepLineSeries());
+    series.dataFields.dateX = "year";
+    series.dataFields.valueY = "amount";
+    series.tooltipText = "{valueY.amount}";
+    series.strokeWidth = 3;
+    console.log("gastbdgagd", series.dataFields.valueY);
+
+    chart.cursor = new am4charts.XYCursor();
+    chart.cursor.xAxis = dateAxis;
+    chart.cursor.fullWidthLineX = true;
+    chart.cursor.lineX.strokeWidth = 0;
+    chart.cursor.lineX.fill = chart.colors.getIndex(2);
+    chart.cursor.lineX.fillOpacity = 0.1;
+
+    chart.scrollbarX = new am4core.Scrollbar();
+
+    this.chart = chart;
+  }
+
+  getChart1() {
+    let chart = am4core.create("chartdivanalytic1", am4charts.XYChart);
+    chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+
+    let data = [];
+    let open = 100;
+    let close = 250;
+
+    for (var i = 1; i < 120; i++) {
+      open += Math.round((Math.random() < 0.5 ? 1 : -1) * Math.random() * 4);
+      close = Math.round(
+        open +
+          Math.random() * 5 +
+          i / 5 -
+          (Math.random() < 0.5 ? 1 : -1) * Math.random() * 2
+      );
+      data.push({ date: new Date(2018, 0, i), open: open, close: close });
     }
-  }
 
-  successMessage() {
-    let title = "Success";
-    let message = "Create New Action";
-    this.notifyService.openToastr(title, message);
-  }
+    chart.data = data;
 
-  successEditMessage() {
-    let title = "Success";
-    let message = "Edit Action";
-    this.notifyService.openToastr(title, message);
-  }
-
-  errorAlert(task) {
-    swal.fire({
-      title: "Error",
-      text: "Cannot " + task + " Action, Please Try Again!",
-      type: "error",
-      buttonsStyling: false,
-      confirmButtonClass: "btn btn-danger",
-      confirmButtonText: "Close",
-    });
-  }
-
-  successAlert(task) {
-    swal.fire({
-      title: "Success",
-      text: "Successfully " + task,
-      type: "success",
-      buttonsStyling: false,
-      confirmButtonClass: "btn btn-success",
-      confirmButtonText: "Close",
-    });
-  }
-
-  confirm() {
-    swal
-      .fire({
-        title: "Confirmation",
-        text: "Are you sure to delete data?",
-        type: "info",
-        buttonsStyling: false,
-        confirmButtonClass: "btn btn-info",
-        confirmButtonText: "Confirm",
-        showCancelButton: true,
-        cancelButtonClass: "btn btn-danger",
-        cancelButtonText: "Cancel",
-      })
-      .then((task) => {
-        // if (result.value) {
-        this.successAlert("delete data");
-        // }
-      });
-  }
-
-  entriesChange($event) {
-    this.tableEntries = $event.target.value;
-  }
-
-  // filterTable($event) {
-  //   let val = $event.target.value;
-  //   this.tableTemp = this.tableRows.filter(function (d) {
-  //     for (var key in d) {
-  //       if (d[key].toLowerCase().indexOf(val) !== -1) {
-  //         return true;
-  //       }
-  //     }
-  //     return false;
-  //   });
-  // }
-
-  onSelect({ selected }) {
-    this.tableSelected.splice(0, this.tableSelected.length);
-    this.tableSelected.push(...selected);
-  }
-
-  onActivate(event) {
-    this.tableActiveRow = event.row;
-  }
-
-  // getCharts() {
-  //   this.zone.runOutsideAngular(() => {
-  //     // this.getChart();
-  //     // this.getChart1();
-  //     // this.getChart2();
-  //     this.getChart3(); // bar chart
-  //     this.getChart4(); // line
-  //     // this.getChart5();
-  //     this.getChart6(); // pie chart
-  //   });
-  // }
-
-  getChart3() {
-    // chatt petak warna warni
-    let chart = am4core.create("chartBillCustBillAnal3", am4charts.XYChart);
-    // chart.scrollbarX = new am4core.Scrollbar();
-
-    // Add data
-    chart.data = [
-      {
-        country: "May",
-        visits: 1122,
-      },
-      {
-        country: "Jun",
-        visits: 1114,
-      },
-      {
-        country: "July",
-        visits: 984,
-      },
-    ];
-
-    // Create axes
-    let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
-    categoryAxis.dataFields.category = "country";
-    categoryAxis.renderer.grid.template.location = 0;
-    categoryAxis.renderer.minGridDistance = 30;
-    categoryAxis.renderer.labels.template.horizontalCenter = "right";
-    categoryAxis.renderer.labels.template.verticalCenter = "middle";
-    categoryAxis.renderer.labels.template.rotation = 270;
-    categoryAxis.tooltip.disabled = true;
-    // categoryAxis.renderer.minHeight = 110;
+    let dateAxis = chart.xAxes.push(new am4charts.DateAxis());
 
     let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-    valueAxis.renderer.minWidth = 50;
+    valueAxis.tooltip.disabled = true;
+
+    let series = chart.series.push(new am4charts.LineSeries());
+    series.dataFields.dateX = "date";
+    series.dataFields.openValueY = "open";
+    series.dataFields.valueY = "close";
+    series.tooltipText = "open: {openValueY.value} close: {valueY.value}";
+    series.sequencedInterpolation = true;
+    series.fillOpacity = 0.3;
+    series.defaultState.transitionDuration = 1000;
+    series.tensionX = 0.8;
+
+    let series2 = chart.series.push(new am4charts.LineSeries());
+    series2.dataFields.dateX = "date";
+    series2.dataFields.valueY = "open";
+    series2.sequencedInterpolation = true;
+    series2.defaultState.transitionDuration = 1500;
+    series2.stroke = chart.colors.getIndex(6);
+    series2.tensionX = 0.8;
+
+    chart.cursor = new am4charts.XYCursor();
+    chart.cursor.xAxis = dateAxis;
+    chart.scrollbarX = new am4core.Scrollbar();
+
+    this.chart1 = chart;
+  }
+
+  getChart2() {
+    let chart = am4core.create("chartdivanalytic2", am4charts.XYChart);
+
+    // Add data
+    chart.data = this.dataChart2;
+
+    // Create axes
+    let valueAxisX = chart.xAxes.push(new am4charts.ValueAxis());
+    valueAxisX.title.text = "X Axis";
+    valueAxisX.renderer.minGridDistance = 40;
+
+    // Create value axis
+    let valueAxisY = chart.yAxes.push(new am4charts.ValueAxis());
+    valueAxisY.title.text = "Y Axis";
 
     // Create series
-    let series = chart.series.push(new am4charts.ColumnSeries());
-    series.sequencedInterpolation = true;
-    series.dataFields.valueY = "visits";
-    series.dataFields.categoryX = "country";
-    series.tooltipText = "[{categoryX}: bold]{valueY}[/]";
-    series.columns.template.strokeWidth = 0;
+    let lineSeries = chart.series.push(new am4charts.LineSeries());
+    lineSeries.dataFields.valueY = "ay";
+    lineSeries.dataFields.valueX = "ax";
+    lineSeries.strokeOpacity = 0;
 
+    let lineSeries2 = chart.series.push(new am4charts.LineSeries());
+    lineSeries2.dataFields.valueY = "by";
+    lineSeries2.dataFields.valueX = "bx";
+    lineSeries2.strokeOpacity = 0;
+
+    // Add a bullet
+    let bullet = lineSeries.bullets.push(new am4charts.Bullet());
+
+    // Add a triangle to act as am arrow
+    let arrow = bullet.createChild(am4core.Triangle);
+    arrow.horizontalCenter = "middle";
+    arrow.verticalCenter = "middle";
+    arrow.strokeWidth = 0;
+    arrow.fill = chart.colors.getIndex(0);
+    arrow.direction = "top";
+    arrow.width = 12;
+    arrow.height = 12;
+
+    // Add a bullet
+    let bullet2 = lineSeries2.bullets.push(new am4charts.Bullet());
+
+    // Add a triangle to act as am arrow
+    let arrow2 = bullet2.createChild(am4core.Triangle);
+    arrow2.horizontalCenter = "middle";
+    arrow2.verticalCenter = "middle";
+    arrow2.rotation = 180;
+    arrow2.strokeWidth = 0;
+    arrow2.fill = chart.colors.getIndex(3);
+    arrow2.direction = "top";
+    arrow2.width = 12;
+    arrow2.height = 12;
+
+    //add the trendlines
+    let trend = chart.series.push(new am4charts.LineSeries());
+    trend.dataFields.valueY = "value2";
+    trend.dataFields.valueX = "value";
+    trend.strokeWidth = 2;
+    trend.stroke = chart.colors.getIndex(0);
+    trend.strokeOpacity = 0.7;
+    trend.data = [
+      { value: 1, value2: 2 },
+      { value: 12, value2: 11 },
+    ];
+
+    let trend2 = chart.series.push(new am4charts.LineSeries());
+    trend2.dataFields.valueY = "value2";
+    trend2.dataFields.valueX = "value";
+    trend2.strokeWidth = 2;
+    trend2.stroke = chart.colors.getIndex(3);
+    trend2.strokeOpacity = 0.7;
+    trend2.data = [
+      { value: 1, value2: 1 },
+      { value: 12, value2: 19 },
+    ];
+
+    //scrollbars
+    chart.scrollbarX = new am4core.Scrollbar();
+    chart.scrollbarY = new am4core.Scrollbar();
+
+    this.chart2 = chart;
+  }
+
+  getChart3() {
+    let chart = am4core.create("chartdivanalytic3", am4charts.XYChart);
+
+    // Add data
+    chart.data = this.dataChart3;
+
+    // Set input format for the dates
+    chart.dateFormatter.inputDateFormat = "yyyy-MM-dd";
+
+    // Create axes
+    let dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+    let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+
+    // Create series
+    let series = chart.series.push(new am4charts.LineSeries());
+    series.dataFields.valueY = "value";
+    series.dataFields.dateX = "date";
+    series.tooltipText = "{value}";
+    series.strokeWidth = 2;
+    series.minBulletDistance = 15;
+
+    // Drop-shaped tooltips
+    series.tooltip.background.cornerRadius = 20;
+    series.tooltip.background.strokeOpacity = 0;
     series.tooltip.pointerOrientation = "vertical";
+    series.tooltip.label.minWidth = 40;
+    series.tooltip.label.minHeight = 40;
+    series.tooltip.label.textAlign = "middle";
+    series.tooltip.label.textValign = "middle";
 
-    series.columns.template.column.cornerRadiusTopLeft = 10;
-    series.columns.template.column.cornerRadiusTopRight = 10;
-    series.columns.template.column.fillOpacity = 0.8;
+    // Make bullets grow on hover
+    let bullet = series.bullets.push(new am4charts.CircleBullet());
+    bullet.circle.strokeWidth = 2;
+    bullet.circle.radius = 4;
+    bullet.circle.fill = am4core.color("#fff");
+    console.log("cdesde = ", valueAxis);
+    // if(){
 
-    // on hover, make corner radiuses bigger
-    let hoverState = series.columns.template.column.states.create("hover");
-    hoverState.properties.cornerRadiusTopLeft = 0;
-    hoverState.properties.cornerRadiusTopRight = 0;
-    hoverState.properties.fillOpacity = 1;
+    // }
 
-    series.columns.template.adapter.add("fill", function (fill, target) {
-      return chart.colors.getIndex(target.dataItem.index);
-    });
+    let bullethover = bullet.states.create("hover");
+    bullethover.properties.scale = 1.3;
 
-    // Cursor
+    // Make a panning cursor
     chart.cursor = new am4charts.XYCursor();
+    chart.cursor.behavior = "panXY";
+    chart.cursor.xAxis = dateAxis;
+    chart.cursor.snapToSeries = series;
 
-    // this.chart2 = chart;
+    // Create vertical scrollbar and place it before the value axis
+    chart.scrollbarY = new am4core.Scrollbar();
+    chart.scrollbarY.parent = chart.leftAxesContainer;
+    chart.scrollbarY.toBack();
+
+    // Create a horizontal scrollbar with previe and place it underneath the date axis
+    let scrollbarX = new am4charts.XYChartScrollbar();
+    scrollbarX.series.push(series);
+    chart.scrollbarX = scrollbarX;
+    chart.scrollbarX.parent = chart.bottomAxesContainer;
+
+    dateAxis.start = 0.79;
+    dateAxis.keepSelection = true;
+
+    this.chart3 = chart;
   }
 
   getChart4() {
-    // chart 2 line
-    // let chart = am4core.create("chartReceipt", am4charts.XYChart);
-    let chart = am4core.create("chartBillCustBillAnal", am4charts.XYChart);
+    let chart = am4core.create("chartdivanalytic4", am4charts.XYChart);
 
     // Add data
-    chart.data = [
-      {
-        month: "Jan",
-        active: 1,
-        inactive: 5,
-      },
-      {
-        month: "Feb",
-        active: 3,
-        inactive: 2,
-      },
-      {
-        month: "Mar",
-        active: 5,
-        inactive: 4,
-      },
-      {
-        month: "Apr",
-        active: 3,
-        inactive: 3,
-      },
-      {
-        month: "May",
-        active: 6,
-        inactive: 5,
-      },
-      {
-        month: "Jun",
-        active: 2,
-        inactive: 4,
-      },
-      {
-        month: "Jul",
-        active: 4,
-        inactive: 3,
-      },
-      {
-        month: "Aug",
-        active: 6,
-        inactive: 5,
-      },
-      {
-        month: "Sep",
-        active: 5,
-        inactive: 4,
-      },
-      {
-        month: "Oct",
-        active: 5,
-        inactive: 5,
-      },
-      {
-        month: "Nov",
-        active: 4,
-        inactive: 5,
-      },
-      {
-        month: "Dec",
-        active: 5,
-        inactive: 6,
-      },
-    ];
-    // Create category axis
-    let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
-    categoryAxis.dataFields.category = "month";
+    chart.data = generateChartData();
 
-    categoryAxis.renderer.grid.template.location = 0;
-    categoryAxis.renderer.minGridDistance = 30;
-    categoryAxis.renderer.labels.template.horizontalCenter = "right";
-    categoryAxis.renderer.labels.template.verticalCenter = "middle";
-    categoryAxis.renderer.labels.template.rotation = 270;
-    categoryAxis.tooltip.disabled = true;
-    categoryAxis.renderer.minHeight = 110;
-    // categoryAxis.renderer.opposite = true;
+    // Create axes
+    let dateAxis = chart.xAxes.push(new am4charts.DateAxis());
 
-    // Create value axis
     let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-    // valueAxis.renderer.inversed = true;
-    valueAxis.title.text = "File";
-    valueAxis.renderer.minLabelPosition = 0.01;
 
     // Create series
-    let series1 = chart.series.push(new am4charts.LineSeries());
-    series1.dataFields.valueY = "active";
-    series1.dataFields.categoryX = "month";
-    series1.name = "Active";
-    series1.strokeWidth = 3;
-    series1.bullets.push(new am4charts.CircleBullet());
-    series1.tooltipText = "Amount {name} in {categoryX}: {valueY}";
-    series1.legendSettings.valueText = "{valueY}";
-    series1.visible = false;
+    let series = chart.series.push(new am4charts.LineSeries());
+    series.dataFields.valueY = "visits";
+    series.dataFields.dateX = "date";
+    series.strokeWidth = 1;
+    series.minBulletDistance = 10;
+    series.tooltipText = "{valueY}";
+    series.fillOpacity = 0.1;
+    series.tooltip.pointerOrientation = "vertical";
+    series.tooltip.background.cornerRadius = 20;
+    series.tooltip.background.fillOpacity = 0.5;
+    series.tooltip.label.padding(12, 12, 12, 12);
 
-    let series2 = chart.series.push(new am4charts.LineSeries());
-    series2.dataFields.valueY = "inactive";
-    series2.dataFields.categoryX = "month";
-    series2.name = "Inactive";
-    series2.strokeWidth = 3;
-    series2.bullets.push(new am4charts.CircleBullet());
-    series2.tooltipText = "Amount {name} in {categoryX}: {valueY}";
-    series2.legendSettings.valueText = "{valueY}";
+    let seriesRange = dateAxis.createSeriesRange(series);
+    seriesRange.contents.strokeDasharray = "2,3";
+    seriesRange.contents.stroke = chart.colors.getIndex(8);
+    seriesRange.contents.strokeWidth = 1;
 
-    // Add chart cursor
-    chart.cursor = new am4charts.XYCursor();
-    chart.cursor.behavior = "zoomY";
+    let pattern = new am4core.LinePattern();
+    pattern.rotation = -45;
+    pattern.stroke = seriesRange.contents.stroke;
+    pattern.width = 1000;
+    pattern.height = 1000;
+    pattern.gap = 6;
+    seriesRange.contents.fill = pattern;
+    seriesRange.contents.fillOpacity = 0.5;
 
-    // Add legend
-    chart.legend = new am4charts.Legend();
+    // Add scrollbar
+    chart.scrollbarX = new am4core.Scrollbar();
+
+    function generateChartData() {
+      let chartData = [];
+      let firstDate = new Date();
+      firstDate.setDate(firstDate.getDate() - 200);
+      let visits = 1200;
+      for (var i = 0; i < 200; i++) {
+        // we create date objects here. In your data, you can have date strings
+        // and then set format of your dates using chart.dataDateFormat property,
+        // however when possible, use date objects, as this will speed up chart rendering.
+        let newDate = new Date(firstDate);
+        newDate.setDate(newDate.getDate() + i);
+
+        visits += Math.round(
+          (Math.random() < 0.5 ? 1 : -1) * Math.random() * 10
+        );
+
+        chartData.push({
+          date: newDate,
+          visits: visits,
+        });
+      }
+      return chartData;
+    }
+
+    // add range
+    let range = dateAxis.axisRanges.push(new am4charts.DateAxisDataItem());
+    range.grid.stroke = chart.colors.getIndex(0);
+    range.grid.strokeOpacity = 1;
+    range.bullet = new am4core.ResizeButton();
+    // range.bullet.background.fill = chart.colors.getIndex(0);
+    // range.bullet.
+    // range.bullet.background.states.copyFrom(
+    //   chart.zoomOutButton.background.states
+    // );
+    range.bullet.minX = 0;
+    range.bullet.adapter.add("minY", function (minY, target) {
+      target.maxY = chart.plotContainer.maxHeight;
+      target.maxX = chart.plotContainer.maxWidth;
+      return chart.plotContainer.maxHeight;
+    });
+
+    range.bullet.events.on("dragged", function () {
+      range.value = dateAxis.xToValue(range.bullet.pixelX);
+      seriesRange.value = range.value;
+    });
+
+    let firstTime = chart.data[0].date.getTime();
+    let lastTime = chart.data[chart.data.length - 1].date.getTime();
+    let date = new Date(firstTime + (lastTime - firstTime) / 2);
+
+    range.date = date;
+
+    seriesRange.date = date;
+    seriesRange.endDate = chart.data[chart.data.length - 1].date;
   }
 
   getChart5() {
-    // chart bar 2 line
-    // let chart = am4core.create("chartReceipt", am4charts.XYChart);
-    let chart = am4core.create("chartBillCustBillAnal5", am4charts.XYChart);
-    chart.colors.step = 2;
+    let chart = am4core.create("chartdivanalytic5", am4charts.XYChart);
+    chart.hiddenState.properties.opacity = 0;
 
-    chart.legend = new am4charts.Legend();
-    chart.legend.position = "top";
-    chart.legend.paddingBottom = 20;
-    chart.legend.labels.template.maxWidth = 95;
+    chart.padding(0, 0, 0, 0);
 
-    let xAxis = chart.xAxes.push(new am4charts.CategoryAxis());
-    xAxis.dataFields.category = "category";
-    xAxis.renderer.cellStartLocation = 0.1;
-    xAxis.renderer.cellEndLocation = 0.9;
-    xAxis.renderer.grid.template.location = 0;
+    chart.zoomOutButton.disabled = true;
 
-    let yAxis = chart.yAxes.push(new am4charts.ValueAxis());
-    yAxis.min = 0;
+    let data = [];
+    let visits = 10;
+    let i = 0;
 
-    function createSeries(value, name) {
-      let series = chart.series.push(new am4charts.ColumnSeries());
-      series.dataFields.valueY = value;
-      series.dataFields.categoryX = "category";
-      series.name = name;
-
-      series.events.on("hidden", arrangeColumns);
-      series.events.on("shown", arrangeColumns);
-
-      let bullet = series.bullets.push(new am4charts.LabelBullet());
-      bullet.interactionsEnabled = false;
-      bullet.dy = 30;
-      bullet.label.text = "{valueY}";
-      bullet.label.fill = am4core.color("#ffffff");
-
-      return series;
+    for (i = 0; i <= 30; i++) {
+      visits -= Math.round((Math.random() < 0.5 ? 1 : -1) * Math.random() * 10);
+      data.push({ date: new Date().setSeconds(i - 30), value: visits });
     }
 
-    chart.data = [
-      {
-        category: "Jan",
-        first: 40,
-        second: 55,
-        third: 35,
-      },
-      {
-        category: "Feb",
-        first: 30,
-        second: 78,
-        third: 54,
-      },
-      {
-        category: "Mar",
-        first: 27,
-        second: 40,
-        third: 43,
-      },
-      {
-        category: "Apr",
-        first: 50,
-        second: 33,
-        third: 43,
-      },
-      {
-        category: "May",
-        first: 55,
-        second: 43,
-        third: 37,
-      },
-      {
-        category: "Jun",
-        first: 60,
-        second: 53,
-        third: 43,
-      },
-      {
-        category: "Jul",
-        first: 70,
-        second: 57,
-        third: 50,
-      },
-    ];
+    chart.data = data;
 
-    createSeries("first", "Motorcycle");
-    createSeries("second", "Car");
-    createSeries("third", "Bicycle");
+    let dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+    dateAxis.renderer.grid.template.location = 0;
+    dateAxis.renderer.minGridDistance = 30;
+    dateAxis.dateFormats.setKey("second", "ss");
+    dateAxis.periodChangeDateFormats.setKey("second", "[bold]h:mm a");
+    dateAxis.periodChangeDateFormats.setKey("minute", "[bold]h:mm a");
+    dateAxis.periodChangeDateFormats.setKey("hour", "[bold]h:mm a");
+    dateAxis.renderer.inside = true;
+    dateAxis.renderer.axisFills.template.disabled = true;
+    dateAxis.renderer.ticks.template.disabled = true;
 
-    function arrangeColumns() {
-      let series = chart.series.getIndex(0);
+    let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+    valueAxis.tooltip.disabled = true;
+    valueAxis.interpolationDuration = 500;
+    valueAxis.rangeChangeDuration = 500;
+    valueAxis.renderer.inside = true;
+    valueAxis.renderer.minLabelPosition = 0.05;
+    valueAxis.renderer.maxLabelPosition = 0.95;
+    valueAxis.renderer.axisFills.template.disabled = true;
+    valueAxis.renderer.ticks.template.disabled = true;
 
-      let w =
-        1 -
-        xAxis.renderer.cellStartLocation -
-        (1 - xAxis.renderer.cellEndLocation);
-      if (series.dataItems.length > 1) {
-        let x0 = xAxis.getX(series.dataItems.getIndex(0), "categoryX");
-        let x1 = xAxis.getX(series.dataItems.getIndex(1), "categoryX");
-        let delta = ((x1 - x0) / chart.series.length) * w;
-        if (am4core.isNumber(delta)) {
-          let middle = chart.series.length / 2;
+    let series = chart.series.push(new am4charts.LineSeries());
+    series.dataFields.dateX = "date";
+    series.dataFields.valueY = "value";
+    series.interpolationDuration = 500;
+    series.defaultState.transitionDuration = 0;
+    series.tensionX = 0.8;
 
-          let newIndex = 0;
-          chart.series.each(function (series) {
-            if (!series.isHidden && !series.isHiding) {
-              series.dummyData = newIndex;
-              newIndex++;
-            } else {
-              series.dummyData = chart.series.indexOf(series);
-            }
-          });
-          let visibleCount = newIndex;
-          let newMiddle = visibleCount / 2;
+    chart.events.on("datavalidated", function () {
+      dateAxis.zoom({ start: 1 / 15, end: 1.2 }, false, true);
+    });
 
-          chart.series.each(function (series) {
-            let trueIndex = chart.series.indexOf(series);
-            let newIndex = series.dummyData;
+    dateAxis.interpolationDuration = 500;
+    dateAxis.rangeChangeDuration = 500;
 
-            let dx = (newIndex - trueIndex + middle - newMiddle) * delta;
-
-            series.animate(
-              { property: "dx", to: dx },
-              series.interpolationDuration,
-              series.interpolationEasing
-            );
-            series.bulletsContainer.animate(
-              { property: "dx", to: dx },
-              series.interpolationDuration,
-              series.interpolationEasing
-            );
-          });
+    document.addEventListener(
+      "visibilitychange",
+      function () {
+        if (document.hidden) {
+          if (interval) {
+            clearInterval(interval);
+          }
+        } else {
+          startInterval();
         }
-      }
+      },
+      false
+    );
+
+    // add data
+    let interval;
+    function startInterval() {
+      interval = setInterval(function () {
+        visits =
+          visits +
+          Math.round((Math.random() < 0.5 ? 1 : -1) * Math.random() * 5);
+        let lastdataItem = series.dataItems.getIndex(
+          series.dataItems.length - 1
+        );
+        chart.addData(
+          {
+            date: new Date(lastdataItem.dateX.getTime() + 1000),
+            value: visits,
+          },
+          1
+        );
+      }, 1000);
     }
+
+    startInterval();
+
+    // all the below is optional, makes some fancy effects
+    // gradient fill of the series
+    series.fillOpacity = 1;
+    let gradient = new am4core.LinearGradient();
+    gradient.addColor(chart.colors.getIndex(0), 0.2);
+    gradient.addColor(chart.colors.getIndex(0), 0);
+    series.fill = gradient;
+
+    // this makes date axis labels to fade out
+    dateAxis.renderer.labels.template.adapter.add("fillOpacity", function (
+      fillOpacity,
+      target
+    ) {
+      let dataItem = target.dataItem;
+      return dataItem.position;
+    });
+
+    // need to set this, otherwise fillOpacity is not changed and not set
+    dateAxis.events.on("validated", function () {
+      am4core.iter.each(dateAxis.renderer.labels.iterator(), function (label) {
+        label.fillOpacity = label.fillOpacity;
+      });
+    });
+
+    // this makes date axis labels which are at equal minutes to be rotated
+    dateAxis.renderer.labels.template.adapter.add("rotation", function (
+      rotation,
+      target
+    ) {
+      let dataItem = target.dataItem;
+      // if (
+      //   dataItem.date &&
+      //   dataItem.date.getTime() ==
+      //     am4core.time
+      //       .round(new Date(dataItem.date.getTime()), "minute")
+      //       .getTime()
+      // ) {
+      //   target.verticalCenter = "middle";
+      //   target.horizontalCenter = "left";
+      //   return -90;
+      // } else {
+      target.verticalCenter = "bottom";
+      target.horizontalCenter = "middle";
+      return 0;
+      // }
+    });
+
+    // bullet at the front of the line
+    let bullet = series.createChild(am4charts.CircleBullet);
+    bullet.circle.radius = 5;
+    bullet.fillOpacity = 1;
+    bullet.fill = chart.colors.getIndex(0);
+    bullet.isMeasured = false;
+
+    series.events.on("validated", function () {
+      bullet.moveTo(series.dataItems.last.point);
+      bullet.validatePosition();
+    });
   }
 
   getChart6() {
-    // pie chart
-    // let chart = am4core.create("chartReceipt", am4charts.XYChart);
-    let chart = am4core.create("chartBillCustBillAnal6", am4charts.PieChart);
+    let chart = am4core.create("chartdivanalytic6", am4charts.XYChart);
 
-    // Add data
-    chart.data = [
-      {
-        label: "Jan",
-        amount: 3025,
-      },
-      {
-        label: "Feb",
-        amount: 1882,
-      },
-      {
-        label: "Mar",
-        amount: 1809,
-      },
-      {
-        label: "Apr",
-        amount: 1322,
-      },
-      {
-        label: "May",
-        amount: 1122,
-      },
-      {
-        label: "Jun",
-        amount: 1114,
-      },
-      {
-        label: "July",
-        amount: 984,
-      },
-      {
-        label: "Aug",
-        amount: 711,
-      },
-      {
-        label: "Sep",
-        amount: 665,
-      },
-      {
-        label: "Oct",
-        amount: 580,
-      },
-      {
-        label: "Nov",
-        amount: 443,
-      },
-      {
-        label: "Dec",
-        amount: 441,
-      },
-    ];
+    // Create daily series and related axes
+    let dateAxis1 = chart.xAxes.push(new am4charts.DateAxis());
+    dateAxis1.renderer.grid.template.location = 0;
+    dateAxis1.renderer.minGridDistance = 40;
 
-    // Add and configure Series
-    let pieSeries = chart.series.push(new am4charts.PieSeries());
-    pieSeries.dataFields.value = "amount";
-    pieSeries.dataFields.category = "label";
-    pieSeries.slices.template.stroke = am4core.color("#fff");
-    pieSeries.slices.template.strokeOpacity = 1;
+    let valueAxis1 = chart.yAxes.push(new am4charts.ValueAxis());
 
-    // This creates initial animation
-    pieSeries.hiddenState.properties.opacity = 1;
-    pieSeries.hiddenState.properties.endAngle = -90;
-    pieSeries.hiddenState.properties.startAngle = -90;
+    let series1 = chart.series.push(new am4charts.ColumnSeries());
+    series1.dataFields.valueY = "value";
+    series1.dataFields.dateX = "date";
+    series1.data = generateDailyData();
+    series1.xAxis = dateAxis1;
+    series1.yAxis = valueAxis1;
+    series1.tooltipText = "{dateX}: [bold]{valueY}[/]";
 
-    chart.hiddenState.properties.radius = am4core.percent(0);
+    // Create hourly series and related axes
+    let dateAxis2 = chart.xAxes.push(new am4charts.DateAxis());
+    dateAxis2.renderer.grid.template.location = 0;
+    dateAxis2.renderer.minGridDistance = 40;
+    dateAxis2.renderer.labels.template.disabled = true;
+    dateAxis2.renderer.grid.template.disabled = true;
+    dateAxis2.renderer.tooltip.disabled = true;
+
+    let valueAxis2 = chart.yAxes.push(new am4charts.ValueAxis());
+    valueAxis2.renderer.opposite = true;
+    valueAxis2.renderer.grid.template.disabled = true;
+    valueAxis2.renderer.labels.template.disabled = true;
+    valueAxis2.renderer.tooltip.disabled = true;
+
+    let series2 = chart.series.push(new am4charts.LineSeries());
+    series2.dataFields.valueY = "value";
+    series2.dataFields.dateX = "date";
+    series2.data = generateHourlyData();
+    series2.xAxis = dateAxis2;
+    series2.yAxis = valueAxis2;
+    series2.strokeWidth = 3;
+    series2.tooltipText =
+      "{dateX.formatDate('yyyy-MM-dd hh:00')}: [bold]{valueY}[/]";
+
+    // Add cursor
+    chart.cursor = new am4charts.XYCursor();
+
+    function generateDailyData() {
+      let firstDate = new Date();
+      firstDate.setDate(firstDate.getDate() - 10);
+      firstDate.setHours(0, 0, 0, 0);
+      let data = [];
+      for (var i = 0; i < 10; i++) {
+        let newDate = new Date(firstDate);
+        newDate.setDate(newDate.getDate() + i);
+        data.push({
+          date: newDate,
+          value: Math.round(Math.random() * 12) + 1,
+        });
+      }
+      return data;
+    }
+
+    function generateHourlyData() {
+      let firstDate = new Date();
+      firstDate.setDate(firstDate.getDate() - 10);
+      let data = [];
+      let value = [];
+      for (var i = 0; i < 10 * 24; i++) {
+        let newDate = new Date(firstDate);
+        newDate.setHours(newDate.getHours() + i);
+        if (i == 0) {
+          let value = Math.round(Math.random() * 10) + 1;
+        } else {
+          let value =
+            Math.round(
+              (data[data.length - 1].value / 100) *
+                (90 + Math.round(Math.random() * 20)) *
+                100
+            ) / 100;
+        }
+        data.push({
+          date: newDate,
+          value: value,
+        });
+      }
+      return data;
+    }
   }
 
-  getChartTrendYear() {
-    // yearly chart lind with trend
-    let chart = am4core.create("chartBillCustBillAnal", am4charts.XYChart);
+  getChart7() {
+    let chart = am4core.create("chartdivanalytic7", am4charts.XYChart);
 
-    // Export
-    chart.exporting.menu = new am4core.ExportMenu();
+    let data = [];
 
-    // Data for both series
-    let data = [
+    chart.data = [
       {
-        year: "2015",
+        year: "2014",
         income: 23.5,
         expenses: 21.1,
+        lineColor: chart.colors.next(),
       },
       {
-        year: "2016",
+        year: "2015",
         income: 26.2,
         expenses: 30.5,
       },
       {
-        year: "2017",
+        year: "2016",
         income: 30.1,
         expenses: 34.9,
       },
       {
+        year: "2017",
+        income: 20.5,
+        expenses: 23.1,
+      },
+      {
         year: "2018",
-        income: 29.5,
-        expenses: 31.1,
+        income: 30.6,
+        expenses: 28.2,
+        lineColor: chart.colors.next(),
       },
       {
         year: "2019",
-        income: 30.6,
-        expenses: 28.2,
-        lineDash: "5,5",
+        income: 34.1,
+        expenses: 31.9,
       },
       {
         year: "2020",
         income: 34.1,
-        expenses: 32.9,
-        strokeWidth: 1,
-        columnDash: "5,5",
-        fillOpacity: 0.2,
-        additional: "(projection)",
-      },
-    ];
-
-    /* Create axes */
-    let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
-    categoryAxis.dataFields.category = "year";
-    categoryAxis.renderer.minGridDistance = 30;
-
-    /* Create value axis */
-    let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-
-    /* Create series */
-    let columnSeries = chart.series.push(new am4charts.ColumnSeries());
-    columnSeries.name = "Income";
-    columnSeries.dataFields.valueY = "income";
-    columnSeries.dataFields.categoryX = "year";
-
-    columnSeries.columns.template.tooltipText =
-      "[#fff font-size: 15px]{name} in {categoryX}:\n[/][#fff font-size: 20px]{valueY}[/] [#fff]{additional}[/]";
-    columnSeries.columns.template.propertyFields.fillOpacity = "fillOpacity";
-    columnSeries.columns.template.propertyFields.stroke = "stroke";
-    columnSeries.columns.template.propertyFields.strokeWidth = "strokeWidth";
-    columnSeries.columns.template.propertyFields.strokeDasharray = "columnDash";
-    columnSeries.tooltip.label.textAlign = "middle";
-
-    let lineSeries = chart.series.push(new am4charts.LineSeries());
-    lineSeries.name = "Expenses";
-    lineSeries.dataFields.valueY = "expenses";
-    lineSeries.dataFields.categoryX = "year";
-
-    lineSeries.stroke = am4core.color("#fdd400");
-    lineSeries.strokeWidth = 3;
-    lineSeries.propertyFields.strokeDasharray = "lineDash";
-    lineSeries.tooltip.label.textAlign = "middle";
-
-    let bullet = lineSeries.bullets.push(new am4charts.Bullet());
-    bullet.fill = am4core.color("#fdd400"); // tooltips grab fill from parent by default
-    bullet.tooltipText =
-      "[#fff font-size: 15px]{name} in {categoryX}:\n[/][#fff font-size: 20px]{valueY}[/] [#fff]{additional}[/]";
-    let circle = bullet.createChild(am4core.Circle);
-    circle.radius = 4;
-    circle.fill = am4core.color("#fff");
-    circle.strokeWidth = 3;
-
-    chart.data = data;
-  }
-
-  getChartTrendMonth() {
-    // yearly chart lind with trend
-    let chart = am4core.create("chartBillCustBillAnal", am4charts.XYChart);
-
-    // Export
-    chart.exporting.menu = new am4core.ExportMenu();
-
-    // Data for both series
-    let data = [
-      {
-        year: "Jan",
-        income: 23.5,
-        expenses: 21.1,
+        expenses: 31.9,
       },
       {
-        year: "Feb",
-        income: 23.5,
-        expenses: 21.1,
-      },
-      {
-        year: "Mar",
-        income: 26.2,
-        expenses: 30.5,
-      },
-      {
-        year: "Apr",
-        income: 30.1,
-        expenses: 34.9,
-      },
-      {
-        year: "May",
-        income: 29.5,
-        expenses: 31.1,
-      },
-      {
-        year: "Jun",
-        income: 30.6,
-        expenses: 28.2,
-        lineDash: "5,5",
-      },
-      {
-        year: "Jul",
+        year: "2021",
         income: 34.1,
-        expenses: 32.9,
-        strokeWidth: 1,
-        columnDash: "5,5",
-        fillOpacity: 0.2,
-        additional: "(projection)",
-      },
-    ];
-
-    /* Create axes */
-    let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
-    categoryAxis.dataFields.category = "year";
-    categoryAxis.renderer.minGridDistance = 30;
-
-    /* Create value axis */
-    let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-
-    /* Create series */
-    let columnSeries = chart.series.push(new am4charts.ColumnSeries());
-    columnSeries.name = "Income";
-    columnSeries.dataFields.valueY = "income";
-    columnSeries.dataFields.categoryX = "year";
-
-    columnSeries.columns.template.tooltipText =
-      "[#fff font-size: 15px]{name} in {categoryX}:\n[/][#fff font-size: 20px]{valueY}[/] [#fff]{additional}[/]";
-    columnSeries.columns.template.propertyFields.fillOpacity = "fillOpacity";
-    columnSeries.columns.template.propertyFields.stroke = "stroke";
-    columnSeries.columns.template.propertyFields.strokeWidth = "strokeWidth";
-    columnSeries.columns.template.propertyFields.strokeDasharray = "columnDash";
-    columnSeries.tooltip.label.textAlign = "middle";
-
-    let lineSeries = chart.series.push(new am4charts.LineSeries());
-    lineSeries.name = "Expenses";
-    lineSeries.dataFields.valueY = "expenses";
-    lineSeries.dataFields.categoryX = "year";
-
-    lineSeries.stroke = am4core.color("#fdd400");
-    lineSeries.strokeWidth = 3;
-    lineSeries.propertyFields.strokeDasharray = "lineDash";
-    lineSeries.tooltip.label.textAlign = "middle";
-
-    let bullet = lineSeries.bullets.push(new am4charts.Bullet());
-    bullet.fill = am4core.color("#fdd400"); // tooltips grab fill from parent by default
-    bullet.tooltipText =
-      "[#fff font-size: 15px]{name} in {categoryX}:\n[/][#fff font-size: 20px]{valueY}[/] [#fff]{additional}[/]";
-    let circle = bullet.createChild(am4core.Circle);
-    circle.radius = 4;
-    circle.fill = am4core.color("#fff");
-    circle.strokeWidth = 3;
-
-    chart.data = data;
-  }
-
-  getChartTrendWeek() {
-    // yearly chart lind with trend
-    let chart = am4core.create("chartBillCustBillAnal", am4charts.XYChart);
-
-    // Export
-    chart.exporting.menu = new am4core.ExportMenu();
-
-    // Data for both series
-    let data = [
-      {
-        year: "Week 1",
-        income: 23.5,
-        expenses: 21.1,
+        expenses: 31.9,
+        lineColor: chart.colors.next(),
       },
       {
-        year: "Week 2",
-        income: 26.2,
-        expenses: 30.5,
-      },
-      {
-        year: "Week 3",
-        income: 30.1,
-        expenses: 34.9,
-      },
-      {
-        year: "Week 4",
-        income: 29.5,
-        expenses: 31.1,
-      },
-      {
-        year: "Week 5",
-        income: 30.6,
-        expenses: 28.2,
-        lineDash: "5,5",
-      },
-      {
-        year: "Week 6",
+        year: "2022",
         income: 34.1,
-        expenses: 32.9,
-        strokeWidth: 1,
-        columnDash: "5,5",
-        fillOpacity: 0.2,
-        additional: "(projection)",
-      },
-    ];
-
-    /* Create axes */
-    let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
-    categoryAxis.dataFields.category = "year";
-    categoryAxis.renderer.minGridDistance = 30;
-
-    /* Create value axis */
-    let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-
-    /* Create series */
-    let columnSeries = chart.series.push(new am4charts.ColumnSeries());
-    columnSeries.name = "Income";
-    columnSeries.dataFields.valueY = "income";
-    columnSeries.dataFields.categoryX = "year";
-
-    columnSeries.columns.template.tooltipText =
-      "[#fff font-size: 15px]{name} in {categoryX}:\n[/][#fff font-size: 20px]{valueY}[/] [#fff]{additional}[/]";
-    columnSeries.columns.template.propertyFields.fillOpacity = "fillOpacity";
-    columnSeries.columns.template.propertyFields.stroke = "stroke";
-    columnSeries.columns.template.propertyFields.strokeWidth = "strokeWidth";
-    columnSeries.columns.template.propertyFields.strokeDasharray = "columnDash";
-    columnSeries.tooltip.label.textAlign = "middle";
-
-    let lineSeries = chart.series.push(new am4charts.LineSeries());
-    lineSeries.name = "Expenses";
-    lineSeries.dataFields.valueY = "expenses";
-    lineSeries.dataFields.categoryX = "year";
-
-    lineSeries.stroke = am4core.color("#fdd400");
-    lineSeries.strokeWidth = 3;
-    lineSeries.propertyFields.strokeDasharray = "lineDash";
-    lineSeries.tooltip.label.textAlign = "middle";
-
-    let bullet = lineSeries.bullets.push(new am4charts.Bullet());
-    bullet.fill = am4core.color("#fdd400"); // tooltips grab fill from parent by default
-    bullet.tooltipText =
-      "[#fff font-size: 15px]{name} in {categoryX}:\n[/][#fff font-size: 20px]{valueY}[/] [#fff]{additional}[/]";
-    let circle = bullet.createChild(am4core.Circle);
-    circle.radius = 4;
-    circle.fill = am4core.color("#fff");
-    circle.strokeWidth = 3;
-
-    chart.data = data;
-  }
-
-  getChartTrendDay() {
-    // yearly chart lind with trend
-    let chart = am4core.create("chartBillCustBillAnal", am4charts.XYChart);
-
-    // Export
-    chart.exporting.menu = new am4core.ExportMenu();
-
-    // Data for both series
-    let data = [
-      {
-        year: "Sun",
-        income: 23.5,
-        expenses: 21.1,
+        expenses: 31.9,
       },
       {
-        year: "Mon",
-        income: 26.2,
-        expenses: 30.5,
-      },
-      {
-        year: "Tue",
-        income: 30.1,
-        expenses: 34.9,
-      },
-      {
-        year: "Wed",
-        income: 29.5,
-        expenses: 31.1,
-      },
-      {
-        year: "Thu",
-        income: 30.6,
-        expenses: 28.2,
-        lineDash: "5,5",
-      },
-      {
-        year: "Fri",
-        income: 30.6,
-        expenses: 28.2,
-        lineDash: "6,6",
-      },
-      {
-        year: "Sat",
+        year: "2023",
         income: 34.1,
-        expenses: 32.9,
-        strokeWidth: 1,
-        columnDash: "5,5",
-        fillOpacity: 0.2,
-        additional: "(projection)",
-      },
-    ];
-
-    /* Create axes */
-    let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
-    categoryAxis.dataFields.category = "year";
-    categoryAxis.renderer.minGridDistance = 30;
-
-    /* Create value axis */
-    let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-
-    /* Create series */
-    let columnSeries = chart.series.push(new am4charts.ColumnSeries());
-    columnSeries.name = "Income";
-    columnSeries.dataFields.valueY = "income";
-    columnSeries.dataFields.categoryX = "year";
-
-    columnSeries.columns.template.tooltipText =
-      "[#fff font-size: 15px]{name} in {categoryX}:\n[/][#fff font-size: 20px]{valueY}[/] [#fff]{additional}[/]";
-    columnSeries.columns.template.propertyFields.fillOpacity = "fillOpacity";
-    columnSeries.columns.template.propertyFields.stroke = "stroke";
-    columnSeries.columns.template.propertyFields.strokeWidth = "strokeWidth";
-    columnSeries.columns.template.propertyFields.strokeDasharray = "columnDash";
-    columnSeries.tooltip.label.textAlign = "middle";
-
-    let lineSeries = chart.series.push(new am4charts.LineSeries());
-    lineSeries.name = "Expenses";
-    lineSeries.dataFields.valueY = "expenses";
-    lineSeries.dataFields.categoryX = "year";
-
-    lineSeries.stroke = am4core.color("#fdd400");
-    lineSeries.strokeWidth = 3;
-    lineSeries.propertyFields.strokeDasharray = "lineDash";
-    lineSeries.tooltip.label.textAlign = "middle";
-
-    let bullet = lineSeries.bullets.push(new am4charts.Bullet());
-    bullet.fill = am4core.color("#fdd400"); // tooltips grab fill from parent by default
-    bullet.tooltipText =
-      "[#fff font-size: 15px]{name} in {categoryX}:\n[/][#fff font-size: 20px]{valueY}[/] [#fff]{additional}[/]";
-    let circle = bullet.createChild(am4core.Circle);
-    circle.radius = 4;
-    circle.fill = am4core.color("#fff");
-    circle.strokeWidth = 3;
-
-    chart.data = data;
-  }
-
-  getChart8() {
-    let chart = am4core.create("chartBillCustBillAnal8", am4charts.PieChart);
-
-    // Add and configure Series
-    let pieSeries = chart.series.push(new am4charts.PieSeries());
-    pieSeries.dataFields.value = "amaunt";
-    pieSeries.dataFields.category = "label";
-
-    // Let's cut a hole in our Pie chart the size of 30% the radius
-    chart.innerRadius = am4core.percent(30);
-
-    // Put a thick white border around each Slice
-    pieSeries.slices.template.stroke = am4core.color("#fff");
-    pieSeries.slices.template.strokeWidth = 2;
-    pieSeries.slices.template.strokeOpacity = 1;
-    // change the cursor on hover to make it apparent the object can be interacted with
-    pieSeries.slices.template.cursorOverStyle = [
-      {
-        property: "cursor",
-        value: "pointer",
-      },
-    ];
-
-    pieSeries.alignLabels = false;
-    // pieSeries.labels.template.bent = true;
-    pieSeries.labels.template.radius = 3;
-    pieSeries.labels.template.padding(0, 0, 0, 0);
-
-    pieSeries.ticks.template.disabled = true;
-
-    // Create a base filter effect (as if it's not there) for the hover to return to
-    let shadow = pieSeries.slices.template.filters.push(
-      new am4core.DropShadowFilter()
-    );
-    shadow.opacity = 0;
-
-    // Create hover state
-    let hoverState = pieSeries.slices.template.states.getKey("hover"); // normally we have to create the hover state, in this case it already exists
-
-    // Slightly shift the shadow and make it more prominent on hover
-    let hoverShadow = hoverState.filters.push(new am4core.DropShadowFilter());
-    hoverShadow.opacity = 0.7;
-    hoverShadow.blur = 5;
-
-    // Add a legend
-    chart.legend = new am4charts.Legend();
-
-    chart.data = [
-      {
-        label: "Subscription",
-        amaunt: 50,
+        expenses: 31.9,
       },
       {
-        label: "Other charges",
-        amaunt: 65,
-      },
-    ];
-  }
-
-  getChart9() {
-    let chart = am4core.create("chartBillCustBillAnal9", am4charts.PieChart);
-
-    // Add and configure Series
-    let pieSeries = chart.series.push(new am4charts.PieSeries());
-    pieSeries.dataFields.value = "amaunt";
-    pieSeries.dataFields.category = "label";
-
-    // Let's cut a hole in our Pie chart the size of 30% the radius
-    chart.innerRadius = am4core.percent(30);
-
-    // Put a thick white border around each Slice
-    pieSeries.slices.template.stroke = am4core.color("#fff");
-    pieSeries.slices.template.strokeWidth = 2;
-    pieSeries.slices.template.strokeOpacity = 1;
-    // change the cursor on hover to make it apparent the object can be interacted with
-    pieSeries.slices.template.cursorOverStyle = [
-      {
-        property: "cursor",
-        value: "pointer",
-      },
-    ];
-
-    pieSeries.alignLabels = false;
-    // pieSeries.labels.template.bent = true;
-    pieSeries.labels.template.radius = 3;
-    pieSeries.labels.template.padding(0, 0, 0, 0);
-
-    pieSeries.ticks.template.disabled = true;
-
-    // Create a base filter effect (as if it's not there) for the hover to return to
-    let shadow = pieSeries.slices.template.filters.push(
-      new am4core.DropShadowFilter()
-    );
-    shadow.opacity = 0;
-
-    // Create hover state
-    let hoverState = pieSeries.slices.template.states.getKey("hover"); // normally we have to create the hover state, in this case it already exists
-
-    // Slightly shift the shadow and make it more prominent on hover
-    let hoverShadow = hoverState.filters.push(new am4core.DropShadowFilter());
-    hoverShadow.opacity = 0.7;
-    hoverShadow.blur = 5;
-
-    // Add a legend
-    chart.legend = new am4charts.Legend();
-
-    chart.data = [
-      {
-        label: "Equipment",
-        amaunt: 50,
-      },
-      {
-        label: "Support",
-        amaunt: 50,
-      },
-      {
-        label: "Upgrade Charges",
-        amaunt: 50,
-      },
-      {
-        label: "Penalty",
-        amaunt: 200,
-      },
-    ];
-  }
-
-  getChart10() {
-    let chart = am4core.create("chartBillCustBillAnalAno1", am4charts.XYChart);
-    chart.hiddenState.properties.opacity = 0; // this makes initial fade in effect
-
-    chart.data = [
-      {
-        country: "Normal",
-        value1: 225,
-        value2: 525,
-        value3: 325,
-      },
-      {
-        country: "Abnormal",
-        value1: 725,
-        value2: 290,
-        value3: 595,
-      },
-      {
-        country: "Normal",
-        value1: 425,
-        value2: 350,
-        value3: 195,
+        year: "2024",
+        income: 34.1,
+        expenses: 31.9,
       },
     ];
 
     let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
     categoryAxis.renderer.grid.template.location = 0;
-    categoryAxis.dataFields.category = "country";
+    categoryAxis.renderer.ticks.template.disabled = true;
+    categoryAxis.renderer.line.opacity = 0;
+    categoryAxis.renderer.grid.template.disabled = true;
     categoryAxis.renderer.minGridDistance = 40;
+    categoryAxis.dataFields.category = "year";
+    categoryAxis.startLocation = 0.4;
+    categoryAxis.endLocation = 0.6;
 
     let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+    valueAxis.tooltip.disabled = true;
+    valueAxis.renderer.line.opacity = 0;
+    valueAxis.renderer.ticks.template.disabled = true;
+    valueAxis.min = 0;
 
-    let series = chart.series.push(new am4charts.CurvedColumnSeries());
-    series.dataFields.categoryX = "country";
+    let lineSeries = chart.series.push(new am4charts.LineSeries());
+    lineSeries.dataFields.categoryX = "year";
+    lineSeries.dataFields.valueY = "income";
+    lineSeries.tooltipText = "income: {valueY.value}";
+    lineSeries.fillOpacity = 0.5;
+    lineSeries.strokeWidth = 3;
+    lineSeries.propertyFields.stroke = "lineColor";
+    lineSeries.propertyFields.fill = "lineColor";
 
-    series.dataFields.valueY = "value1";
-    series.tooltipText = "{valueY.value}";
-    series.columns.template.strokeOpacity = 0;
-    series.clustered = false;
-    series.hiddenState.properties.visible = true; // this is added in case legend is used and first series is hidden.
-
-    let series2 = chart.series.push(new am4charts.CurvedColumnSeries());
-    series2.dataFields.categoryX = "country";
-
-    series2.dataFields.valueY = "value2";
-    series2.tooltipText = "{valueY.value}";
-    series2.columns.template.strokeOpacity = 0;
-    series2.clustered = false;
-
-    let series3 = chart.series.push(new am4charts.CurvedColumnSeries());
-    series3.dataFields.categoryX = "country";
-
-    series3.dataFields.valueY = "value3";
-    series3.tooltipText = "{valueY.value}";
-    series3.columns.template.strokeOpacity = 0;
-    series3.clustered = false;
+    let bullet = lineSeries.bullets.push(new am4charts.CircleBullet());
+    bullet.circle.radius = 6;
+    bullet.circle.fill = am4core.color("#fff");
+    bullet.circle.strokeWidth = 3;
 
     chart.cursor = new am4charts.XYCursor();
-    chart.cursor.maxTooltipDistance = 0;
+    chart.cursor.behavior = "panX";
+    chart.cursor.lineX.opacity = 0;
+    chart.cursor.lineY.opacity = 0;
 
     chart.scrollbarX = new am4core.Scrollbar();
-
-    series.dataItems.template.adapter.add("width", (width, target) => {
-      return am4core.percent((target.valueY / valueAxis.max) * 100);
-    });
-
-    series2.dataItems.template.adapter.add("width", (width, target) => {
-      return am4core.percent((target.valueY / valueAxis.max) * 100);
-    });
-
-    series3.dataItems.template.adapter.add("width", (width, target) => {
-      return am4core.percent((target.valueY / valueAxis.max) * 100);
-    });
-
-    series.columns.template.events.on("parentset", function (event) {
-      event.target.zIndex = valueAxis.max;
-    });
-
-    series2.columns.template.events.on("parentset", function (event) {
-      event.target.parent = series.columnsContainer;
-      event.target.zIndex = valueAxis.max;
-    });
-
-    series3.columns.template.events.on("parentset", function (event) {
-      event.target.parent = series.columnsContainer;
-      event.target.zIndex = valueAxis.max;
-    });
-  }
-
-  getChart11() {
-    let chart = am4core.create("chartBillCustBillAnalAno2", am4charts.XYChart);
-    chart.hiddenState.properties.opacity = 0; // this makes initial fade in effect
-
-    chart.data = [
-      {
-        country: "Normal",
-        value1: 125,
-        value2: 525,
-        value3: 325,
-      },
-      {
-        country: "Abnormal",
-        value1: 825,
-        value2: 225,
-        value3: 525,
-      },
-      {
-        country: "Normal",
-        value1: 525,
-        value2: 325,
-        value3: 225,
-      },
-    ];
-
-    let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
-    categoryAxis.renderer.grid.template.location = 0;
-    categoryAxis.dataFields.category = "country";
-    categoryAxis.renderer.minGridDistance = 40;
-
-    let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-
-    let series = chart.series.push(new am4charts.CurvedColumnSeries());
-    series.dataFields.categoryX = "country";
-
-    series.dataFields.valueY = "value1";
-    series.tooltipText = "{valueY.value}";
-    series.columns.template.strokeOpacity = 0;
-    series.clustered = false;
-    series.hiddenState.properties.visible = true; // this is added in case legend is used and first series is hidden.
-
-    let series2 = chart.series.push(new am4charts.CurvedColumnSeries());
-    series2.dataFields.categoryX = "country";
-
-    series2.dataFields.valueY = "value2";
-    series2.tooltipText = "{valueY.value}";
-    series2.columns.template.strokeOpacity = 0;
-    series2.clustered = false;
-
-    let series3 = chart.series.push(new am4charts.CurvedColumnSeries());
-    series3.dataFields.categoryX = "country";
-
-    series3.dataFields.valueY = "value3";
-    series3.tooltipText = "{valueY.value}";
-    series3.columns.template.strokeOpacity = 0;
-    series3.clustered = false;
-
-    chart.cursor = new am4charts.XYCursor();
-    chart.cursor.maxTooltipDistance = 0;
-
-    chart.scrollbarX = new am4core.Scrollbar();
-
-    series.dataItems.template.adapter.add("width", (width, target) => {
-      return am4core.percent((target.valueY / valueAxis.max) * 100);
-    });
-
-    series2.dataItems.template.adapter.add("width", (width, target) => {
-      return am4core.percent((target.valueY / valueAxis.max) * 100);
-    });
-
-    series3.dataItems.template.adapter.add("width", (width, target) => {
-      return am4core.percent((target.valueY / valueAxis.max) * 100);
-    });
-
-    series.columns.template.events.on("parentset", function (event) {
-      event.target.zIndex = valueAxis.max;
-    });
-
-    series2.columns.template.events.on("parentset", function (event) {
-      event.target.parent = series.columnsContainer;
-      event.target.zIndex = valueAxis.max;
-    });
-
-    series3.columns.template.events.on("parentset", function (event) {
-      event.target.parent = series.columnsContainer;
-      event.target.zIndex = valueAxis.max;
-    });
+    chart.scrollbarX.parent = chart.bottomAxesContainer;
   }
 }

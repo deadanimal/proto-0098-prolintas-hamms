@@ -65,10 +65,11 @@ export class HmWorkOrderComponent implements OnInit, OnDestroy {
   tableSelected: any[] = [];
   tableTemp = [];
   tableActiveRow: any;
-  tableRows: Audit[] = [];
+  tableRows = [];
   SelectionType = SelectionType;
   listData: any = [
     {
+      id: "WO0122334",
       name: "Work Order",
       text: "Defect 1",
       type: "Bore Pile",
@@ -76,6 +77,7 @@ export class HmWorkOrderComponent implements OnInit, OnDestroy {
       created_at: "2019-07-27T01:07:14Z",
     },
     {
+      id: "WO0122334",
       name: "Work Order",
       text: "Defect 2.",
       type: "Micro Pile",
@@ -83,6 +85,7 @@ export class HmWorkOrderComponent implements OnInit, OnDestroy {
       created_at: "2019-07-27T01:07:14Z",
     },
     {
+      id: "WO0122334",
       name: "Work Order",
       text: "Defect 3.",
       type: "Crosshead",
@@ -90,6 +93,7 @@ export class HmWorkOrderComponent implements OnInit, OnDestroy {
       created_at: "2019-07-27T01:07:14Z",
     },
     {
+      id: "WO0122334",
       name: "Work Order",
       text: "Defect 4.",
       type: "Beam",

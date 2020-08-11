@@ -183,6 +183,17 @@ export class ManagementUserComponent implements OnInit, OnDestroy {
     });
   }
 
+  successAlert(task) {
+    swal.fire({
+      title: "Success",
+      text: "Successfully " + task,
+      type: "success",
+      buttonsStyling: false,
+      confirmButtonClass: "btn btn-success",
+      confirmButtonText: "Close",
+    });
+  }
+
   openModal(modalRef: TemplateRef<any>) {
     this.modal = this.modalService.show(modalRef, this.modalConfig);
   }

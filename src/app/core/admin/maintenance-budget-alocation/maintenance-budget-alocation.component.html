@@ -4,7 +4,7 @@
       <div class="row align-items-center py-4">
         <div class="col-lg-6 col-7">
           <h6 class="h2 text-dark d-inline-block mb-0">
-            Alert
+            Maintenance Budget Allocation
           </h6>
 
           <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
@@ -23,7 +23,7 @@
             class="btn btn-sm btn-default"
             (click)="openModal(addNewAlert, undefined)"
           >
-            Add New Alert
+            Add New Budget
           </a>
         </div>
       </div>
@@ -36,10 +36,10 @@
     <div class="col">
       <div class="card">
         <div class="card-header bg-secondary">
-          <h3 class="m-0">Alert</h3>
+          <h3 class="m-0">Maintenance Budget Allocation</h3>
         </div>
         <div class="card-body">
-          <div style="width: 100%; height: 450px;" id="chartReceipt"></div>
+          <div style="width: 100%; height: 450px;" id="chartBudget"></div>
         </div>
       </div>
     </div>
@@ -49,7 +49,7 @@
     <div class="col">
       <div class="card">
         <div class="card-header bg-secondary">
-          <h3 class="m-0">Alert List</h3>
+          <h3 class="m-0">Maintenance Budget Allocation List</h3>
         </div>
         <div class="dataTables_wrapper py-4">
           <div class="row">
@@ -109,7 +109,7 @@
 
             <ngx-datatable-column>
               <ng-template ngx-datatable-header-template>
-                <span>Alert</span>
+                <span>Name</span>
               </ng-template>
               <ng-template let-row="row" ngx-datatable-cell-template>
                 {{ row.name }}
@@ -118,10 +118,19 @@
 
             <ngx-datatable-column>
               <ng-template ngx-datatable-header-template>
-                <span>Text</span>
+                <span>Size</span>
               </ng-template>
               <ng-template let-row="row" ngx-datatable-cell-template>
-                {{ row.text }}
+                {{ row.size }}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span>Cycle</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.cycle }}
               </ng-template>
             </ngx-datatable-column>
 
@@ -131,6 +140,15 @@
               </ng-template>
               <ng-template let-row="row" ngx-datatable-cell-template>
                 {{ row.type }}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span>Requester</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.requester }}
               </ng-template>
             </ngx-datatable-column>
 
@@ -148,11 +166,8 @@
                 <span></span>
               </ng-template>
               <ng-template let-row="row" ngx-datatable-cell-template>
-                <a
-                  (click)="openModal(editReceipt, row)"
-                  style="cursor: pointer;"
-                >
-                  <button class="btn btn-info btn-sm">
+                <a (click)="openModal(editModal, row)" style="cursor: pointer;">
+                  <button class="btn btn-default btn-sm">
                     <i class="fas fa-edit"></i>
                   </button>
                 </a>
@@ -168,7 +183,7 @@
 <ng-template #addNewAlert>
   <div class="modal-header bg-default">
     <h6 class="modal-title text-white my-auto" id="modal-title-default">
-      Add New Alert
+      Add New Budget
     </h6>
 
     <button
@@ -187,32 +202,35 @@
       <label class="form-control-label">Name</label>
       <input class="form-control" placeholder="Enter Name" type="text" />
     </div>
+
     <div class="form-group">
-      <label class="form-control-label">Text</label>
-      <textarea
-        class="form-control"
-        placeholder="Enter Text"
-        type="text"
-        rows="3"
-      ></textarea>
-    </div>
-    <div class="form-group">
-      <label class="form-control-label">Alert Type</label>
+      <label class="form-control-label">Budget Cycle</label>
       <select class="form-control">
-        <option>Birthday</option>
-        <option>Next investment due for recurring investment</option>
-        <option>EPF Re investment due</option>
-        <option>Investment Target Achieved</option>
-        <option>Investment Cut Loss</option>
-        <option>Next appointment date</option>
-        <option>Sales Campaigns by ASNB</option>
+        <option>Routine</option>
+        <option>Once</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label class="form-control-label">Budget Size</label>
+      <select class="form-control">
+        <option>Minor</option>
+        <option>Major</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label class="form-control-label">Budget Type</label>
+      <select class="form-control">
+        <option>Repair</option>
+        <option>Emargency</option>
       </select>
     </div>
   </div>
 
   <div class="modal-footer">
     <div class="text-center">
-      <button class="btn btn-default" (click)="successAlert('add new alert')">
+      <button class="btn btn-default" (click)="successAlert('add new budget')">
         Save
       </button>
       <button
@@ -227,10 +245,10 @@
   </div>
 </ng-template>
 
-<ng-template #editReceipt>
+<ng-template #editModal>
   <div class="modal-header bg-default">
     <h6 class="modal-title text-white my-auto" id="modal-title-default">
-      Edit Alert
+      Edit Budget
     </h6>
 
     <button
@@ -243,37 +261,41 @@
       <span aria-hidden="true" class="text-white my-auto"> × </span>
     </button>
   </div>
+
   <div class="modal-body">
     <div class="form-group">
       <label class="form-control-label">Name</label>
-      <input
-        class="form-control"
-        placeholder="Enter Name"
-        type="text"
-        value="Alert 1"
-      />
+      <input class="form-control" placeholder="Enter Name" type="text" />
     </div>
-    <div class="form-group">
-      <label class="form-control-label">Text</label>
-      <textarea
-        class="form-control"
-        type="text"
-        rows="3"
-        value="This is a text message for alert 1"
-      >
-This is a text message for alert 1</textarea
-      >
-    </div>
-    <div class="form-group">
-      <label class="form-control-label">Alert Type</label>
 
-      <input class="form-control" type="text" value="Birthday" />
+    <div class="form-group">
+      <label class="form-control-label">Budget Cycle</label>
+      <select class="form-control">
+        <option>Routine</option>
+        <option>Once</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label class="form-control-label">Budget Size</label>
+      <select class="form-control">
+        <option>Minor</option>
+        <option>Major</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label class="form-control-label">Budget Type</label>
+      <select class="form-control">
+        <option>Repair</option>
+        <option>Emargency</option>
+      </select>
     </div>
   </div>
 
   <div class="modal-footer">
     <div class="text-center">
-      <button class="btn btn-default" (click)="successAlert('edit alert')">
+      <button class="btn btn-default" (click)="successAlert('edit budget')">
         Save
       </button>
       <button

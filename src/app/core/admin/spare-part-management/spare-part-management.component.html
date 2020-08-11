@@ -3,25 +3,28 @@
     <div class="header-body">
       <div class="row align-items-center py-4">
         <div class="col-lg-6 col-7">
-          <h6 class="h2 text-dark d-inline-block mb-0">Transaction Module</h6>
+          <h6 class="h2 text-dark d-inline-block mb-0">
+            Spare Part
+          </h6>
+
           <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
             <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
               <li class="breadcrumb-item">
                 <a href="javascript:void(0)">
-                  <i class="fas fa-user-shield text-dark"> </i>
+                  <i class="fas fa-user-shield text-dark"></i>
                 </a>
               </li>
             </ol>
           </nav>
         </div>
-
         <div class="col-lg-6 col-5 text-right">
-          <!-- <a
-              class="btn btn-sm btn-default text-white"
-              (click)="openModal(createUser)"
-            >
-              Create
-            </a> -->
+          <a
+            href="javascript:void(0)"
+            class="btn btn-sm btn-default"
+            (click)="openModal(addModal, undefined)"
+          >
+            Add Spare Part
+          </a>
         </div>
       </div>
     </div>
@@ -30,19 +33,481 @@
 
 <div class="container-fluid mt--6">
   <div class="row">
-    <div
-      class="col-lg-4"
-      style="cursor: pointer;"
-      (click)="successAlert('redirect to myASNB Portal')"
-    >
-      <div class="card card-lift--hover shadow border-0">
-        <a href="https://www.myasnb.com.my/" target="_blank">
-          <img
-            alt="Image placeholder"
-            class="card-img-top"
-            src="assets/img/google/payment_img.png"
-        /></a>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header bg-secondary">
+          <h3 class="m-0">Spare Part</h3>
+        </div>
+        <div style="width: 100%; height: 400px;" id="chartSPM1"></div>
+      </div>
+    </div>
+
+    
+    <div class="col">
+
+      <div class="card">
+        <div class="card-header bg-secondary"><h5 class="h3 mb-0">Notifications</h5></div>
+
+        <div class="card-body p-0">
+          <ul class="list-group list-group-flush" data-toggle="checklist">
+            <li
+              class="checklist-entry list-group-item flex-column align-items-start py-4 px-4"
+            >
+              <div class="checklist-item checklist-item-success">
+                <div class="checklist-info">
+                  <h5 class="checklist-title mb-0">Zero spare part for bulldozer</h5>
+
+                  <small> 10:30 AM </small>
+                </div>
+
+                <div>
+                  <div
+                    class="custom-control custom-checkbox custom-checkbox-success"
+                  >
+                    <input
+                      checked="checked"
+                      class="custom-control-input"
+                      id="chk-todo-task-1"
+                      type="checkbox"
+                    />
+
+                    <label class="custom-control-label" for="chk-todo-task-1">
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li
+              class="checklist-entry list-group-item flex-column align-items-start py-4 px-4"
+            >
+              <div class="checklist-item checklist-item-warning">
+                <div class="checklist-info">
+                  <h5 class="checklist-title mb-0">2 spare part for Crawler crane</h5>
+
+                  <small> 10:30 AM </small>
+                </div>
+
+                <div>
+                  <div
+                    class="custom-control custom-checkbox custom-checkbox-warning"
+                  >
+                    <input
+                      class="custom-control-input"
+                      id="chk-todo-task-2"
+                      type="checkbox"
+                    />
+
+                    <label class="custom-control-label" for="chk-todo-task-2">
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li
+              class="checklist-entry list-group-item flex-column align-items-start py-4 px-4"
+            >
+              <div class="checklist-item checklist-item-info">
+                <div class="checklist-info">
+                  <h5 class="checklist-title mb-0">Zero spare part for truck crane.</h5>
+
+                  <small> 10:30 AM </small>
+                </div>
+
+                <div>
+                  <div
+                    class="custom-control custom-checkbox custom-checkbox-info"
+                  >
+                    <input
+                      class="custom-control-input"
+                      id="chk-todo-task-3"
+                      type="checkbox"
+                    />
+
+                    <label class="custom-control-label" for="chk-todo-task-3">
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li
+              class="checklist-entry list-group-item flex-column align-items-start py-4 px-4"
+            >
+              <div class="checklist-item checklist-item-danger">
+                <div class="checklist-info">
+                  <h5 class="checklist-title mb-0">Zero spare part for escavator parts</h5>
+
+                  <small> 10:30 AM </small>
+                </div>
+
+                <div>
+                  <div
+                    class="custom-control custom-checkbox custom-checkbox-danger"
+                  >
+                    <input
+                      checked="checked"
+                      class="custom-control-input"
+                      id="chk-todo-task-4"
+                      type="checkbox"
+                    />
+
+                    <label class="custom-control-label" for="chk-todo-task-4">
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-header bg-secondary">
+          <h3 class="m-0">Spare Part List</h3>
+        </div>
+        <div class="dataTables_wrapper py-4">
+          <div class="row">
+            <div class="col-sm-12 col-md-6">
+              <div class="dataTables_length" id="datatable_length">
+                <label>
+                  Show
+                  <select
+                    name="datatable_length"
+                    aria-controls="datatable"
+                    class="form-control form-control-sm"
+                    (change)="entriesChange($event)"
+                  >
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="-1">All</option>
+                  </select>
+                  records
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <ngx-datatable
+            class="bootstrap selection-cell"
+            [columnMode]="'force'"
+            [headerHeight]="50"
+            [footerHeight]="50"
+            [rowHeight]="'auto'"
+            [limit]="tableEntries != -1 ? tableEntries : undefined"
+            [rows]="listData"
+            (activate)="onActivate($event)"
+          >
+            <ngx-datatable-column name="No">
+              <ng-template
+                let-rowIndex="rowIndex"
+                let-row="row"
+                ngx-datatable-cell-template
+              >
+                <strong>{{ rowIndex + 1 }}</strong>
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span>Running No</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.id }}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span>Name</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.name }}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span>Batch Number</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.text }}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span>Asset Type</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.type }}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span>Status</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <span *ngIf="row.status == 'AC'" class="badge badge-warning"
+                  >Active</span
+                >
+                <span *ngIf="row.status == 'RE'" class="badge badge-info"
+                  >Reviewed</span
+                >
+                <span *ngIf="row.status == 'AP'" class="badge badge-success"
+                  >Approved</span
+                >
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span>Quantity</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.quantity }}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span>Created</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.created_at | date: "dd/MM/yyyy" }}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span></span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <a (click)="openModal(editModal, row)" style="cursor: pointer;">
+                  <button class="btn btn-default btn-sm">
+                    <i class="fas fa-edit"></i>
+                  </button> </a
+                >&nbsp;
+                <!-- <span *ngIf="row.status == 'Approved'">
+                  <button class="btn btn-info btn-sm">
+                    <i class="fa fa-eye"></i>
+                  </button>
+                </span> -->
+              </ng-template>
+            </ngx-datatable-column>
+          </ngx-datatable>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
+<ng-template #addModal>
+  <div class="modal-header bg-default">
+    <h6 class="modal-title text-white my-auto" id="modal-title-default">
+      Add Spare Part
+    </h6>
+
+    <button
+      aria-label="Close"
+      class="close"
+      data-dismiss="modal"
+      type="button"
+      (click)="closeModal()"
+    >
+      <span aria-hidden="true" class="text-white my-auto"> × </span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="form-control-label">Incoming & Registering sub-module</label>
+          <input
+            class="form-control"
+            placeholder="Enter Text"
+            type="text"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="form-control-label">Supplying Company & Personnel Name</label>
+          <input
+            class="form-control"
+            placeholder="Enter Name"
+            type="text"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="form-control-label">Receiving Highway & Staff Name</label>
+          <input
+            class="form-control"
+            placeholder="Enter Name"
+            type="text"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="form-control-label">Quantity Of Part</label>
+          <input
+            class="form-control"
+            placeholder="Enter Quantity"
+            type="number" />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="form-control-label">Batch Number</label>
+          <input
+            class="form-control"
+            placeholder="Enter Batch Number"
+            type="text" />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="form-control-label">Asset Type</label>
+          <select class="form-control">
+            <option>Micro Pile</option>
+            <option>Bore Pile</option>
+            <option>Crosshead</option>
+            <option>Beam</option>
+            <option>Parapet</option>
+            <option>Caisson Pile</option>
+            <option>Pile Cap</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <div class="text-center">
+      <button class="btn btn-default" (click)="successAlert('add new spare part')">
+        Save
+      </button>
+      <button
+        class="btn btn-outline-danger ml-auto"
+        data-dismiss="modal"
+        type="button"
+        (click)="closeModal()"
+      >
+        Close
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #editModal>
+  <div class="modal-header bg-default">
+    <h6 class="modal-title text-white my-auto" id="modal-title-default">
+      Edit Spare Part
+    </h6>
+
+    <button
+      aria-label="Close"
+      class="close"
+      data-dismiss="modal"
+      type="button"
+      (click)="closeModal()"
+    >
+      <span aria-hidden="true" class="text-white my-auto"> × </span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="form-control-label">Incoming & Registering sub-module</label>
+          <input
+            class="form-control"
+            placeholder="Enter Text"
+            type="text"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="form-control-label">Supplying Company & Personnel Name</label>
+          <input
+            class="form-control"
+            placeholder="Enter Name"
+            type="text"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="form-control-label">Receiving Highway & Staff Name</label>
+          <input
+            class="form-control"
+            placeholder="Enter Name"
+            type="text"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="form-control-label">Quantity Of Part</label>
+          <input
+            class="form-control"
+            placeholder="Enter Quantity"
+            type="number" />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="form-control-label">Batch Number</label>
+          <input
+            class="form-control"
+            placeholder="Enter Batch Number"
+            type="text" />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="form-control-label">Asset Type</label>
+          <select class="form-control">
+            <option>Micro Pile</option>
+            <option>Bore Pile</option>
+            <option>Crosshead</option>
+            <option>Beam</option>
+            <option>Parapet</option>
+            <option>Caisson Pile</option>
+            <option>Pile Cap</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <div class="text-center">
+      <button class="btn btn-default" (click)="successAlert('edit alert')">
+        Save
+      </button>
+      <button
+        class="btn btn-outline-danger ml-auto"
+        data-dismiss="modal"
+        type="button"
+        (click)="closeModal()"
+      >
+        Close
+      </button>
+    </div>
+  </div>
+</ng-template>

@@ -67,23 +67,52 @@ export class WorkEmergencyComponent implements OnInit, OnDestroy {
   tableEntries: number = 5;
   tableSelected: any[] = [];
   tableTemp = [];
+  tableRows: any;
   tableActiveRow: any;
-  tableRows: Audit[] = [];
   SelectionType = SelectionType;
-  listPenguatkuasa: any = [
+  listData: any = [
     {
-      type: "SMS",
+      id: "WO0122334",
+      name: "Work",
+      text: "Defect 1",
+      type: "Bore Pile",
+      status: "AC",
+      budget: "RM 10,000,000.00",
+      completed: "2020-03-15T01:07:14Z",
       created_at: "2019-07-27T01:07:14Z",
     },
     {
-      type: "Email",
+      id: "WO0122334",
+      name: "Work",
+      text: "Defect 2.",
+      type: "Micro Pile",
+      status: "AP",
+      budget: "RM 900,000.00",
+      completed: "2020-03-15T01:07:14Z",
       created_at: "2019-07-27T01:07:14Z",
     },
     {
-      type: "Printed",
+      id: "WO0122334",
+      name: "Work",
+      text: "Defect 3.",
+      type: "Crosshead",
+      status: "AP",
+      budget: "RM 750,000.00",
+      completed: "2020-03-15T01:07:14Z",
+      created_at: "2019-07-27T01:07:14Z",
+    },
+    {
+      id: "WO0122334",
+      name: "Work",
+      text: "Defect 4.",
+      type: "Beam",
+      status: "RE",
+      budget: "RM 80,000.00",
+      completed: "2020-03-15T01:07:14Z",
       created_at: "2019-07-27T01:07:14Z",
     },
   ];
+
   options = {
     layers: [
       tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {

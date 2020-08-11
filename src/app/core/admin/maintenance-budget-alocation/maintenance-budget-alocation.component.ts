@@ -69,27 +69,27 @@ export class MaintenanceBudgetAlocationComponent implements OnInit, OnDestroy {
   SelectionType = SelectionType;
   listReceipt: any = [
     {
-      name: "Alert 1",
-      text: "This is a text message for alert 1.",
-      type: "Birthday",
+      name: "Budget 1",
+      size: "Routine",
+      cycle: "Minor",
+      type: "Repair",
+      requester: "Aidil",
       created_at: "2019-07-27T01:07:14Z",
     },
     {
-      name: "Alert 2",
-      text: "This is a text message for alert 2.",
-      type: "EPF Re investment due",
+      name: "Budget 2",
+      size: "Once",
+      cycle: "Major",
+      type: "Emergency",
+      requester: "Kamal",
       created_at: "2019-07-27T01:07:14Z",
     },
     {
-      name: "Alert 3",
-      text: "This is a text message for alert 3.",
-      type: "Investment Target Achieved",
-      created_at: "2019-07-27T01:07:14Z",
-    },
-    {
-      name: "Alert 4",
-      text: "This is a text message for alert 4.",
-      type: "Investment Cut Loss",
+      name: "Budget 3",
+      size: "Routine",
+      cycle: "Major",
+      type: "Repair",
+      requester: "Zakaria",
       created_at: "2019-07-27T01:07:14Z",
     },
   ];
@@ -105,11 +105,11 @@ export class MaintenanceBudgetAlocationComponent implements OnInit, OnDestroy {
     private router: Router,
     private _route: ActivatedRoute
   ) {
-    this.getData();
+    // this.getData();
   }
 
   ngOnInit() {
-    this.getChart();
+    this.getCharts();
   }
 
   ngOnDestroy() {
@@ -120,28 +120,28 @@ export class MaintenanceBudgetAlocationComponent implements OnInit, OnDestroy {
     });
   }
 
-  getData() {
-    this.mockService.getAll(this.listReceipt).subscribe(
-      (res) => {
-        // Success
-        this.tableRows = [...res];
-        this.tableTemp = this.tableRows.map((prop, key) => {
-          return {
-            ...prop,
-            id: key,
-          };
-        });
-        console.log("Svc: ", this.tableTemp);
-      },
-      () => {
-        // Unsuccess
-      },
-      () => {
-        // After
-        this.getChart();
-      }
-    );
-  }
+  // getData() {
+  //   this.mockService.getAll(this.listReceipt).subscribe(
+  //     (res) => {
+  //       // Success
+  //       this.tableRows = [...res];
+  //       this.tableTemp = this.tableRows.map((prop, key) => {
+  //         return {
+  //           ...prop,
+  //           id: key,
+  //         };
+  //       });
+  //       console.log("Svc: ", this.tableTemp);
+  //     },
+  //     () => {
+  //       // Unsuccess
+  //     },
+  //     () => {
+  //       // After
+  //       this.getChart();
+  //     }
+  //   );
+  // }
 
   openModal(modalRef: TemplateRef<any>, row) {
     // if (row) {
@@ -238,89 +238,53 @@ export class MaintenanceBudgetAlocationComponent implements OnInit, OnDestroy {
 
   getChart() {
     // let chart = am4core.create("chartReceipt", am4charts.XYChart);
-    let chart = am4core.create("chartReceipt", am4charts.XYChart);
+    // Create chart instance
+    let chart = am4core.create("chartBudget", am4charts.PieChart);
 
     // Add data
     chart.data = [
       {
-        country: "Jan",
-        visits: 2025,
+        country: "AKLEH - Ampang-Kuala Lumpur Elevated Highway",
+        litres: 501.9,
       },
       {
-        country: "Feb",
-        visits: 1882,
+        country: "GCE - Guthrie Corridor Expressway",
+        litres: 301.9,
       },
       {
-        country: "Mar",
-        visits: 1809,
+        country: "LKSA - Lebuhraya Kemuning-Shah Alam",
+        litres: 201.1,
       },
       {
-        country: "Apr",
-        visits: 1322,
+        country: "Kajang SILK Highway",
+        litres: 165.8,
       },
       {
-        country: "May",
-        visits: 1122,
+        country: "DASH - Damansara-Shah Alam Elevated Expressway",
+        litres: 139.9,
       },
       {
-        country: "Jun",
-        visits: 1114,
-      },
-      {
-        country: "Jul",
-        visits: 984,
-      },
-      {
-        country: "Aug",
-        visits: 711,
-      },
-      {
-        country: "Sep",
-        visits: 665,
-      },
-      {
-        country: "Oct",
-        visits: 580,
-      },
-      {
-        country: "Nov",
-        visits: 443,
-      },
-      {
-        country: "Dec",
-        visits: 441,
+        country: "SUKE - Sungai Besi-Ulu Kelang Elevated Expressway",
+        litres: 128.3,
       },
     ];
 
-    // Create axes
+    // Add and configure Series
+    let pieSeries = chart.series.push(new am4charts.PieSeries());
+    pieSeries.dataFields.value = "litres";
+    pieSeries.dataFields.category = "country";
+    pieSeries.innerRadius = am4core.percent(50);
+    pieSeries.ticks.template.disabled = true;
+    pieSeries.labels.template.disabled = true;
 
-    let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
-    categoryAxis.dataFields.category = "country";
-    categoryAxis.renderer.grid.template.location = 0;
-    categoryAxis.renderer.minGridDistance = 30;
+    let rgm = new am4core.RadialGradientModifier();
+    rgm.brightnesses.push(-0.8, -0.8, -0.5, 0, -0.5);
+    pieSeries.slices.template.fillModifier = rgm;
+    pieSeries.slices.template.strokeModifier = rgm;
+    pieSeries.slices.template.strokeOpacity = 0.4;
+    pieSeries.slices.template.strokeWidth = 0;
 
-    categoryAxis.renderer.labels.template.adapter.add("dy", function (
-      dy,
-      target
-    ) {
-      if (target.dataItem && target.dataItem.index) {
-        return dy + 25;
-      }
-      return dy;
-    });
-
-    let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-
-    // Create series
-    let series = chart.series.push(new am4charts.ColumnSeries());
-    series.dataFields.valueY = "visits";
-    series.dataFields.categoryX = "country";
-    series.name = "";
-    series.columns.template.tooltipText = "{categoryX}: [bold]{valueY}[/]";
-    series.columns.template.fillOpacity = 0.8;
-
-    let columnTemplate = series.columns.template;
-    columnTemplate.strokeWidth = 2;
-    columnTemplate.strokeOpacity = 1;
+    chart.legend = new am4charts.Legend();
+    chart.legend.position = "right";
   }
 }
