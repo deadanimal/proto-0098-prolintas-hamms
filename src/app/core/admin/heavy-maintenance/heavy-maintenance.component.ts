@@ -250,8 +250,8 @@ export class HeavyMaintenanceComponent implements OnInit, OnDestroy {
   }
 
   getChart() {
-    // let chart = am4core.create("chartScheduler", am4charts.XYChart);
-    let chart = am4core.create("chartScheduler1", am4charts.XYChart3D);
+    // let chart = am4core.create("chartHmd", am4charts.XYChart);
+    let chart = am4core.create("chartHmd1", am4charts.XYChart3D);
 
     // Add data
     chart.data = [
@@ -348,56 +348,129 @@ export class HeavyMaintenanceComponent implements OnInit, OnDestroy {
   }
 
   getChart2() {
-    let chart = am4core.create("chartScheduler2", am4charts.XYChart);
+    let chart = am4core.create("chartHmd2", am4charts.XYChart);
+    chart.colors.step = 2;
 
-    // Add data
+    chart.legend = new am4charts.Legend();
+    chart.legend.position = "top";
+    chart.legend.paddingBottom = 20;
+    chart.legend.labels.template.maxWidth = 95;
+
+    let xAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+    xAxis.dataFields.category = "category";
+    xAxis.renderer.cellStartLocation = 0.1;
+    xAxis.renderer.cellEndLocation = 0.9;
+    xAxis.renderer.grid.template.location = 0;
+
+    let yAxis = chart.yAxes.push(new am4charts.ValueAxis());
+    yAxis.min = 0;
+
+    function createSeries(value, name) {
+      let series = chart.series.push(new am4charts.ColumnSeries());
+      series.dataFields.valueY = value;
+      series.dataFields.categoryX = "category";
+      series.name = name;
+
+      series.events.on("hidden", arrangeColumns);
+      series.events.on("shown", arrangeColumns);
+
+      let bullet = series.bullets.push(new am4charts.LabelBullet());
+      bullet.interactionsEnabled = false;
+      bullet.dy = 30;
+      bullet.label.text = "{valueY}";
+      bullet.label.fill = am4core.color("#ffffff");
+
+      return series;
+    }
+
     chart.data = [
       {
-        date: new Date(2018, 3, 20),
-        value: 90,
+        category: "Jan",
+        first: 40,
+        second: 55,
+        third: 60,
       },
       {
-        date: new Date(2018, 3, 21),
-        value: 102,
+        category: "Feb",
+        first: 30,
+        second: 78,
+        third: 69,
       },
       {
-        date: new Date(2018, 3, 22),
-        value: 65,
+        category: "Mar",
+        first: 27,
+        second: 40,
+        third: 45,
       },
       {
-        date: new Date(2018, 3, 23),
-        value: 62,
+        category: "Apr",
+        first: 50,
+        second: 33,
+        third: 22,
       },
       {
-        date: new Date(2018, 3, 24),
-        value: 55,
+        category: "May",
+        first: 39,
+        second: 40,
+        third: 43,
       },
       {
-        date: new Date(2018, 3, 25),
-        value: 81,
+        category: "Jun",
+        first: 45,
+        second: 50,
+        third: 40,
       },
     ];
 
-    // Create axes
-    let dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+    createSeries("first", "Budget");
+    createSeries("second", "Penalty");
+    createSeries("third", "KPI");
 
-    // Create value axis
-    let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+    function arrangeColumns() {
+      let series = chart.series.getIndex(0);
 
-    // Create series
-    let lineSeries = chart.series.push(new am4charts.LineSeries());
-    lineSeries.dataFields.valueY = "value";
-    lineSeries.dataFields.dateX = "date";
-    lineSeries.name = "Sales";
-    lineSeries.strokeWidth = 3;
+      let w =
+        1 -
+        xAxis.renderer.cellStartLocation -
+        (1 - xAxis.renderer.cellEndLocation);
+      if (series.dataItems.length > 1) {
+        let x0 = xAxis.getX(series.dataItems.getIndex(0), "categoryX");
+        let x1 = xAxis.getX(series.dataItems.getIndex(1), "categoryX");
+        let delta = ((x1 - x0) / chart.series.length) * w;
+        if (am4core.isNumber(delta)) {
+          let middle = chart.series.length / 2;
 
-    // Add simple bullet
-    let bullet = lineSeries.bullets.push(new am4charts.Bullet());
-    let image = bullet.createChild(am4core.Image);
-    image.href = "https://www.amcharts.com/lib/images/star.svg";
-    image.width = 30;
-    image.height = 30;
-    image.horizontalCenter = "middle";
-    image.verticalCenter = "middle";
+          let newIndex = 0;
+          chart.series.each(function (series) {
+            if (!series.isHidden && !series.isHiding) {
+              series.dummyData = newIndex;
+              newIndex++;
+            } else {
+              series.dummyData = chart.series.indexOf(series);
+            }
+          });
+          let visibleCount = newIndex;
+          let newMiddle = visibleCount / 2;
+
+          chart.series.each(function (series) {
+            let trueIndex = chart.series.indexOf(series);
+            let newIndex = series.dummyData;
+
+            let dx = (newIndex - trueIndex + middle - newMiddle) * delta;
+
+            series.animate(
+              { property: "dx", to: dx },
+              series.interpolationDuration,
+              series.interpolationEasing
+            );
+            series.bulletsContainer.animate(
+              { property: "dx", to: dx },
+              series.interpolationDuration,
+              series.interpolationEasing
+            );
+          });
+        }
+      }
+    }
   }
 }

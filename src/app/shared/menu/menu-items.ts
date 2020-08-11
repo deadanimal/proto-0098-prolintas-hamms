@@ -71,13 +71,13 @@ export const ROUTES: RouteInfo[] = [
     collapse: "RM",
     isCollapsed: true,
     children: [
-      { path: "dashboard", title: "Dashboard", type: "link" },
       {
         path: "notification-defect",
         title: "Notification Defect",
         type: "link",
       },
       { path: "work-order", title: "Work Order", type: "link" },
+      { path: "dashboard", title: "Budget, Panalty & KPI", type: "link" },
     ],
   },
   {
