@@ -65,37 +65,39 @@ export class KpiModuleComponent implements OnInit, OnDestroy {
   tableSelected: any[] = [];
   tableTemp = [];
   tableActiveRow: any;
-  tableRows: Audit[] = [];
+  tableRows = [];
   SelectionType = SelectionType;
-  listReceipt: any = [
+  listData: any = [
     {
-      name: "Portfolio 1",
-      text: "Portfolio Description 1",
+      id: "WO0122334",
+      name: "Work Order",
+      text: "Defect 1",
+      type: "Bore Pile",
+      status: "AC",
       created_at: "2019-07-27T01:07:14Z",
     },
     {
-      name: "Investment 1",
-      text: "Investment Description 1",
+      id: "WO0122334",
+      name: "Work Order",
+      text: "Defect 2.",
+      type: "Micro Pile",
+      status: "AP",
       created_at: "2019-07-27T01:07:14Z",
     },
     {
-      name: "Portfolio 2",
-      text: "Portfolio Description 2",
+      id: "WO0122334",
+      name: "Work Order",
+      text: "Defect 3.",
+      type: "Crosshead",
+      status: "AP",
       created_at: "2019-07-27T01:07:14Z",
     },
     {
-      name: "Investment 2",
-      text: "Investment Description 2",
-      created_at: "2019-07-27T01:07:14Z",
-    },
-    {
-      name: "Investment 3",
-      text: "Investment Description 3",
-      created_at: "2019-07-27T01:07:14Z",
-    },
-    {
-      name: "Portfolio 3",
-      text: "Portfolio Description 3",
+      id: "WO0122334",
+      name: "Work Order",
+      text: "Defect 4.",
+      type: "Beam",
+      status: "RE",
       created_at: "2019-07-27T01:07:14Z",
     },
   ];
@@ -111,7 +113,7 @@ export class KpiModuleComponent implements OnInit, OnDestroy {
     private router: Router,
     private _route: ActivatedRoute
   ) {
-    this.getData();
+    // this.getData();
   }
 
   ngOnInit() {
@@ -126,28 +128,28 @@ export class KpiModuleComponent implements OnInit, OnDestroy {
     });
   }
 
-  getData() {
-    this.mockService.getAll(this.listReceipt).subscribe(
-      (res) => {
-        // Success
-        this.tableRows = [...res];
-        this.tableTemp = this.tableRows.map((prop, key) => {
-          return {
-            ...prop,
-            id: key,
-          };
-        });
-        console.log("Svc: ", this.tableTemp);
-      },
-      () => {
-        // Unsuccess
-      },
-      () => {
-        // After
-        this.getChart();
-      }
-    );
-  }
+  // getData() {
+  //   this.mockService.getAll(this.listReceipt).subscribe(
+  //     (res) => {
+  //       // Success
+  //       this.tableRows = [...res];
+  //       this.tableTemp = this.tableRows.map((prop, key) => {
+  //         return {
+  //           ...prop,
+  //           id: key,
+  //         };
+  //       });
+  //       console.log("Svc: ", this.tableTemp);
+  //     },
+  //     () => {
+  //       // Unsuccess
+  //     },
+  //     () => {
+  //       // After
+  //       this.getChart();
+  //     }
+  //   );
+  // }
 
   openModal(modalRef: TemplateRef<any>, row) {
     // if (row) {
@@ -239,19 +241,70 @@ export class KpiModuleComponent implements OnInit, OnDestroy {
   getCharts() {
     this.zone.runOutsideAngular(() => {
       this.getChart();
-      // this.getChart2();
+      this.getChart2();
     });
   }
 
   getChart() {
-    // let chart = am4core.create("chartWealthPlan", am4charts.XYChart);
-    let chart = am4core.create("chartWealthPlan1", am4charts.XYChart3D);
+    // let chart = am4core.create("chartScheduler", am4charts.XYChart);
+    let chart = am4core.create("chartScheduler1", am4charts.PieChart);
+
+    // Add data
+    chart.data = [
+      {
+        country: "bore pile",
+        litres: 501.9,
+      },
+      {
+        country: "Micro pile",
+        litres: 301.9,
+      },
+      {
+        country: "Crosshead",
+        litres: 201.1,
+      },
+      {
+        country: "Beam",
+        litres: 165.8,
+      },
+      {
+        country: "Parapet",
+        litres: 139.9,
+      },
+      {
+        country: "Caisson pile",
+        litres: 128.3,
+      },
+    ];
+
+    // Add and configure Series
+    let pieSeries = chart.series.push(new am4charts.PieSeries());
+    pieSeries.dataFields.value = "litres";
+    pieSeries.dataFields.category = "country";
+    pieSeries.slices.template.stroke = am4core.color("#fff");
+    pieSeries.slices.template.strokeOpacity = 1;
+
+    /// change
+    pieSeries.radius = 80;
+
+    // This creates initial animation
+    pieSeries.hiddenState.properties.opacity = 1;
+    pieSeries.hiddenState.properties.endAngle = -90;
+    pieSeries.hiddenState.properties.startAngle = -90;
+
+    chart.hiddenState.properties.radius = am4core.percent(0);
+  }
+
+  getChart2() {
+    // Create chart instance
+    let chart = am4core.create("chartScheduler2", am4charts.XYChart);
+    chart.scrollbarX = new am4core.Scrollbar();
 
     // Add data
     chart.data = [
       {
         country: "Jan",
-        visits: 2025,
+        visits: 3025,
       },
       {
         country: "Feb",
@@ -302,96 +355,42 @@ export class KpiModuleComponent implements OnInit, OnDestroy {
     // Create axes
     let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
     categoryAxis.dataFields.category = "country";
-    categoryAxis.renderer.labels.template.rotation = 270;
-    categoryAxis.renderer.labels.template.hideOversized = false;
-    categoryAxis.renderer.minGridDistance = 20;
+    categoryAxis.renderer.grid.template.location = 0;
+    categoryAxis.renderer.minGridDistance = 30;
     categoryAxis.renderer.labels.template.horizontalCenter = "right";
     categoryAxis.renderer.labels.template.verticalCenter = "middle";
-    categoryAxis.tooltip.label.rotation = 270;
-    categoryAxis.tooltip.label.horizontalCenter = "right";
-    categoryAxis.tooltip.label.verticalCenter = "middle";
+    categoryAxis.renderer.labels.template.rotation = 270;
+    categoryAxis.tooltip.disabled = true;
+    categoryAxis.renderer.minHeight = 110;
 
     let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-    // valueAxis.title.text = "Countries";
-    valueAxis.title.fontWeight = "bold";
+    valueAxis.renderer.minWidth = 50;
 
     // Create series
-    let series = chart.series.push(new am4charts.ColumnSeries3D());
+    let series = chart.series.push(new am4charts.ColumnSeries());
+    series.sequencedInterpolation = true;
     series.dataFields.valueY = "visits";
     series.dataFields.categoryX = "country";
-    series.name = "Visits";
-    series.tooltipText = "{categoryX}: [bold]{valueY}[/]";
-    series.columns.template.fillOpacity = 0.8;
+    series.tooltipText = "[{categoryX}: bold]{valueY}[/]";
+    series.columns.template.strokeWidth = 0;
 
-    let columnTemplate = series.columns.template;
-    columnTemplate.strokeWidth = 2;
-    columnTemplate.strokeOpacity = 1;
-    columnTemplate.stroke = am4core.color("#FFFFFF");
+    series.tooltip.pointerOrientation = "vertical";
 
-    columnTemplate.adapter.add("fill", function (fill, target) {
+    series.columns.template.column.cornerRadiusTopLeft = 10;
+    series.columns.template.column.cornerRadiusTopRight = 10;
+    series.columns.template.column.fillOpacity = 0.8;
+
+    // on hover, make corner radiuses bigger
+    let hoverState = series.columns.template.column.states.create("hover");
+    hoverState.properties.cornerRadiusTopLeft = 0;
+    hoverState.properties.cornerRadiusTopRight = 0;
+    hoverState.properties.fillOpacity = 1;
+
+    series.columns.template.adapter.add("fill", function (fill, target) {
       return chart.colors.getIndex(target.dataItem.index);
     });
 
-    columnTemplate.adapter.add("stroke", function (stroke, target) {
-      return chart.colors.getIndex(target.dataItem.index);
-    });
-
+    // Cursor
     chart.cursor = new am4charts.XYCursor();
-    chart.cursor.lineX.strokeOpacity = 0;
-    chart.cursor.lineY.strokeOpacity = 0;
-  }
-
-  getChart2() {
-    let chart = am4core.create("chartWealthPlan2", am4charts.XYChart);
-
-    // Add data
-    chart.data = [
-      {
-        date: new Date(2018, 3, 20),
-        value: 90,
-      },
-      {
-        date: new Date(2018, 3, 21),
-        value: 102,
-      },
-      {
-        date: new Date(2018, 3, 22),
-        value: 65,
-      },
-      {
-        date: new Date(2018, 3, 23),
-        value: 62,
-      },
-      {
-        date: new Date(2018, 3, 24),
-        value: 55,
-      },
-      {
-        date: new Date(2018, 3, 25),
-        value: 81,
-      },
-    ];
-
-    // Create axes
-    let dateAxis = chart.xAxes.push(new am4charts.DateAxis());
-
-    // Create value axis
-    let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-
-    // Create series
-    let lineSeries = chart.series.push(new am4charts.LineSeries());
-    lineSeries.dataFields.valueY = "value";
-    lineSeries.dataFields.dateX = "date";
-    lineSeries.name = "Sales";
-    lineSeries.strokeWidth = 3;
-
-    // Add simple bullet
-    let bullet = lineSeries.bullets.push(new am4charts.Bullet());
-    let image = bullet.createChild(am4core.Image);
-    image.href = "https://www.amcharts.com/lib/images/star.svg";
-    image.width = 30;
-    image.height = 30;
-    image.horizontalCenter = "middle";
-    image.verticalCenter = "middle";
   }
 }
