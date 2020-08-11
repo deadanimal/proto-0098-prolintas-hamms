@@ -199,7 +199,7 @@
     </div>
   </div>
 
-  <div class="row">
+  <!-- <div class="row">
     <div class="col">
       <div class="card">
         <div class="card-header bg-secondary">
@@ -226,19 +226,6 @@
                 </label>
               </div>
             </div>
-            <div class="col-sm-12 col-md-6">
-              <!-- <div id="datatable_filter" class="dataTables_filter">
-                        <label>
-                          <input
-                            type="search"
-                            class="form-control form-control-sm"
-                            placeholder="Search records"
-                            aria-controls="datatable"
-                            (keyup)="filterTable($event)"
-                          />
-                        </label>
-                      </div> -->
-            </div>
           </div>
 
           <ngx-datatable
@@ -251,16 +238,6 @@
             [rows]="listreport"
             (activate)="onActivate($event)"
           >
-            <!-- <ngx-datatable-column name="No">
-                  <ng-template
-                    let-rowIndex="rowIndex"
-                    let-row="row"
-                    ngx-datatable-cell-template
-                  >
-                    <strong>{{ rowIndex + 1 }}</strong>
-                  </ng-template>
-                </ngx-datatable-column> -->
-
             <ngx-datatable-column>
               <ng-template ngx-datatable-header-template>
                 <span>Current Holdings Units</span>
@@ -368,25 +345,10 @@
                 {{ row.created_at | date: "dd/MM/yyyy" }}
               </ng-template>
             </ngx-datatable-column>
-
-            <!-- <ngx-datatable-column>
-                  <ng-template ngx-datatable-header-template>
-                    <span></span>
-                  </ng-template>
-                  <ng-template let-row="row" ngx-datatable-cell-template>
-                    <a
-                      (click)="openModal(editReceipt, row)"
-                      style="cursor: pointer;"
-                    >
-                      <button class="btn btn-info btn-sm">
-                        <i class="fas fa-edit"></i>
-                      </button>
-                    </a>
-                  </ng-template>
-                </ngx-datatable-column> -->
+            
           </ngx-datatable>
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>
