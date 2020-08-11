@@ -69,39 +69,27 @@ export class HeavyMaintenanceComponent implements OnInit, OnDestroy {
   SelectionType = SelectionType;
   listReceipt: any = [
     {
-      name: "Scheduler 1",
-      text: "This is a text message for scheduler 1.",
-      type: "In house &amp; 3rd Party fund info data",
+      name: "RM 1,000,000.00",
+      text: "RM 55,000.00",
+      type: "50 %",
       created_at: "2019-07-27T01:07:14Z",
     },
     {
-      name: "Scheduler 2",
-      text: "This is a text message for scheduler 2.",
-      type: "Real time market report",
+      name: "RM 20,000.00",
+      text: "RM 1000.00",
+      type: "70 %",
       created_at: "2019-07-27T01:07:14Z",
     },
     {
-      name: "Scheduler 3",
-      text: "This is a text message for scheduler 3.",
-      type: "IInvestors &amp; Investments",
+      name: "RM 140,000.00",
+      text: "RM 2,0000.00",
+      type: "40 %",
       created_at: "2019-07-27T01:07:14Z",
     },
     {
-      name: "Scheduler 4",
-      text: "This is a text message for scheduler 4.",
-      type: "Daily Fund Price",
-      created_at: "2019-07-27T01:07:14Z",
-    },
-    {
-      name: "Scheduler 5",
-      text: "This is a text message for scheduler 5.",
-      type: "New Fund Maintenance",
-      created_at: "2019-07-27T01:07:14Z",
-    },
-    {
-      name: "Scheduler 6",
-      text: "This is a text message for scheduler 6.",
-      type: "New Distribution maintenance",
+      name: "RM 3,200,000.00",
+      text: "RM 4,000,000.00",
+      type: "80 %",
       created_at: "2019-07-27T01:07:14Z",
     },
   ];

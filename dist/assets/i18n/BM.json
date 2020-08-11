@@ -1,0 +1,27 @@
+{
+  "HOME": {
+    "SELECT": "Bahasa",
+    "TITLE": "Penyampaian Bil",
+    "TITLE1": "Penyampaian Bil",
+    "TITLE2": "Penyampaian Bil",
+    "TITLE3": "Penyampaian Bil",
+    "TITLE4": "Penyampaian Bil",
+    "TITLE5": "Penyampaian Bil",
+    "TITLE6": "Penyampaian Bil",
+    "SHOW": "Tunjuk",
+    "REKOD": "rekod",
+    "NO": "No.",
+    "NAMECOL": "Nama",
+    "BINV": "Invois Bil",
+    "BDD": "Tarikh Akhir Bil",
+    "BPAID": "Bil Dibayar",
+    "CREATED": "Tarikh",
+    "EXP": "Export",
+    "ACT": "Aksi",
+    "BAR": "Bar",
+    "LINE": "Garisan",
+    "PIE": "Pai",
+    "BILLNO": "No. Bil",
+    "TOT": "Jumlah"
+  }
+}

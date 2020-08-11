@@ -21,7 +21,7 @@
           <a
             href="javascript:void(0)"
             class="btn btn-sm btn-default"
-            (click)="openModal(addNewAlert, undefined)"
+            (click)="openModal(addModal, undefined)"
           >
             Add New Budget, Penalty & KPI
           </a>
@@ -116,7 +116,7 @@
 
             <ngx-datatable-column>
               <ng-template ngx-datatable-header-template>
-                <span>Budget, Penalty & KPI</span>
+                <span>Budget</span>
               </ng-template>
               <ng-template let-row="row" ngx-datatable-cell-template>
                 {{ row.name }}
@@ -125,7 +125,7 @@
 
             <ngx-datatable-column>
               <ng-template ngx-datatable-header-template>
-                <span>Text</span>
+                <span>Penalty</span>
               </ng-template>
               <ng-template let-row="row" ngx-datatable-cell-template>
                 {{ row.text }}
@@ -134,7 +134,7 @@
 
             <ngx-datatable-column>
               <ng-template ngx-datatable-header-template>
-                <span>Type</span>
+                <span>KPI</span>
               </ng-template>
               <ng-template let-row="row" ngx-datatable-cell-template>
                 {{ row.type }}
@@ -155,10 +155,7 @@
                 <span></span>
               </ng-template>
               <ng-template let-row="row" ngx-datatable-cell-template>
-                <a
-                  (click)="openModal(editReceipt, row)"
-                  style="cursor: pointer;"
-                >
+                <a (click)="openModal(editModal, row)" style="cursor: pointer;">
                   <button class="btn btn-info btn-sm">
                     <i class="fas fa-edit"></i>
                   </button>
@@ -172,10 +169,10 @@
   </div>
 </div>
 
-<ng-template #addNewAlert>
+<ng-template #addModal>
   <div class="modal-header bg-default">
     <h6 class="modal-title text-white my-auto" id="modal-title-default">
-      Add New Alert
+      Add New Data
     </h6>
 
     <button
@@ -191,29 +188,16 @@
 
   <div class="modal-body">
     <div class="form-group">
-      <label class="form-control-label">Name</label>
-      <input class="form-control" placeholder="Enter Name" type="text" />
+      <label class="form-control-label">Budget</label>
+      <input class="form-control" placeholder="Enter Budget" type="text" />
     </div>
     <div class="form-group">
-      <label class="form-control-label">Text</label>
-      <textarea
-        class="form-control"
-        placeholder="Enter Text"
-        type="text"
-        rows="3"
-      ></textarea>
+      <label class="form-control-label">Penalty</label>
+      <input class="form-control" placeholder="Enter Penalty" type="text" />
     </div>
     <div class="form-group">
-      <label class="form-control-label">Alert Type</label>
-      <select class="form-control">
-        <option>Birthday</option>
-        <option>Next investment due for recurring investment</option>
-        <option>EPF Re investment due</option>
-        <option>Investment Target Achieved</option>
-        <option>Investment Cut Loss</option>
-        <option>Next appointment date</option>
-        <option>Sales Campaigns by ASNB</option>
-      </select>
+      <label class="form-control-label">KPI</label>
+      <input class="form-control" placeholder="Enter KPI" type="text" />
     </div>
   </div>
 
@@ -234,10 +218,10 @@
   </div>
 </ng-template>
 
-<ng-template #editReceipt>
+<ng-template #editModal>
   <div class="modal-header bg-default">
     <h6 class="modal-title text-white my-auto" id="modal-title-default">
-      Edit Alert
+      Edit Data
     </h6>
 
     <button
@@ -250,31 +234,19 @@
       <span aria-hidden="true" class="text-white my-auto"> × </span>
     </button>
   </div>
+
   <div class="modal-body">
     <div class="form-group">
-      <label class="form-control-label">Name</label>
-      <input
-        class="form-control"
-        placeholder="Enter Name"
-        type="text"
-        value="Alert 1"
-      />
+      <label class="form-control-label">Budget</label>
+      <input class="form-control" placeholder="Enter Budget" type="text" />
     </div>
     <div class="form-group">
-      <label class="form-control-label">Text</label>
-      <textarea
-        class="form-control"
-        type="text"
-        rows="3"
-        value="This is a text message for alert 1"
-      >
-This is a text message for alert 1</textarea
-      >
+      <label class="form-control-label">Penalty</label>
+      <input class="form-control" placeholder="Enter Penalty" type="text" />
     </div>
     <div class="form-group">
-      <label class="form-control-label">Alert Type</label>
-
-      <input class="form-control" type="text" value="Birthday" />
+      <label class="form-control-label">KPI</label>
+      <input class="form-control" placeholder="Enter KPI" type="text" />
     </div>
   </div>
 
