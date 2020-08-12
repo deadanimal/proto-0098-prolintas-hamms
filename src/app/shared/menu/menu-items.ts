@@ -127,12 +127,12 @@ export const ROUTES: RouteInfo[] = [
     icontype: "fas fa-chart-bar text-default",
   },
 
-  {
-    path: "/admin/report",
-    title: "Report",
-    type: "link",
-    icontype: "fas fa-chart-pie text-default",
-  },
+  // {
+  //   path: "/admin/report",
+  //   title: "Report",
+  //   type: "link",
+  //   icontype: "fas fa-chart-pie text-default",
+  // },
 
   {
     path: "/admin/management",
